@@ -17,12 +17,16 @@ namespace Bacchus.Control
         /// </summary>
         /// <param name="Objet"></param>
         /// <returns></returns>
-        public override bool Create(Marque Objet)
+        public override bool Insert(Marque Objet)
         {
             if(Objet.RefMarque > 0)
-                return ExecuteUpdate("INSERT INTO Marques (RefMarque,Nom) VALUES (" + Objet.RefMarque + "," + Objet.Nom + ")");
+                return ExecuteUpdate("INSERT INTO Marques (RefMarque,Nom) VALUES (" + Objet.RefMarque + ",'" + Objet.Nom + "')");
             else
-                return ExecuteUpdate("INSERT INTO Marques (Nom) VALUES (" + Objet.Nom + ")");
+            {
+                Marque Brand = GetLastInserted();
+                // Pseodo Auto-Increment
+                return ExecuteUpdate("INSERT INTO Marques (RefMarque,Nom) VALUES (" + (Brand.RefMarque + 1) + ",'" + Objet.Nom + "')");
+            }
         }
 
         /// <summary>
@@ -65,10 +69,55 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Update(Marque Objet)
         {
+            OpenConnection();
             if (Objet.RefMarque > 0)
                 return ExecuteUpdate("UPDATE Marques SET Nom = " + Objet.Nom + " WHERE RefMarque = " + Objet.RefMarque);
             else
                 return false;
+        }
+
+        /// <summary>
+        /// Find a brand by his reference
+        /// </summary>
+        /// <param name="Ref"></param>
+        /// <returns></returns>
+        public Marque FindByRef(int Ref)
+        {
+            OpenConnection();
+            var Result = ExecuteSelect("SELECT * FROM Marques WHERE RefMarque = " + Ref);
+            if(Result != null)
+            {
+                Marque Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
+                CloseConnection();
+                return Brand;
+            }
+            else
+            {
+                CloseConnection();
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Return the last inserted (with the max id)
+        /// </summary>
+        /// <returns></returns>
+        public Marque GetLastInserted()
+        {
+            OpenConnection();
+            var Result = ExecuteSelect("SELECT MAX(RefMarque), Nom FROM Marques");
+            Marque Brand;
+            if(Result != null)
+            {
+                Result.Read();
+                Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
+            }
+            else
+            {
+                Brand = null;
+            }
+            CloseConnection();
+            return Brand;
         }
     }
 }

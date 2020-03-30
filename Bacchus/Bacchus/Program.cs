@@ -19,7 +19,7 @@ namespace Bacchus
         [STAThread]
         static void Main()
         {
-            /// TESTS - EXAMPLE ///
+            /// TESTS BDD - EXAMPLE ///
             Control.MarqueControl MCont = new Control.MarqueControl();
             HashSet<Model.Marque> List = MCont.GetAll();
             if(List != null)    // If the table is not empty
@@ -30,6 +30,18 @@ namespace Bacchus
                     Console.WriteLine(Brand.Nom);
                 }
             }
+            Model.Marque m = new Model.Marque("Kingston");
+            MCont.Insert(m);
+            // Update with the new id
+            m.Nom = MCont.GetLastInserted().Nom;
+            Console.WriteLine("Insert : " + m.Nom);
+            // Change the name + update SQL
+            m.Nom = "QueenStone";
+            MCont.Update(m);
+            Console.WriteLine("Update : " + m.Nom);
+            // Delete
+            bool r = MCont.Delete(m);
+
 
 
             // Launch View Part

@@ -18,7 +18,7 @@ namespace Bacchus
         private string dataBaseName;
         private string databaseSource;
         private SQLiteConnection Connection;
-        private SQLiteCommand Command;
+        public SQLiteCommand Command { get; set; }
 
         // Attributes with modified set 
         public string DataBaseName{
@@ -92,7 +92,7 @@ namespace Bacchus
         /// <param name="Query"></param>
         /// <returns></returns>
         public bool ExecuteUpdate(string Query) {
-
+            OpenConnection();
             if (IsOpened())
             {
                 try
@@ -104,17 +104,22 @@ namespace Bacchus
                 catch (SQLiteException Except)
                 {
                     Console.WriteLine("ERREUR : " + Except);
+                    CloseConnection();
                     return false;
                 }
-
+                CloseConnection();
                 return true;
             }
             else
-                return false;            
+            {
+                CloseConnection();
+                return false;
+            }
         }
 
         /// <summary>
-        /// For SELECT Query (Reading)
+        /// For SELECT Query (Reading) 
+        /// WARNING : Need to open and close a connection
         /// </summary>
         /// <param name="Query"></param>
         /// <returns></returns>
@@ -144,7 +149,7 @@ namespace Bacchus
         /// </summary>
         /// <param name="Objet"></param>
         /// <returns></returns>
-        public abstract bool Create(Obj Objet);
+        public abstract bool Insert(Obj Objet);
         /// <summary>
         /// Update an object in DataBase
         /// </summary>
