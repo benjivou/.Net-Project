@@ -50,7 +50,7 @@ namespace Bacchus.Control
 
         public override bool Update(SousFamille Objet)
         {
-            if (Objet != null && Objet.Famille != null && Objet.RefSousFamille > 0) 
+            if (Objet != null && Objet.Famille != null && Objet.RefSousFamille > 0 && CheckFamille(Objet.Famille)) 
                 return ExecuteUpdate("UPDATE " + TableName + " SET Nom = '" + Objet.Nom + "', RefFamille = " + Objet.Famille.RefFamille + " WHERE " + RefName + " = " + Objet.RefSousFamille);
             else
                 return false;
@@ -98,6 +98,19 @@ namespace Bacchus.Control
                 return false;
             else
                 return true;
+        }
+
+        public bool Exist(string Name)
+        {
+            OpenConnection();
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE Nom = '" + Name + "')");
+            bool state;
+            if (Result != null && Result.Read())
+                state = true;
+            else
+                state = false;
+            CloseConnection();
+            return state;
         }
     }
 }
