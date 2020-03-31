@@ -110,4 +110,13 @@ namespace Bacchus.Control
             return Brand;
         }
     }
+
+	class ArticleControl
+	{
+
+	} // TO-DO
+
+	class FamilleControl { } // TO-DO
+
+	class SousFamille{ } // TO-DO
 }
