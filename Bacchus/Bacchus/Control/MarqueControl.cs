@@ -49,14 +49,14 @@ namespace Bacchus.Control
             HashSet<Marque> Liste = new HashSet<Marque>();
             var Result = ExecuteSelect("SELECT * FROM Marques");
             if (Result.StepCount <= 0)
+                Liste = null;
+            else
             {
-                CloseConnection();
-                return null;
-            }
-            while (Result.Read())
-            {
-                Marque Brand = new Marque( Result.GetString(1), Result.GetInt16(0) );
-                Liste.Add(Brand);
+                while (Result.Read())
+                {
+                    Marque Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
+                    Liste.Add(Brand);
+                }
             }
             CloseConnection();
             return Liste;
@@ -69,7 +69,6 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Update(Marque Objet)
         {
-            OpenConnection();
             if (Objet.RefMarque > 0)
                 return ExecuteUpdate("UPDATE Marques SET Nom = " + Objet.Nom + " WHERE RefMarque = " + Objet.RefMarque);
             else
@@ -85,17 +84,13 @@ namespace Bacchus.Control
         {
             OpenConnection();
             var Result = ExecuteSelect("SELECT * FROM Marques WHERE RefMarque = " + Ref);
-            if(Result != null)
-            {
-                Marque Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
-                CloseConnection();
-                return Brand;
-            }
+            Marque Brand;
+            if (Result != null)
+                Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
             else
-            {
-                CloseConnection();
-                return null;
-            }
+                Brand = null;
+            CloseConnection();
+            return Brand;
         }
 
         /// <summary>
@@ -113,9 +108,8 @@ namespace Bacchus.Control
                 Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
             }
             else
-            {
                 Brand = null;
-            }
+
             CloseConnection();
             return Brand;
         }
