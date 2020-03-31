@@ -28,9 +28,8 @@ namespace Bacchus.Control
                 return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom) VALUES (" + Objet.RefMarque + ",'" + Objet.Nom + "')");
             else
             {
-                Marque Brand = GetLastInserted();
-                // Pseodo Auto-Increment
-                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom) VALUES (" + (Brand.RefMarque + 1) + ",'" + Objet.Nom + "')");
+                // Auto-inc
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom) VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
             }
         }
 
@@ -97,25 +96,23 @@ namespace Bacchus.Control
             CloseConnection();
             return Brand;
         }
-
-        /// <summary>
-        /// Return the last inserted (with the max id)
-        /// </summary>
-        /// <returns></returns>
-        public Marque GetLastInserted()
+        
+        public int GetMaxRef()
         {
+            if (TableIsEmpty(TableName) == true)
+                return 0;
             OpenConnection();
-            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom FROM " + TableName );
-            Marque Brand;
-            if(Result.Read())
+            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom FROM " + TableName);
+            int Ref;
+            if (Result.Read())
             {
-                Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
+                Ref = Result.GetInt16(0);
             }
             else
-                Brand = null;
+                Ref = 0;
 
             CloseConnection();
-            return Brand;
+            return Ref;
         }
     }
 }

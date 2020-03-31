@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Data.SQLite;
+using Bacchus.Control;
+using Bacchus.Model;
 
 namespace Bacchus
 {
@@ -20,6 +22,8 @@ namespace Bacchus
         static void Main()
         {
             /// TESTS BDD - EXAMPLE ///
+            
+            /// MARQUES
             Control.MarqueControl MCont = new Control.MarqueControl();
             HashSet<Model.Marque> List = MCont.GetAll();
             if(List != null)    // Display all Marques
@@ -37,17 +41,45 @@ namespace Bacchus
             // Insert this new marque into the DB
             MCont.Insert(m);
             // Update the marque in the model with the new attributed id
-            m = MCont.GetLastInserted();
+            m = MCont.FindByRef(MCont.GetMaxRef());
             Console.WriteLine("Insert : " + m.Nom);
             // Change the name in the model
             m.Nom = "QueenStone";
             // Update the name in the DB
             bool u = MCont.Update(m);
-            Console.WriteLine("Update : " + MCont.GetLastInserted().Nom);
+            Console.WriteLine("Update : " + MCont.FindByRef(MCont.GetMaxRef()).Nom);
             // Delete the marque
             bool r = MCont.Delete(m);
 
-
+            /// FAMILLE
+            FamilleControl Fcont = new FamilleControl();
+            HashSet<Famille> ListF = Fcont.GetAll();
+            if (ListF != null)    // Display all 
+            {
+                foreach (Famille Fam in ListF)
+                {
+                    // Display all differents 
+                    Console.WriteLine(Fam.Nom);
+                }
+            }
+            Fcont.Insert(new Famille("Grande"));
+            Fcont.Insert(new Famille("Moyenne"));
+            Fcont.Insert(new Famille("Petite"));
+            Console.WriteLine("max : " + Fcont.GetMaxRef());
+            ListF = Fcont.GetAll();
+            if (ListF != null)    // Display all 
+            {
+                foreach (Famille Fam in ListF)
+                {
+                    // Display all differents 
+                    Console.WriteLine(Fam.RefFamille + " " + Fam.Nom);
+                    Fam.Nom = "Changed";
+                    Fcont.Update(Fam);
+                    Console.WriteLine(Fam.RefFamille + " " + Fam.Nom);
+                    Fcont.Delete(Fam);
+                }
+            }
+            Console.WriteLine("max : " + Fcont.GetMaxRef());
 
             // Launch View Part
             Application.EnableVisualStyles();

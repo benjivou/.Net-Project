@@ -9,7 +9,7 @@ namespace Bacchus.Control
 {
     class SousFamilleControl : BaseControl<SousFamille>
     {
-        private string TableName = "SousFamille";
+        private string TableName = "SousFamilles";
         private string RefName = "RefSousFamille";
 
         public override bool Delete(SousFamille Objet)
@@ -25,10 +25,11 @@ namespace Bacchus.Control
             OpenConnection();
             HashSet<SousFamille> Liste = new HashSet<SousFamille>();
             var Result = ExecuteSelect("SELECT * FROM " + TableName);
+            FamilleControl FCont = new FamilleControl();
             while (Result.Read())
             {
-                // TODO SousFamille ChildFamily = new SousFamille(Result.GetString(1), Result.GetInt16(0));
-                // Liste.Add(ChildFamily);
+                SousFamille ChildFamily = new SousFamille(Result.GetString(2), FCont.FindByRef(Result.GetInt32(1)), Result.GetInt16(0));
+                Liste.Add(ChildFamily);
             }
             CloseConnection();
             return Liste;
@@ -59,11 +60,12 @@ namespace Bacchus.Control
         public SousFamille GetLastInserted()
         {
             OpenConnection();
-            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom, RefFamille FROM " + TableName);
+            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom,RefFamille RefFamille FROM " + TableName);
             SousFamille ChildFamily = null;
+            FamilleControl FCont = new FamilleControl();
             if (Result.Read())
             {
-                //TODO ChildFamily = new SousFamille(Result.GetString(1), Result.GetInt16(2),);
+                ChildFamily = new SousFamille(Result.GetString(1), FCont.FindByRef(Result.GetInt32(2)), Result.GetInt16(0));
             }
             else
                 ChildFamily = null;
@@ -75,11 +77,12 @@ namespace Bacchus.Control
         public SousFamille FindByRef(int Ref)
         {
             OpenConnection();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + RefName + " = " + Ref);
+            var Result = ExecuteSelect("SELECT Nom,RefFamille,RefSousFamille FROM " + TableName + " WHERE " + RefName + " = " + Ref);
             SousFamille ChildFamily = null;
+            FamilleControl FCont = new FamilleControl();
             if (Result.Read())
             {
-                // TODO ChildFamily = new SousFamille(Result.GetString(1), Result.get,Result.GetInt16(0));
+                ChildFamily = new SousFamille(Result.GetString(0), FCont.FindByRef(Result.GetInt32(1)),Result.GetInt16(2));
             }
             else
                 ChildFamily = null;

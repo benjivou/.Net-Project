@@ -147,6 +147,24 @@ namespace Bacchus
                 return null;
         }
 
+        public bool TableIsEmpty(String TableName)
+        {
+            bool Res = false;
+            if (TableName != null)
+            {
+                OpenConnection();
+                var Result = ExecuteSelect("SELECT * FROM " + TableName);
+                if (Result.Read())
+                    Res = false;
+                else
+                    Res = true;
+                CloseConnection();
+            }
+            else
+                Res = false;
+            return Res;
+        }
+
         /// <summary>
         /// Create an object in DataBase
         /// </summary>
