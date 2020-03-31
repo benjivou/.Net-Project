@@ -12,6 +12,9 @@ namespace Bacchus.Control
     /// </summary>
     class MarqueControl : BaseControl<Marque>
     {
+        private string TableName = "Marques";
+        private string RefName = "RefMarque";
+
         /// <summary>
         /// Create a Marque Row in Database
         /// </summary>
@@ -19,13 +22,15 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Insert(Marque Objet)
         {
+            if (Objet == null)
+                return false;
             if(Objet.RefMarque > 0)
-                return ExecuteUpdate("INSERT INTO Marques (RefMarque,Nom) VALUES (" + Objet.RefMarque + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom) VALUES (" + Objet.RefMarque + ",'" + Objet.Nom + "')");
             else
             {
                 Marque Brand = GetLastInserted();
                 // Pseodo Auto-Increment
-                return ExecuteUpdate("INSERT INTO Marques (RefMarque,Nom) VALUES (" + (Brand.RefMarque + 1) + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom) VALUES (" + (Brand.RefMarque + 1) + ",'" + Objet.Nom + "')");
             }
         }
 
@@ -36,7 +41,9 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Delete(Marque Objet)
         {
-            return ExecuteUpdate("DELETE FROM Marques WHERE RefMarque = " + Objet.RefMarque );
+            if (Objet == null)
+                return false;
+            return ExecuteUpdate("DELETE FROM " + TableName + " WHERE " + RefName  + " = " + Objet.RefMarque );
         }
 
         /// <summary>
@@ -47,7 +54,7 @@ namespace Bacchus.Control
         {
             OpenConnection();
             HashSet<Marque> Liste = new HashSet<Marque>();
-            var Result = ExecuteSelect("SELECT * FROM Marques");
+            var Result = ExecuteSelect("SELECT * FROM " + TableName );
             while (Result.Read())
             {
                 Marque Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
@@ -65,7 +72,7 @@ namespace Bacchus.Control
         public override bool Update(Marque Objet)
         {
             if (Objet != null && Objet.RefMarque > 0)
-                return ExecuteUpdate("UPDATE Marques SET Nom = '" + Objet.Nom + "' WHERE RefMarque = " + Objet.RefMarque);
+                return ExecuteUpdate("UPDATE " + TableName + " SET Nom = '" + Objet.Nom + "' WHERE " + RefName  + " = " + Objet.RefMarque);
             else
                 return false;
         }
@@ -78,7 +85,7 @@ namespace Bacchus.Control
         public Marque FindByRef(int Ref)
         {
             OpenConnection();
-            var Result = ExecuteSelect("SELECT * FROM Marques WHERE RefMarque = " + Ref);
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + RefName  + " = " + Ref);
             Marque Brand;
             if (Result.Read())
             {
@@ -97,7 +104,7 @@ namespace Bacchus.Control
         public Marque GetLastInserted()
         {
             OpenConnection();
-            var Result = ExecuteSelect("SELECT MAX(RefMarque), Nom FROM Marques");
+            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom FROM " + TableName );
             Marque Brand;
             if(Result.Read())
             {

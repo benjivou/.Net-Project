@@ -67,6 +67,10 @@
   <ItemGroup>
     <Compile Include="Control\BaseControl.cs" />
     <Compile Include="Control\MarqueControl.cs" />
+    <Compile Include="Control\SousFamilleControl.cs" />
+    <Compile Include="Model\Article.cs" />
+    <Compile Include="Model\Famille.cs" />
+    <Compile Include="Model\SousFamille.cs" />
     <Compile Include="View\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

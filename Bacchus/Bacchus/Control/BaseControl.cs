@@ -92,6 +92,9 @@ namespace Bacchus
         /// <param name="Query"></param>
         /// <returns></returns>
         public bool ExecuteUpdate(string Query) {
+            if (Query == null)
+                return false;
+
             OpenConnection();
             if (IsOpened())
             {
