@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bacchus.Model;
+
 namespace Bacchus.Control
 {
     class FamilleControl : BaseControl<Famille>
-
     {
         private String TableName = "Familles";  // Tablename
 
         // attributs 
         private String RefName = "RefFamille";  // primary  key
         private String NameName = "Nom";        // Name 
-
 
         /// <summary>
         /// Delete a Famille Row in Database

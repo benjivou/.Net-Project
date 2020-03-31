@@ -37,15 +37,14 @@ namespace Bacchus.Control
 
         public override bool Insert(SousFamille Objet)
         {
-            if (Objet == null && Objet.Famille == null)
+            if (Objet == null || !CheckFamille(Objet.Famille))
                 return false;
             if (Objet.RefSousFamille > 0)
                 return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom,RefFamille) VALUES (" + Objet.RefSousFamille + ",'" + Objet.Nom + "' , " + Objet.Famille.RefFamille + ")");
             else
             {
-                SousFamille ChildFamily = GetLastInserted();
                 // Pseodo Auto-Increment
-                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom,RefFamille) VALUES (" + (ChildFamily.RefSousFamille + 1) + ",'" + Objet.Nom + "'," + Objet.Famille.RefFamille + ")");
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom,RefFamille) VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "'," + Objet.Famille.RefFamille + ")");
             }
         }
 
@@ -56,24 +55,7 @@ namespace Bacchus.Control
             else
                 return false;
         }
-
-        public SousFamille GetLastInserted()
-        {
-            OpenConnection();
-            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom,RefFamille RefFamille FROM " + TableName);
-            SousFamille ChildFamily = null;
-            FamilleControl FCont = new FamilleControl();
-            if (Result.Read())
-            {
-                ChildFamily = new SousFamille(Result.GetString(1), FCont.FindByRef(Result.GetInt32(2)), Result.GetInt16(0));
-            }
-            else
-                ChildFamily = null;
-
-            CloseConnection();
-            return ChildFamily;
-        }
-
+        
         public SousFamille FindByRef(int Ref)
         {
             OpenConnection();
@@ -88,6 +70,34 @@ namespace Bacchus.Control
                 ChildFamily = null;
             CloseConnection();
             return ChildFamily;
+        }
+
+        public int GetMaxRef()
+        {
+            if (TableIsEmpty(TableName) == true)
+                return 0;
+            OpenConnection();
+            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom FROM " + TableName);
+            int Ref;
+            if (Result.Read())
+            {
+                Ref = Result.GetInt16(0);
+            }
+            else
+                Ref = 0;
+
+            CloseConnection();
+            return Ref;
+        }
+        public bool CheckFamille(Famille Family)
+        {
+            if (Family == null)
+                return false;
+            FamilleControl FCont = new FamilleControl();
+            if (FCont.FindByRef(Family.RefFamille) == null)
+                return false;
+            else
+                return true;
         }
     }
 }

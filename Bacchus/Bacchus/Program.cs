@@ -52,8 +52,8 @@ namespace Bacchus
             bool r = MCont.Delete(m);
 
             /// FAMILLE
-            FamilleControl Fcont = new FamilleControl();
-            HashSet<Famille> ListF = Fcont.GetAll();
+            FamilleControl FCont = new FamilleControl();
+            HashSet<Famille> ListF = FCont.GetAll();
             if (ListF != null)    // Display all 
             {
                 foreach (Famille Fam in ListF)
@@ -62,11 +62,11 @@ namespace Bacchus
                     Console.WriteLine(Fam.Nom);
                 }
             }
-            Fcont.Insert(new Famille("Grande"));
-            Fcont.Insert(new Famille("Moyenne"));
-            Fcont.Insert(new Famille("Petite"));
-            Console.WriteLine("max : " + Fcont.GetMaxRef());
-            ListF = Fcont.GetAll();
+            FCont.Insert(new Famille("Grande"));
+            FCont.Insert(new Famille("Moyenne"));
+            FCont.Insert(new Famille("Petite"));
+            Console.WriteLine("max : " + FCont.GetMaxRef());
+            ListF = FCont.GetAll();
             if (ListF != null)    // Display all 
             {
                 foreach (Famille Fam in ListF)
@@ -74,17 +74,49 @@ namespace Bacchus
                     // Display all differents 
                     Console.WriteLine(Fam.RefFamille + " " + Fam.Nom);
                     Fam.Nom = "Changed";
-                    Fcont.Update(Fam);
-                    Console.WriteLine(Fam.RefFamille + " " + Fam.Nom);
-                    Fcont.Delete(Fam);
+                    FCont.Update(Fam);
+                    Famille Fam2 = FCont.FindByRef(Fam.RefFamille);
+                    Console.WriteLine(Fam2.RefFamille + " " + Fam2.Nom);
+                    FCont.Delete(Fam);
                 }
             }
-            Console.WriteLine("max : " + Fcont.GetMaxRef());
+            Console.WriteLine("max : " + FCont.GetMaxRef());
+
+            /// SS-FAMILLE
+            SousFamilleControl SFCont = new SousFamilleControl();
+            Console.WriteLine("\nMax sous-famille : " + SFCont.GetMaxRef());
+            Famille f = new Famille("La Ch-tite Famille");
+            FCont.Insert(f);
+            f = FCont.FindByRef(FCont.GetMaxRef());
+            SousFamille sf = new SousFamille("Sous race 1", f);
+            SousFamille sfb = new SousFamille("Sous race 2", f);
+            r = SFCont.Insert(sf);
+            r = SFCont.Insert(sfb);
+            Console.WriteLine("Inserts\nMax sous-famille : " + SFCont.GetMaxRef());
+            HashSet<SousFamille> ListSF = SFCont.GetAll();
+            if (ListSF != null)    // Display all 
+            {
+                foreach (SousFamille SFam in ListSF)
+                {
+                    // Display all differents 
+                    Console.WriteLine(SFam.RefSousFamille + " " + SFam.Nom);
+                    SFam.Nom = "Changed";
+                    SFCont.Update(SFam);
+                    SousFamille SFam2 = SFCont.FindByRef(SFam.RefSousFamille);
+                    Console.WriteLine(SFam2.RefSousFamille + " " + SFam2.Nom);
+                    SFCont.Delete(SFam);
+                }
+            }
+            FCont.Delete(f);
+            Console.WriteLine("Deletes\nMax sous-famille : " + SFCont.GetMaxRef());
+
 
             // Launch View Part
+            /*
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
+            */
         }
     }
 }
