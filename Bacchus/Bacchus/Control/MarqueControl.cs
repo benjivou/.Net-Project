@@ -48,7 +48,7 @@ namespace Bacchus.Control
             OpenConnection();
             HashSet<Marque> Liste = new HashSet<Marque>();
             var Result = ExecuteSelect("SELECT * FROM Marques");
-            if (Result.StepCount <= 0)
+            if (Result == null && Result.StepCount <= 0)
                 Liste = null;
             else
             {
@@ -69,8 +69,8 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Update(Marque Objet)
         {
-            if (Objet.RefMarque > 0)
-                return ExecuteUpdate("UPDATE Marques SET Nom = " + Objet.Nom + " WHERE RefMarque = " + Objet.RefMarque);
+            if (Objet != null && Objet.RefMarque > 0)
+                return ExecuteUpdate("UPDATE Marques SET Nom = '" + Objet.Nom + "' WHERE RefMarque = " + Objet.RefMarque);
             else
                 return false;
         }
@@ -86,7 +86,10 @@ namespace Bacchus.Control
             var Result = ExecuteSelect("SELECT * FROM Marques WHERE RefMarque = " + Ref);
             Marque Brand;
             if (Result != null)
+            {
+                Result.Read();
                 Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
+            }
             else
                 Brand = null;
             CloseConnection();

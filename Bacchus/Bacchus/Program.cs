@@ -30,15 +30,16 @@ namespace Bacchus
                     Console.WriteLine(Brand.Nom);
                 }
             }
+            Console.WriteLine("find name with id 1 : " + MCont.FindByRef(1).Nom);
             Model.Marque m = new Model.Marque("Kingston");
             MCont.Insert(m);
             // Update with the new id
-            m.Nom = MCont.GetLastInserted().Nom;
+            m = MCont.GetLastInserted();
             Console.WriteLine("Insert : " + m.Nom);
             // Change the name + update SQL
             m.Nom = "QueenStone";
-            MCont.Update(m);
-            Console.WriteLine("Update : " + m.Nom);
+            bool u = MCont.Update(m);
+            Console.WriteLine("Update : " + MCont.GetLastInserted().Nom);
             // Delete
             bool r = MCont.Delete(m);
 
