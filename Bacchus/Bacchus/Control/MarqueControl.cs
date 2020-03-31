@@ -48,15 +48,10 @@ namespace Bacchus.Control
             OpenConnection();
             HashSet<Marque> Liste = new HashSet<Marque>();
             var Result = ExecuteSelect("SELECT * FROM Marques");
-            if (Result == null && Result.StepCount <= 0)
-                Liste = null;
-            else
+            while (Result.Read())
             {
-                while (Result.Read())
-                {
-                    Marque Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
-                    Liste.Add(Brand);
-                }
+                Marque Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
+                Liste.Add(Brand);
             }
             CloseConnection();
             return Liste;
@@ -85,9 +80,8 @@ namespace Bacchus.Control
             OpenConnection();
             var Result = ExecuteSelect("SELECT * FROM Marques WHERE RefMarque = " + Ref);
             Marque Brand;
-            if (Result != null)
+            if (Result.Read())
             {
-                Result.Read();
                 Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
             }
             else
@@ -105,9 +99,8 @@ namespace Bacchus.Control
             OpenConnection();
             var Result = ExecuteSelect("SELECT MAX(RefMarque), Nom FROM Marques");
             Marque Brand;
-            if(Result != null)
+            if(Result.Read())
             {
-                Result.Read();
                 Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
             }
             else

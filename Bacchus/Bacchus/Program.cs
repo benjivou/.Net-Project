@@ -22,7 +22,7 @@ namespace Bacchus
             /// TESTS BDD - EXAMPLE ///
             Control.MarqueControl MCont = new Control.MarqueControl();
             HashSet<Model.Marque> List = MCont.GetAll();
-            if(List != null)    // If the table is not empty
+            if(List != null)    // Display all Marques
             {
                 foreach (Model.Marque Brand in List)
                 {
@@ -30,17 +30,21 @@ namespace Bacchus
                     Console.WriteLine(Brand.Nom);
                 }
             }
+            // Display Marque name with id = 1
             Console.WriteLine("find name with id 1 : " + MCont.FindByRef(1).Nom);
+            // Create a new marque in the model
             Model.Marque m = new Model.Marque("Kingston");
+            // Insert this new marque into the DB
             MCont.Insert(m);
-            // Update with the new id
+            // Update the marque in the model with the new attributed id
             m = MCont.GetLastInserted();
             Console.WriteLine("Insert : " + m.Nom);
-            // Change the name + update SQL
+            // Change the name in the model
             m.Nom = "QueenStone";
+            // Update the name in the DB
             bool u = MCont.Update(m);
             Console.WriteLine("Update : " + MCont.GetLastInserted().Nom);
-            // Delete
+            // Delete the marque
             bool r = MCont.Delete(m);
 
 
