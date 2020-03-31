@@ -20,6 +20,8 @@ namespace Bacchus
         static void Main()
         {
             /// TESTS BDD - EXAMPLE ///
+			
+			/// TEST Marque ///
             Control.MarqueControl MCont = new Control.MarqueControl();
             HashSet<Model.Marque> List = MCont.GetAll();
             if(List != null)    // Display all Marques
@@ -47,10 +49,38 @@ namespace Bacchus
             // Delete the marque
             bool r = MCont.Delete(m);
 
+			/// TEST Famille ///
+			Control.FamilleControl FCont = new Control.FamilleControl();
+			HashSet<Model.Famille> FList = FCont.GetAll();
 
+			if(FList != null)
+			{
+				foreach(Model.Famille Family in FList)
+				{
+					Console.WriteLine(Family.Nom);
+				}
+			}
+			else
+			{
+				Console.WriteLine("Liste vide");
+			}
+			// Display Famille name with id = 1
+			//Console.WriteLine("find name with id 1 : " + FCont.FindByRef(1).Nom);
+			// Create a new Famille in the model
+			Model.Famille f = new Model.Famille("ToTo");
+			// Insert this new Famille into the DB
+			FCont.Insert(f);
+			FList = FCont.GetAll();
 
-            // Launch View Part
-            Application.EnableVisualStyles();
+			if (FList != null)
+			{
+				foreach (Model.Famille Family in FList)
+				{
+					Console.WriteLine(Family.Nom);
+				}
+			}
+			// Launch View Part
+			Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
         }

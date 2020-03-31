@@ -111,12 +111,5 @@ namespace Bacchus.Control
         }
     }
 
-	class ArticleControl
-	{
 
-	} // TO-DO
-
-	class FamilleControl { } // TO-DO
-
-	class SousFamille{ } // TO-DO
 }
