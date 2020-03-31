@@ -41,6 +41,7 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Delete(Marque Objet)
         {
+            // TODO Cascade
             if (Objet == null)
                 return false;
             return ExecuteUpdate("DELETE FROM " + TableName + " WHERE " + RefName  + " = " + Objet.RefMarque );

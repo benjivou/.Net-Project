@@ -9,24 +9,82 @@ namespace Bacchus.Control
 {
     class SousFamilleControl : BaseControl<SousFamille>
     {
+        private string TableName = "SousFamille";
+        private string RefName = "RefSousFamille";
+
         public override bool Delete(SousFamille Objet)
         {
-            throw new NotImplementedException();
+            // TODO Cascade
+            if (Objet == null)
+                return false;
+            return ExecuteUpdate("DELETE FROM " + TableName + " WHERE " + RefName + " = " + Objet.RefSousFamille);
         }
 
         public override HashSet<SousFamille> GetAll()
         {
-            throw new NotImplementedException();
+            OpenConnection();
+            HashSet<SousFamille> Liste = new HashSet<SousFamille>();
+            var Result = ExecuteSelect("SELECT * FROM " + TableName);
+            while (Result.Read())
+            {
+                // TODO SousFamille ChildFamily = new SousFamille(Result.GetString(1), Result.GetInt16(0));
+                // Liste.Add(ChildFamily);
+            }
+            CloseConnection();
+            return Liste;
         }
 
         public override bool Insert(SousFamille Objet)
         {
-            throw new NotImplementedException();
+            if (Objet == null && Objet.Famille == null)
+                return false;
+            if (Objet.RefSousFamille > 0)
+                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom,RefFamille) VALUES (" + Objet.RefSousFamille + ",'" + Objet.Nom + "' , " + Objet.Famille.RefFamille + ")");
+            else
+            {
+                SousFamille ChildFamily = GetLastInserted();
+                // Pseodo Auto-Increment
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom,RefFamille) VALUES (" + (ChildFamily.RefSousFamille + 1) + ",'" + Objet.Nom + "'," + Objet.Famille.RefFamille + ")");
+            }
         }
 
         public override bool Update(SousFamille Objet)
         {
-            throw new NotImplementedException();
+            if (Objet != null && Objet.Famille != null && Objet.RefSousFamille > 0) 
+                return ExecuteUpdate("UPDATE " + TableName + " SET Nom = '" + Objet.Nom + "', RefFamille = " + Objet.Famille.RefFamille + " WHERE " + RefName + " = " + Objet.RefSousFamille);
+            else
+                return false;
+        }
+
+        public SousFamille GetLastInserted()
+        {
+            OpenConnection();
+            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom, RefFamille FROM " + TableName);
+            SousFamille ChildFamily = null;
+            if (Result.Read())
+            {
+                //TODO ChildFamily = new SousFamille(Result.GetString(1), Result.GetInt16(2),);
+            }
+            else
+                ChildFamily = null;
+
+            CloseConnection();
+            return ChildFamily;
+        }
+
+        public SousFamille FindByRef(int Ref)
+        {
+            OpenConnection();
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + RefName + " = " + Ref);
+            SousFamille ChildFamily = null;
+            if (Result.Read())
+            {
+                // TODO ChildFamily = new SousFamille(Result.GetString(1), Result.get,Result.GetInt16(0));
+            }
+            else
+                ChildFamily = null;
+            CloseConnection();
+            return ChildFamily;
         }
     }
 }
