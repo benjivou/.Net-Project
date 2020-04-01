@@ -9,8 +9,12 @@ namespace Bacchus.Control
 {
     class ArticleControl : BaseControl<Article>
     {
-        private string TableName = "Articles";
-        private string RefName = "RefArticle";
+      
+        public ArticleControl()
+        {
+            TableName = "Articles";
+            RefName = "RefArticle";
+        }
 
         public override bool Delete(Article Objet)
         { 

@@ -7,11 +7,19 @@ using Bacchus.Model;
 
 namespace Bacchus.Control
 {
-    class SousFamilleControl : BaseControl<SousFamille>
+    class SousFamilleControl : AutoIncrementBaseControl<SousFamille>
     {
-        private string TableName = "SousFamilles";
-        private string RefName = "RefSousFamille";
-
+        public SousFamilleControl()
+        {
+            TableName = "SousFamilles";
+            RefName = "RefSousFamille";
+        }
+        
+        /// <summary>
+        /// Delete a sousFamille object in dataBase
+        /// </summary>
+        /// <param name="Objet"></param>
+        /// <returns></returns>
         public override bool Delete(SousFamille Objet)
         {
             // TODO Cascade
@@ -20,6 +28,10 @@ namespace Bacchus.Control
             return ExecuteUpdate("DELETE FROM " + TableName + " WHERE " + RefName + " = " + Objet.RefSousFamille);
         }
 
+        /// <summary>
+        /// Return all element in the table sousFamille
+        /// </summary>
+        /// <returns></returns>
         public override HashSet<SousFamille> GetAll()
         {
             OpenConnection();
@@ -35,9 +47,14 @@ namespace Bacchus.Control
             return Liste;
         }
 
+        /// <summary>
+        /// Insert a sousfamille object in the database
+        /// </summary>
+        /// <param name="Objet"></param>
+        /// <returns></returns>
         public override bool Insert(SousFamille Objet)
         {
-            if (Objet == null || !CheckFamille(Objet.Famille))
+            if (Objet == null || !CheckFamille(Objet.Famille) || Exist(Objet.Nom))
                 return false;
             if (Objet.RefSousFamille > 0)
                 return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom,RefFamille) VALUES (" + Objet.RefSousFamille + ",'" + Objet.Nom + "' , " + Objet.Famille.RefFamille + ")");
@@ -48,6 +65,11 @@ namespace Bacchus.Control
             }
         }
 
+        /// <summary>
+        /// Update a sousfamille object in the database (base on the ref)
+        /// </summary>
+        /// <param name="Objet"></param>
+        /// <returns></returns>
         public override bool Update(SousFamille Objet)
         {
             if (Objet != null && Objet.Famille != null && Objet.RefSousFamille > 0 && CheckFamille(Objet.Famille)) 
@@ -56,7 +78,12 @@ namespace Bacchus.Control
                 return false;
         }
         
-        public SousFamille FindByRef(int Ref)
+        /// <summary>
+        /// Return the sousfamille object from the database with his ref
+        /// </summary>
+        /// <param name="Ref"></param>
+        /// <returns></returns>
+        public override SousFamille FindByRef(int Ref)
         {
             OpenConnection();
             var Result = ExecuteSelect("SELECT Nom,RefFamille,RefSousFamille FROM " + TableName + " WHERE " + RefName + " = " + Ref);
@@ -72,23 +99,11 @@ namespace Bacchus.Control
             return ChildFamily;
         }
 
-        public int GetMaxRef()
-        {
-            if (TableIsEmpty(TableName) == true)
-                return 0;
-            OpenConnection();
-            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom FROM " + TableName);
-            int Ref;
-            if (Result.Read())
-            {
-                Ref = Result.GetInt16(0);
-            }
-            else
-                Ref = 0;
-
-            CloseConnection();
-            return Ref;
-        }
+        /// <summary>
+        /// Check If the famille exist 
+        /// </summary>
+        /// <param name="Family"></param>
+        /// <returns></returns>
         public bool CheckFamille(Famille Family)
         {
             if (Family == null)
@@ -98,19 +113,6 @@ namespace Bacchus.Control
                 return false;
             else
                 return true;
-        }
-
-        public bool Exist(string Name)
-        {
-            OpenConnection();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE Nom = '" + Name + "')");
-            bool state;
-            if (Result != null && Result.Read())
-                state = true;
-            else
-                state = false;
-            CloseConnection();
-            return state;
         }
     }
 }

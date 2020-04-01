@@ -17,8 +17,11 @@ namespace Bacchus
         /// Attributs d'instances
         private string dataBaseName;
         private string databaseSource;
-        private SQLiteConnection Connection;
-        public SQLiteCommand Command { get; set; }
+        protected SQLiteConnection Connection;
+        protected SQLiteCommand Command { get; set; }
+
+        protected string TableName { get; set; }
+        protected string RefName { get; set; }
 
         // Attributes with modified set 
         public string DataBaseName{
@@ -85,7 +88,6 @@ namespace Bacchus
                 return true;
         }
 
-
         /// <summary>
         /// For INSERT - UPDATE Query (Writing)
         /// </summary>
@@ -147,7 +149,11 @@ namespace Bacchus
                 return null;
         }
 
-        public bool TableIsEmpty(String TableName)
+        /// <summary>
+        /// Return true if its empty
+        /// </summary>
+        /// <returns></returns>
+        public bool TableIsEmpty()
         {
             bool Res = false;
             if (TableName != null)

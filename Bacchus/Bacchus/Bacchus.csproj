@@ -65,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\ArticleControl.cs" />
+    <Compile Include="Control\AutoIncrementBaseControl.cs" />
     <Compile Include="Control\BaseControl.cs" />
     <Compile Include="Control\FamilleControl.cs" />
     <Compile Include="Control\MarqueControl.cs" />

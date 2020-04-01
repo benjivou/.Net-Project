@@ -7,13 +7,16 @@ using Bacchus.Model;
 
 namespace Bacchus.Control
 {
-    class FamilleControl : BaseControl<Famille>
+    class FamilleControl : AutoIncrementBaseControl<Famille>
     {
-        private String TableName = "Familles";  // Tablename
+        
+        private string NameName = "Nom";        // Name 
 
-        // attributs 
-        private String RefName = "RefFamille";  // primary  key
-        private String NameName = "Nom";        // Name 
+        public FamilleControl()
+        {
+            TableName = "Familles";  // Tablename
+            RefName = "RefFamille";  // primary  key
+        }
 
         /// <summary>
         /// Delete a Famille Row in Database
@@ -46,34 +49,23 @@ namespace Bacchus.Control
             return Liste;
         }
 
+        /// <summary>
+        /// Insert a famille object in the database
+        /// </summary>
+        /// <param name="Objet"></param>
+        /// <returns></returns>
         public override bool Insert(Famille Objet)
         {
-            if (Objet.RefFamille > 0)
+            if (Objet == null || Exist(Objet.Nom))
+                return false;
+            if (Objet.RefFamille > 0 )
                 return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + "," + NameName + ") VALUES (" + Objet.RefFamille + ",'" + Objet.Nom + "')");
             else
             {
                 return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + ", " + NameName + ") VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
             }
-            throw new NotImplementedException();
         }
 
-        public int GetMaxRef()
-        {
-            if (TableIsEmpty(TableName) == true)
-                return 0;
-            OpenConnection();
-            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom FROM " + TableName);
-            int Ref;
-            if (Result.Read())
-            {
-                Ref = Result.GetInt16(0);
-            }
-            else
-                Ref = 0;
-
-            CloseConnection();
-            return Ref;
-        }
 
         /// <summary>
         /// Update Famille element
@@ -94,7 +86,7 @@ namespace Bacchus.Control
         /// </summary>
         /// <param name="Ref"></param>
         /// <returns></returns>
-        public Famille FindByRef(int Ref)
+        public override Famille FindByRef(int Ref)
         {
             OpenConnection();
             var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + RefName + " = " + Ref);
@@ -107,19 +99,6 @@ namespace Bacchus.Control
                 Family = null;
             CloseConnection();
             return Family;
-        }
-
-        public bool Exist(string Name)
-        {
-            OpenConnection();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE Nom = '" + Name + "')");
-            bool state;
-            if (Result != null && Result.Read())
-                state = true;
-            else
-                state = false;
-            CloseConnection();
-            return state;
         }
     }
 }
