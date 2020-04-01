@@ -100,7 +100,7 @@ namespace Bacchus.Control
         }
 
         /// <summary>
-        /// Check If the famille exist 
+        /// Check If the famille exist, true if exist
         /// </summary>
         /// <param name="Family"></param>
         /// <returns></returns>

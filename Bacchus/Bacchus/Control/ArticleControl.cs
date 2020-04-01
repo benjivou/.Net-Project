@@ -47,7 +47,7 @@ namespace Bacchus.Control
 
         public override bool Insert(Article Objet)
         {
-            if (Objet == null || !isInsertable(Objet))
+            if (Objet == null || !CheckParam(Objet) || ExistantRef(Objet.RefArticle))
                 return false;
             // Pseodo Auto-Increment
             return ExecuteUpdate("INSERT INTO " + TableName + " VALUES (" +
@@ -61,7 +61,7 @@ namespace Bacchus.Control
 
         public override bool Update(Article Objet)
         {
-            if (Objet != null && Exist(Objet.RefArticle) && isInsertable(Objet))
+            if (Objet != null && ExistantRef(Objet.RefArticle) && CheckParam(Objet))
                 return ExecuteUpdate("UPDATE " + TableName + " SET " +
                     "Description = '" + Objet.Description + "', " +
                     "RefSousFamille = " + Objet.SousFamille.RefSousFamille + ", " +
@@ -73,10 +73,14 @@ namespace Bacchus.Control
                 return false;
         }
 
-        public bool isInsertable(Article Arti)
+        /// <summary>
+        /// Check Article param except Reference, return true if its ok
+        /// </summary>
+        /// <param name="Arti"></param>
+        /// <returns></returns>
+        public bool CheckParam(Article Arti)
         {
             if (Arti == null
-                || Exist(Arti.RefArticle)
                 || Arti.Marque == null
                 || Arti.PrixHT < 0
                 || Arti.Quantite < 0
@@ -90,12 +94,12 @@ namespace Bacchus.Control
             return true;
         }
 
-        public bool Exist(string Name)
+        public bool ExistantRef(string Name)
         {
             if (Name == null)
                 return false;
             OpenConnection();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + RefName + " = '" + Name + "')");
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + RefName + " = '" + Name + "'");
             bool state;
             if (Result != null && Result.Read())
                 state = true;
@@ -103,6 +107,30 @@ namespace Bacchus.Control
                 state = false;
             CloseConnection();
             return state;
+        }
+
+        public Article FindByRef(string Ref)
+        {
+            OpenConnection();
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + RefName + " = '" + Ref + "'");
+
+            Article Arti;
+            SousFamilleControl SFCont = new SousFamilleControl();
+            MarqueControl MCont = new MarqueControl();
+            if (Result.Read())
+            {
+                Arti = new Article(
+                    Result.GetString(0),
+                    Result.GetString(1),
+                    Result.GetFloat(4),
+                    Result.GetInt16(5),
+                    MCont.FindByRef(Result.GetInt16(3)),
+                    SFCont.FindByRef(Result.GetInt16(2)));
+            }
+            else
+                Arti = null;
+            CloseConnection();
+            return Arti;
         }
     }
 }

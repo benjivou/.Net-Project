@@ -17,7 +17,7 @@ namespace Bacchus
         /// Attributs d'instances
         private string dataBaseName;
         private string databaseSource;
-        protected SQLiteConnection Connection;
+        private SQLiteConnection Connection;
         protected SQLiteCommand Command { get; set; }
 
         protected string TableName { get; set; }

@@ -35,7 +35,7 @@ namespace Bacchus
                 }
             }
             // Display Marque name with id = 1
-            Console.WriteLine("find name with id 1 : " + MCont.FindByRef(1).Nom);
+            //Console.WriteLine("find name with id 1 : " + MCont.FindByRef(1).Nom);
             // Create a new marque in the model
             Model.Marque m = new Model.Marque("Kingston");
             // Insert this new marque into the DB
@@ -56,10 +56,10 @@ namespace Bacchus
             HashSet<Famille> ListF = FCont.GetAll();
             if (ListF != null)    // Display all 
             {
-                foreach (Famille Fam in ListF)
+                foreach (Famille Fami in ListF)
                 {
                     // Display all differents 
-                    Console.WriteLine(Fam.Nom);
+                    Console.WriteLine(Fami.Nom);
                 }
             }
             FCont.Insert(new Famille("Grande"));
@@ -69,15 +69,15 @@ namespace Bacchus
             ListF = FCont.GetAll();
             if (ListF != null)    // Display all 
             {
-                foreach (Famille Fam in ListF)
+                foreach (Famille Fami in ListF)
                 {
                     // Display all differents 
-                    Console.WriteLine(Fam.RefFamille + " " + Fam.Nom);
-                    Fam.Nom = "Changed";
-                    FCont.Update(Fam);
-                    Famille Fam2 = FCont.FindByRef(Fam.RefFamille);
+                    Console.WriteLine(Fami.RefFamille + " " + Fami.Nom);
+                    Fami.Nom = "Changed";
+                    FCont.Update(Fami);
+                    Famille Fam2 = FCont.FindByRef(Fami.RefFamille);
                     Console.WriteLine(Fam2.RefFamille + " " + Fam2.Nom);
-                    FCont.Delete(Fam);
+                    FCont.Delete(Fami);
                 }
             }
             Console.WriteLine("max : " + FCont.GetMaxRef());
@@ -109,6 +109,57 @@ namespace Bacchus
             }
             FCont.Delete(f);
             Console.WriteLine("Deletes\nMax sous-famille : " + SFCont.GetMaxRef());
+
+            /// ARTICLES 
+            ArticleControl ACont = new ArticleControl();
+            // Create famille first
+            Famille Fam = new Famille("Pere");
+            FCont.Insert(Fam);
+            Fam.RefFamille = FCont.GetMaxRef();
+            // Then create SousFamilles
+            SousFamille sf1 = new SousFamille("Fils",Fam);
+            SousFamille sf2 = new SousFamille("Fille",Fam);
+            SFCont.Insert(sf1);
+            sf1.RefSousFamille = SFCont.GetMaxRef();
+            SFCont.Insert(sf2);
+            sf2.RefSousFamille = SFCont.GetMaxRef();
+            //Create Marque
+            Marque Mark = new Marque("Vroom");
+            MCont.Insert(Mark);
+            Mark.RefMarque = MCont.GetMaxRef();
+            Marque Mark2 = new Marque("Nitro");
+            MCont.Insert(Mark2);
+            Mark2.RefMarque = MCont.GetMaxRef();
+            Console.WriteLine("\nArticle :\n" + MCont.GetMaxRef() + " Marques / " + SFCont.GetMaxRef() + " ssFamilles / " + FCont.GetMaxRef() + " Familles");
+            //Articles
+            Article a1 = new Article("007","Secret Pen",88,2,Mark,sf1);
+            ACont.Insert(a1);
+            Article ac = new Article("008", "Secret copieur", 71, 12, Mark2, sf2);
+            ACont.Insert(ac);
+            HashSet<Article> Alist = ACont.GetAll();
+            if(Alist != null)
+            {
+                foreach(Article Art in Alist)
+                {
+                    Console.WriteLine(Art.RefArticle + " " + Art.Description + " " + Art.Marque.Nom + " " + Art.SousFamille.Nom);
+                    Art.Description = "Secret changed ";
+                    Art.Marque = Mark2;
+                    Art.SousFamille = sf2;
+                    ACont.Update(Art);
+                    Article Updated = ACont.FindByRef(Art.RefArticle);
+                    Console.WriteLine(Updated.RefArticle + " " + Updated.Description + " " + Updated.Marque.Nom + " " + Updated.SousFamille.Nom);
+                    ACont.Delete(Updated);
+                }
+            }
+
+            //Delete
+            MCont.Delete(Mark);
+            MCont.Delete(Mark2);
+            SFCont.Delete(sf1);
+            SFCont.Delete(sf2);
+            FCont.Delete(Fam);
+            Console.WriteLine(MCont.GetMaxRef() + " Marques / " + SFCont.GetMaxRef() + " ssFamilles / " + FCont.GetMaxRef() + " Familles ");
+
 
 
             // Launch View Part
