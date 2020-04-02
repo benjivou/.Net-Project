@@ -1,5 +1,4 @@
-﻿using Bacchus.View;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,19 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Bacchus
+namespace Bacchus.View
 {
-    public partial class FormMain : Form
+    public partial class FormImport : Form
     {
-        public FormMain()
+        public FormImport()
         {
             InitializeComponent();
         }
 
-        private void ImporterToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OKBtn_Click(object sender, EventArgs e)
         {
-            FormImport Frame = new FormImport();
-            Frame.ShowDialog();
+
         }
     }
 }

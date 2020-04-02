@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
-            this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.FichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Splitter = new System.Windows.Forms.SplitContainer();
-            this.TypeTree = new System.Windows.Forms.TreeView();
-            this.DisplayList = new System.Windows.Forms.ListView();
             this.ActualiserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StatusStrip = new System.Windows.Forms.StatusStrip();
+            this.Splitter = new System.Windows.Forms.SplitContainer();
+            this.TypeTree = new System.Windows.Forms.TreeView();
+            this.DisplayList = new System.Windows.Forms.ListView();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Splitter)).BeginInit();
             this.Splitter.Panel1.SuspendLayout();
@@ -54,14 +54,6 @@
             this.MenuStrip.TabIndex = 0;
             this.MenuStrip.Text = "MenuStrip";
             // 
-            // StatusStrip
-            // 
-            this.StatusStrip.Location = new System.Drawing.Point(0, 428);
-            this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(800, 22);
-            this.StatusStrip.TabIndex = 1;
-            this.StatusStrip.Text = "StatusStrip";
-            // 
             // FichierToolStripMenuItem
             // 
             this.FichierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -71,6 +63,33 @@
             this.FichierToolStripMenuItem.Name = "FichierToolStripMenuItem";
             this.FichierToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.FichierToolStripMenuItem.Text = "Fichier";
+            // 
+            // ActualiserToolStripMenuItem
+            // 
+            this.ActualiserToolStripMenuItem.Name = "ActualiserToolStripMenuItem";
+            this.ActualiserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ActualiserToolStripMenuItem.Text = "Actualiser";
+            // 
+            // ImporterToolStripMenuItem
+            // 
+            this.ImporterToolStripMenuItem.Name = "ImporterToolStripMenuItem";
+            this.ImporterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ImporterToolStripMenuItem.Text = "Importer";
+            this.ImporterToolStripMenuItem.Click += new System.EventHandler(this.ImporterToolStripMenuItem_Click);
+            // 
+            // ExporterToolStripMenuItem
+            // 
+            this.ExporterToolStripMenuItem.Name = "ExporterToolStripMenuItem";
+            this.ExporterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExporterToolStripMenuItem.Text = "Exporter";
+            // 
+            // StatusStrip
+            // 
+            this.StatusStrip.Location = new System.Drawing.Point(0, 428);
+            this.StatusStrip.Name = "StatusStrip";
+            this.StatusStrip.Size = new System.Drawing.Size(800, 22);
+            this.StatusStrip.TabIndex = 1;
+            this.StatusStrip.Text = "StatusStrip";
             // 
             // Splitter
             // 
@@ -108,24 +127,6 @@
             this.DisplayList.TabIndex = 0;
             this.DisplayList.UseCompatibleStateImageBehavior = false;
             this.DisplayList.View = System.Windows.Forms.View.Details;
-            // 
-            // ActualiserToolStripMenuItem
-            // 
-            this.ActualiserToolStripMenuItem.Name = "ActualiserToolStripMenuItem";
-            this.ActualiserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ActualiserToolStripMenuItem.Text = "Actualiser";
-            // 
-            // ImporterToolStripMenuItem
-            // 
-            this.ImporterToolStripMenuItem.Name = "ImporterToolStripMenuItem";
-            this.ImporterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ImporterToolStripMenuItem.Text = "Importer";
-            // 
-            // ExporterToolStripMenuItem
-            // 
-            this.ExporterToolStripMenuItem.Name = "ExporterToolStripMenuItem";
-            this.ExporterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ExporterToolStripMenuItem.Text = "Exporter";
             // 
             // FormMain
             // 

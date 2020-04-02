@@ -162,12 +162,11 @@ namespace Bacchus
 
 
 
-            // Launch View Part
-            /*
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
-            */
+            
         }
     }
 }
