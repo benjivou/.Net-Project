@@ -189,7 +189,6 @@ namespace Bacchus
 			return Ref;
 		}
 
-
 		/// <summary>
 		/// Create an object in DataBase
 		/// </summary>

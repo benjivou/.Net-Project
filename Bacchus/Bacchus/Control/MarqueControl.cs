@@ -43,9 +43,23 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Delete(Marque Objet)
         {
-            // TODO Cascade
+            
             if (Objet == null)
                 return false;
+
+			/*
+			 * Step 1 : Remove Articles linked tot this Marque
+			 */
+			ArticleControl ACont = new ArticleControl();
+			HashSet<Article> Liste = ACont.FindByMarque(Objet);
+			foreach(Article Element in Liste)
+			{
+				Console.WriteLine(Element.ToString());
+				ACont.Delete(Element);
+			}
+			/*
+			 * Step 2 : remopve from the Database the "Marque"
+			 */
             return ExecuteUpdate("DELETE FROM " + TableName + " WHERE " + RefName  + " = " + Objet.RefMarque );
         }
 
@@ -99,5 +113,8 @@ namespace Bacchus.Control
             CloseConnection();
             return Brand;
         }
-    }
+
+		
+
+	}
 }
