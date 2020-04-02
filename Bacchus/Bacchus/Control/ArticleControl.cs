@@ -132,5 +132,27 @@ namespace Bacchus.Control
             CloseConnection();
             return Arti;
         }
+
+		public HashSet<Article> FindBySousFamille(SousFamille Objet)
+		{
+			OpenConnection();
+			HashSet<Article> Liste = new HashSet<Article>();
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " Where RefSousFamille = " + Objet.RefSousFamille);
+			SousFamilleControl SFCont = new SousFamilleControl();
+			MarqueControl MCont = new MarqueControl();
+			while ( Result.Read())
+			{
+				Article Arti = new Article(
+					Result.GetString(0),
+					Result.GetString(1),
+					Result.GetFloat(4),
+					Result.GetInt16(5),
+					MCont.FindByRef(Result.GetInt16(3)),
+					SFCont.FindByRef(Result.GetInt16(2)));
+				Liste.Add(Arti);
+			}
+			CloseConnection();
+			return Liste;
+		}
     }
 }

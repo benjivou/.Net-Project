@@ -41,13 +41,13 @@ namespace Bacchus
             // Insert this new marque into the DB
             MCont.Insert(m);
             // Update the marque in the model with the new attributed id
-            m = MCont.FindByRef(MCont.GetMaxRef());
+            m = MCont.FindByRef(MCont.GetCountRef());
             Console.WriteLine("Insert : " + m.Nom);
             // Change the name in the model
             m.Nom = "QueenStone";
             // Update the name in the DB
             bool u = MCont.Update(m);
-            Console.WriteLine("Update : " + MCont.FindByRef(MCont.GetMaxRef()).Nom);
+            Console.WriteLine("Update : " + MCont.FindByRef(MCont.GetCountRef()).Nom);
             // Delete the marque
             bool r = MCont.Delete(m);
 
@@ -65,7 +65,7 @@ namespace Bacchus
             FCont.Insert(new Famille("Grande"));
             FCont.Insert(new Famille("Moyenne"));
             FCont.Insert(new Famille("Petite"));
-            Console.WriteLine("max : " + FCont.GetMaxRef());
+            Console.WriteLine("max : " + FCont.GetCountRef());
             ListF = FCont.GetAll();
             if (ListF != null)    // Display all 
             {
@@ -80,19 +80,19 @@ namespace Bacchus
                     FCont.Delete(Fami);
                 }
             }
-            Console.WriteLine("max : " + FCont.GetMaxRef());
+            Console.WriteLine("max : " + FCont.GetCountRef());
 
             /// SS-FAMILLE
             SousFamilleControl SFCont = new SousFamilleControl();
-            Console.WriteLine("\nMax sous-famille : " + SFCont.GetMaxRef());
+            Console.WriteLine("\nMax sous-famille : " + SFCont.GetCountRef());
             Famille f = new Famille("La Ch-tite Famille");
             FCont.Insert(f);
-            f = FCont.FindByRef(FCont.GetMaxRef());
+            f = FCont.FindByRef(FCont.GetCountRef());
             SousFamille sf = new SousFamille("Sous race 1", f);
             SousFamille sfb = new SousFamille("Sous race 2", f);
             r = SFCont.Insert(sf);
             r = SFCont.Insert(sfb);
-            Console.WriteLine("Inserts\nMax sous-famille : " + SFCont.GetMaxRef());
+            Console.WriteLine("Inserts\nMax sous-famille : " + SFCont.GetCountRef());
             HashSet<SousFamille> ListSF = SFCont.GetAll();
             if (ListSF != null)    // Display all 
             {
@@ -108,29 +108,29 @@ namespace Bacchus
                 }
             }
             FCont.Delete(f);
-            Console.WriteLine("Deletes\nMax sous-famille : " + SFCont.GetMaxRef());
+            Console.WriteLine("Deletes\nMax sous-famille : " + SFCont.GetCountRef());
 
             /// ARTICLES 
             ArticleControl ACont = new ArticleControl();
             // Create famille first
             Famille Fam = new Famille("Pere");
             FCont.Insert(Fam);
-            Fam.RefFamille = FCont.GetMaxRef();
+            Fam.RefFamille = FCont.GetCountRef();
             // Then create SousFamilles
             SousFamille sf1 = new SousFamille("Fils",Fam);
             SousFamille sf2 = new SousFamille("Fille",Fam);
             SFCont.Insert(sf1);
-            sf1.RefSousFamille = SFCont.GetMaxRef();
+            sf1.RefSousFamille = SFCont.GetCountRef();
             SFCont.Insert(sf2);
-            sf2.RefSousFamille = SFCont.GetMaxRef();
+            sf2.RefSousFamille = SFCont.GetCountRef();
             //Create Marque
             Marque Mark = new Marque("Vroom");
             MCont.Insert(Mark);
-            Mark.RefMarque = MCont.GetMaxRef();
+            Mark.RefMarque = MCont.GetCountRef();
             Marque Mark2 = new Marque("Nitro");
             MCont.Insert(Mark2);
-            Mark2.RefMarque = MCont.GetMaxRef();
-            Console.WriteLine("\nArticle :\n" + MCont.GetMaxRef() + " Marques / " + SFCont.GetMaxRef() + " ssFamilles / " + FCont.GetMaxRef() + " Familles");
+            Mark2.RefMarque = MCont.GetCountRef();
+            Console.WriteLine("\nArticle :\n" + MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles");
             //Articles
             Article a1 = new Article("007","Secret Pen",88,2,Mark,sf1);
             ACont.Insert(a1);
@@ -151,14 +151,18 @@ namespace Bacchus
                     ACont.Delete(Updated);
                 }
             }
+			
 
-            //Delete
-            MCont.Delete(Mark);
+			//Delete
+			
+			ACont.Insert(a1);
+			
+			ACont.Insert(ac);
+			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+			MCont.Delete(Mark);
             MCont.Delete(Mark2);
-            SFCont.Delete(sf1);
-            SFCont.Delete(sf2);
             FCont.Delete(Fam);
-            Console.WriteLine(MCont.GetMaxRef() + " Marques / " + SFCont.GetMaxRef() + " ssFamilles / " + FCont.GetMaxRef() + " Familles ");
+            Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 
 
 

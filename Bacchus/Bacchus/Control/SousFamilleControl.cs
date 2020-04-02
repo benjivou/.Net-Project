@@ -13,8 +13,9 @@ namespace Bacchus.Control
         {
             TableName = "SousFamilles";
             RefName = "RefSousFamille";
+            
         }
-        
+		
         /// <summary>
         /// Delete a sousFamille object in dataBase
         /// </summary>
@@ -22,9 +23,28 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Delete(SousFamille Objet)
         {
-            // TODO Cascade
+            
             if (Objet == null)
                 return false;
+
+
+			ArticleControl ACont = new ArticleControl();
+			HashSet<Article> Liste;
+			/*
+			 * Step : 1 Remove all Articles linked to this "Sous-Famille"
+			 */
+
+			// get all "Articles" linked 
+
+			Liste = ACont.FindBySousFamille(Objet);
+
+			// remove all of them
+
+			foreach(Article ElementArticle in Liste)
+			{
+				ACont.Delete(ElementArticle);
+			}
+
             return ExecuteUpdate("DELETE FROM " + TableName + " WHERE " + RefName + " = " + Objet.RefSousFamille);
         }
 
@@ -114,5 +134,26 @@ namespace Bacchus.Control
             else
                 return true;
         }
-    }
+
+		/// <summary>
+		/// Return the list of "SousFamille" object from the database with the FamilleRef equals to the family pass in parameter
+		/// </summary>
+		/// <param name="Ref"></param>
+		/// <returns></returns>
+		public HashSet<SousFamille> FindByFamily(Famille Objet)
+		{
+			OpenConnection();
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + "RefFamille" + " = " + Objet.RefFamille);
+			HashSet<SousFamille> Liste = new HashSet<SousFamille>();
+
+			FamilleControl FCont = new FamilleControl();
+			while (Result.Read())
+			{
+				SousFamille ChildFamily = new SousFamille(Result.GetString(2), FCont.FindByRef(Result.GetInt32(1)), Result.GetInt16(0));
+				Liste.Add(ChildFamily);
+			}
+			CloseConnection();
+			return Liste;
+		}
+	}
 }
