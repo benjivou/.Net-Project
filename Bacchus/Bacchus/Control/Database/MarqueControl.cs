@@ -114,7 +114,6 @@ namespace Bacchus.Control
             CloseConnection();
             return Brand;
         }
-
 		public override Marque GetByName(Marque obj)
 		{
 			OpenConnection();
