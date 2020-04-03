@@ -21,7 +21,9 @@ namespace Bacchus
         [STAThread]
         static void Main()
         {
-   //         /// TESTS BDD - EXAMPLE ///
+			
+            /// TESTS BDD - EXAMPLE ///
+
             
    //         /// MARQUES
            Control.MarqueControl MCont = new Control.MarqueControl();
@@ -174,6 +176,7 @@ namespace Bacchus
 			//FCont.Delete(Fam);
    //         Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 
+
 			FileControl.ImportFile("E:\\Document\\.Net-Project\\Bacchus\\Bacchus\\Data_to_integrate.csv");
 			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 
@@ -184,5 +187,7 @@ namespace Bacchus
             Application.Run(new FormMain());
             */
 		}
+
+
     }
 }
