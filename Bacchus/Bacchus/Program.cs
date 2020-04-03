@@ -104,10 +104,19 @@ namespace Bacchus
                     SFCont.Update(SFam);
                     SousFamille SFam2 = SFCont.FindByRef(SFam.RefSousFamille);
                     Console.WriteLine(SFam2.RefSousFamille + " " + SFam2.Nom);
-                    SFCont.Delete(SFam);
+
+					// Test of the GetByName on a SF
+					SousFamille SFMock = SFCont.GetByName(SFam);
+					Console.WriteLine("test Get FullObject \n SFMock name = " + SFMock.Nom);
+					SFam.Nom = "Not In the Database";
+					SFMock = SFCont.GetByName(SFam);
+					if (SFMock == null) Console.WriteLine("Done");
+					SFCont.Delete(SFam);
                 }
             }
-            FCont.Delete(f);
+			
+
+			FCont.Delete(f);
             Console.WriteLine("Deletes\nMax sous-famille : " + SFCont.GetMaxRef());
 
             /// ARTICLES 

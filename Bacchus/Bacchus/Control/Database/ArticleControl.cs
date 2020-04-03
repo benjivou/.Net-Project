@@ -189,6 +189,10 @@ namespace Bacchus.Control
 			return Liste;
 		}
 
+		public override Article GetByName(Article Obj)
+		{
+			return FindByRef(Obj.RefArticle);
+		}
 	}
 
 		

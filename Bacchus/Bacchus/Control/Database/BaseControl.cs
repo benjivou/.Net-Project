@@ -214,11 +214,11 @@ namespace Bacchus
         public abstract HashSet<Obj> GetAll();
 
 		/// <summary>
-		/// the objectif is to retrive the real reference in the Database of the object but 
+		/// the Objectif is to retrive the real reference in the Database of the Object but 
 		/// </summary>
-		/// <param name="obj">the partial object </param>
-		/// <returns>if you don't have the object in the database the return will be a null</returns>
-		public abstract Obj GetFullObject(Obj obj);
+		/// <param name="Obj">the partial Object </param>
+		/// <returns>if you don't have the Object in the database the return will be a null</returns>
+		public abstract Obj GetByName(Obj Obj);
 		
 
     }

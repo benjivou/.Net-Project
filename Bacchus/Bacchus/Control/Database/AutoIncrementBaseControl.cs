@@ -8,7 +8,9 @@ namespace Bacchus.Control
 {
     abstract class AutoIncrementBaseControl<Obj> : BaseControl<Obj>
     {
-        public int GetMaxRef()
+		protected string ValueName = "Nom";
+
+		public int GetMaxRef()
         {
             if (TableIsEmpty() == true)
                 return 0;

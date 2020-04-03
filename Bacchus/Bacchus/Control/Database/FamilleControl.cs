@@ -10,7 +10,7 @@ namespace Bacchus.Control
     class FamilleControl : AutoIncrementBaseControl<Famille>
     {
         
-        private string NameName = "Nom";        // Name 
+        
 
         public FamilleControl()
         {
@@ -77,10 +77,10 @@ namespace Bacchus.Control
             if (Objet == null || Exist(Objet.Nom))
                 return false;
             if (Objet.RefFamille > 0 )
-                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + "," + NameName + ") VALUES (" + Objet.RefFamille + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + "," + ValueName + ") VALUES (" + Objet.RefFamille + ",'" + Objet.Nom + "')");
             else
             {
-                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + ", " + NameName + ") VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + ", " + ValueName + ") VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
             }
         }
 
@@ -119,10 +119,10 @@ namespace Bacchus.Control
             return Family;
         }
 
-		public override Famille GetFullObject(Famille obj)
+		public override Famille GetByName(Famille Obj)
 		{
 			OpenConnection();
-			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + NameName + " LIKE '" + obj.Nom + "'");
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + ValueName + " LIKE '" + Obj.Nom + "'");
 			Famille Family;
 			if (Result.Read())
 			{

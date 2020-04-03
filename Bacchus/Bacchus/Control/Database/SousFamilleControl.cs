@@ -9,7 +9,7 @@ namespace Bacchus.Control
 {
     class SousFamilleControl : AutoIncrementBaseControl<SousFamille>
     {
-		private string NameName = "Nom";        // Name
+		       // Name
 		public SousFamilleControl()
         {
             TableName = "SousFamilles";
@@ -157,15 +157,26 @@ namespace Bacchus.Control
 			return Liste;
 		}
 
-		public override SousFamille GetFullObject(SousFamille obj)
+		public override SousFamille GetByName(SousFamille obj)
 		{
 			OpenConnection();
-			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + NameName + " LIKE '" + NameName + "' AND RefFamille = "+ obj.Famille.RefFamille);
+
+			// We have to compare the FamilleRef and the Sous Famille Name to fin it 
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + 
+				" WHERE " + ValueName + " = '" + obj.Nom +
+				"' AND RefFamille = "+ obj.Famille.RefFamille);
+
+
 			SousFamille ChildFamily = null;
 			FamilleControl FCont = new FamilleControl();
+
+
 			if (Result.Read())
 			{
-				ChildFamily = new SousFamille(Result.GetString(0), FCont.FindByRef(Result.GetInt32(1)), Result.GetInt16(2));
+				ChildFamily = new SousFamille(
+					Result.GetString(2), 
+					obj.Famille,
+					Result.GetInt16(0));
 			}
 			else
 				ChildFamily = null;
