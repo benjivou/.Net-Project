@@ -21,6 +21,7 @@ namespace Bacchus
         [STAThread]
         static void Main()
         {
+            /*
             /// TESTS BDD - EXAMPLE ///
             
             /// MARQUES
@@ -159,7 +160,7 @@ namespace Bacchus
             SFCont.Delete(sf2);
             FCont.Delete(Fam);
             Console.WriteLine(MCont.GetMaxRef() + " Marques / " + SFCont.GetMaxRef() + " ssFamilles / " + FCont.GetMaxRef() + " Familles ");
-
+            */
 
 
             

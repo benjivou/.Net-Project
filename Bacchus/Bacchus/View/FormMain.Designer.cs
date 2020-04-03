@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tous les articles");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Familles");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Marques");
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.FichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ActualiserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,20 +70,20 @@
             // ActualiserToolStripMenuItem
             // 
             this.ActualiserToolStripMenuItem.Name = "ActualiserToolStripMenuItem";
-            this.ActualiserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ActualiserToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ActualiserToolStripMenuItem.Text = "Actualiser";
             // 
             // ImporterToolStripMenuItem
             // 
             this.ImporterToolStripMenuItem.Name = "ImporterToolStripMenuItem";
-            this.ImporterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ImporterToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ImporterToolStripMenuItem.Text = "Importer";
             this.ImporterToolStripMenuItem.Click += new System.EventHandler(this.ImporterToolStripMenuItem_Click);
             // 
             // ExporterToolStripMenuItem
             // 
             this.ExporterToolStripMenuItem.Name = "ExporterToolStripMenuItem";
-            this.ExporterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExporterToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ExporterToolStripMenuItem.Text = "Exporter";
             // 
             // StatusStrip
@@ -114,6 +117,16 @@
             this.TypeTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TypeTree.Location = new System.Drawing.Point(0, 0);
             this.TypeTree.Name = "TypeTree";
+            treeNode1.Name = "AllNode";
+            treeNode1.Text = "Tous les articles";
+            treeNode2.Name = "FamilyNode";
+            treeNode2.Text = "Familles";
+            treeNode3.Name = "BrandNode";
+            treeNode3.Text = "Marques";
+            this.TypeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
             this.TypeTree.Size = new System.Drawing.Size(266, 404);
             this.TypeTree.TabIndex = 0;
             // 
