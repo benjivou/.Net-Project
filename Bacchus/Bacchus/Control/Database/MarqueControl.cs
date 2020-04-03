@@ -117,7 +117,7 @@ namespace Bacchus.Control
 		public override Marque GetByName(Marque obj)
 		{
 			OpenConnection();
-			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + ValueName + " LIKE '" + ValueName + "'");
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + ValueName + " LIKE '" + obj.Nom + "'");
 			Marque Brand;
 			if (Result.Read())
 			{

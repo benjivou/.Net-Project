@@ -18,5 +18,9 @@ namespace Bacchus.Model
             Famille = Family;
             Nom = Name;
         }
-    }
+
+		public SousFamille()
+		{
+		}
+	}
 }

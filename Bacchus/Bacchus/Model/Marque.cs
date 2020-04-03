@@ -12,11 +12,11 @@ namespace Bacchus.Model
     class Marque
     {
         public int RefMarque { get; set; }
-        public String Nom { get; set; }
+        public string Nom { get; set; }
 
         public Marque()
         {
-
+			
         }
 
         /// <summary>

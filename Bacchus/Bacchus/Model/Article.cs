@@ -24,5 +24,10 @@ namespace Bacchus.Model
             Marque = Brand;
             SousFamille = ChildFamily;
         }
-    }
+
+		public Article()
+		{
+			Quantite = 0;
+		}
+	}
 }
