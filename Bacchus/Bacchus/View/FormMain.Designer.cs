@@ -28,22 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Tous les articles");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Familles");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Marques");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Tous les articles");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Familles");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Marques");
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.FichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ActualiserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
-            this.Splitter = new System.Windows.Forms.SplitContainer();
-            this.TypeTree = new System.Windows.Forms.TreeView();
-            this.DisplayList = new System.Windows.Forms.ListView();
             this.NbArticles = new System.Windows.Forms.ToolStripStatusLabel();
             this.NbFamilles = new System.Windows.Forms.ToolStripStatusLabel();
             this.NbSousFamilles = new System.Windows.Forms.ToolStripStatusLabel();
             this.NbMarques = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Splitter = new System.Windows.Forms.SplitContainer();
+            this.TypeTree = new System.Windows.Forms.TreeView();
+            this.DisplayList = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MenuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Splitter)).BeginInit();
@@ -75,21 +78,21 @@
             // ActualiserToolStripMenuItem
             // 
             this.ActualiserToolStripMenuItem.Name = "ActualiserToolStripMenuItem";
-            this.ActualiserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ActualiserToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ActualiserToolStripMenuItem.Text = "Actualiser";
             this.ActualiserToolStripMenuItem.Click += new System.EventHandler(this.ActualiserToolStripMenuItem_Click);
             // 
             // ImporterToolStripMenuItem
             // 
             this.ImporterToolStripMenuItem.Name = "ImporterToolStripMenuItem";
-            this.ImporterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ImporterToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ImporterToolStripMenuItem.Text = "Importer";
             this.ImporterToolStripMenuItem.Click += new System.EventHandler(this.ImporterToolStripMenuItem_Click);
             // 
             // ExporterToolStripMenuItem
             // 
             this.ExporterToolStripMenuItem.Name = "ExporterToolStripMenuItem";
-            this.ExporterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExporterToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ExporterToolStripMenuItem.Text = "Exporter";
             this.ExporterToolStripMenuItem.Click += new System.EventHandler(this.ExporterToolStripMenuItem_Click);
             // 
@@ -105,53 +108,6 @@
             this.StatusStrip.Size = new System.Drawing.Size(628, 22);
             this.StatusStrip.TabIndex = 1;
             this.StatusStrip.Text = "StatusStrip";
-            // 
-            // Splitter
-            // 
-            this.Splitter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Splitter.Location = new System.Drawing.Point(0, 24);
-            this.Splitter.Name = "Splitter";
-            // 
-            // Splitter.Panel1
-            // 
-            this.Splitter.Panel1.Controls.Add(this.TypeTree);
-            this.Splitter.Panel1MinSize = 200;
-            // 
-            // Splitter.Panel2
-            // 
-            this.Splitter.Panel2.Controls.Add(this.DisplayList);
-            this.Splitter.Size = new System.Drawing.Size(628, 186);
-            this.Splitter.SplitterDistance = 200;
-            this.Splitter.TabIndex = 2;
-            // 
-            // TypeTree
-            // 
-            this.TypeTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TypeTree.Location = new System.Drawing.Point(0, 0);
-            this.TypeTree.Name = "TypeTree";
-            treeNode7.Name = "AllNode";
-            treeNode7.Text = "Tous les articles";
-            treeNode8.Name = "FamilyNode";
-            treeNode8.Text = "Familles";
-            treeNode9.Name = "BrandNode";
-            treeNode9.Text = "Marques";
-            this.TypeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
-            treeNode9});
-            this.TypeTree.Size = new System.Drawing.Size(200, 186);
-            this.TypeTree.TabIndex = 0;
-            // 
-            // DisplayList
-            // 
-            this.DisplayList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DisplayList.HideSelection = false;
-            this.DisplayList.Location = new System.Drawing.Point(0, 0);
-            this.DisplayList.Name = "DisplayList";
-            this.DisplayList.Size = new System.Drawing.Size(424, 186);
-            this.DisplayList.TabIndex = 0;
-            this.DisplayList.UseCompatibleStateImageBehavior = false;
-            this.DisplayList.View = System.Windows.Forms.View.Details;
             // 
             // NbArticles
             // 
@@ -180,6 +136,61 @@
             this.NbMarques.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.NbMarques.Size = new System.Drawing.Size(72, 17);
             this.NbMarques.Text = "Marques : ";
+            // 
+            // Splitter
+            // 
+            this.Splitter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Splitter.Location = new System.Drawing.Point(0, 24);
+            this.Splitter.Name = "Splitter";
+            // 
+            // Splitter.Panel1
+            // 
+            this.Splitter.Panel1.Controls.Add(this.TypeTree);
+            this.Splitter.Panel1MinSize = 200;
+            // 
+            // Splitter.Panel2
+            // 
+            this.Splitter.Panel2.Controls.Add(this.DisplayList);
+            this.Splitter.Size = new System.Drawing.Size(628, 186);
+            this.Splitter.SplitterDistance = 200;
+            this.Splitter.TabIndex = 2;
+            // 
+            // TypeTree
+            // 
+            this.TypeTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TypeTree.Location = new System.Drawing.Point(0, 0);
+            this.TypeTree.Name = "TypeTree";
+            treeNode46.Name = "AllNode";
+            treeNode46.Text = "Tous les articles";
+            treeNode47.Name = "FamilyNode";
+            treeNode47.Text = "Familles";
+            treeNode48.Name = "BrandNode";
+            treeNode48.Text = "Marques";
+            this.TypeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode46,
+            treeNode47,
+            treeNode48});
+            this.TypeTree.Size = new System.Drawing.Size(200, 186);
+            this.TypeTree.TabIndex = 0;
+            this.TypeTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TypeTree_AfterSelect);
+            // 
+            // DisplayList
+            // 
+            this.DisplayList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.DisplayList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DisplayList.GridLines = true;
+            this.DisplayList.HideSelection = false;
+            this.DisplayList.Location = new System.Drawing.Point(0, 0);
+            this.DisplayList.Name = "DisplayList";
+            this.DisplayList.Size = new System.Drawing.Size(424, 186);
+            this.DisplayList.TabIndex = 0;
+            this.DisplayList.UseCompatibleStateImageBehavior = false;
+            this.DisplayList.View = System.Windows.Forms.View.Details;
+            this.DisplayList.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.DisplayList_DrawColumnHeader);
+            this.DisplayList.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.DisplayList_DrawItem);
             // 
             // FormMain
             // 
@@ -221,6 +232,9 @@
         private System.Windows.Forms.ToolStripStatusLabel NbFamilles;
         private System.Windows.Forms.ToolStripStatusLabel NbSousFamilles;
         private System.Windows.Forms.ToolStripStatusLabel NbMarques;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
     }
 }
 
