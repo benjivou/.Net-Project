@@ -75,7 +75,7 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Insert(SousFamille Objet)
         {
-            if (Objet == null || !CheckFamille(Objet.Famille) || Exist(Objet.Nom))
+            if (Objet == null || !CheckFamille(Objet.Famille) || Exist(Objet))
                 return false;
             if (Objet.RefSousFamille > 0)
                 return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom,RefFamille) VALUES (" + Objet.RefSousFamille + ",'" + Objet.Nom + "' , " + Objet.Famille.RefFamille + ")");

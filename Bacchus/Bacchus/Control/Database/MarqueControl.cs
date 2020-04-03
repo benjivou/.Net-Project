@@ -26,7 +26,7 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Insert(Marque Objet)
         {
-            if (Objet == null || Exist(Objet.Nom))
+            if (Objet == null || Exist(Objet))
                 return false;
             if(Objet.RefMarque > 0)
                 return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom) VALUES (" + Objet.RefMarque + ",'" + Objet.Nom + "')");
