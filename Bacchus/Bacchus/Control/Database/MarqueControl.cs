@@ -12,7 +12,8 @@ namespace Bacchus.Control
     /// </summary>
     class MarqueControl : AutoIncrementBaseControl<Marque>
     {
-        public MarqueControl()
+		private string NameName = "Nom";        // Name 
+		public MarqueControl()
         {
             TableName = "Marques";
             RefName = "RefMarque";
@@ -114,7 +115,19 @@ namespace Bacchus.Control
             return Brand;
         }
 
-		
-
+		public override Marque GetFullObject(Marque obj)
+		{
+			OpenConnection();
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + NameName + " LIKE '" + NameName + "'");
+			Marque Brand;
+			if (Result.Read())
+			{
+				Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
+			}
+			else
+				Brand = null;
+			CloseConnection();
+			return Brand;
+		}
 	}
 }

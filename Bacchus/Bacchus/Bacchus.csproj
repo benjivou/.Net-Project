@@ -65,12 +65,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Control\ArticleControl.cs" />
-    <Compile Include="Control\AutoIncrementBaseControl.cs" />
-    <Compile Include="Control\BaseControl.cs" />
-    <Compile Include="Control\FamilleControl.cs" />
-    <Compile Include="Control\MarqueControl.cs" />
-    <Compile Include="Control\SousFamilleControl.cs" />
+    <Compile Include="Control\Database\ArticleControl.cs" />
+    <Compile Include="Control\Database\AutoIncrementBaseControl.cs" />
+    <Compile Include="Control\Database\BaseControl.cs" />
+    <Compile Include="Control\Database\FamilleControl.cs" />
+    <Compile Include="Control\FileControl.cs" />
+    <Compile Include="Control\Database\MarqueControl.cs" />
+    <Compile Include="Control\Database\SousFamilleControl.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Famille.cs" />
     <Compile Include="Model\SousFamille.cs" />

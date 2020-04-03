@@ -119,6 +119,19 @@ namespace Bacchus.Control
             return Family;
         }
 
-
-    }
+		public override Famille GetFullObject(Famille obj)
+		{
+			OpenConnection();
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + NameName + " LIKE '" + obj.Nom + "'");
+			Famille Family;
+			if (Result.Read())
+			{
+				Family = new Famille(Result.GetString(1), Result.GetInt16(0));
+			}
+			else
+				Family = null;
+			CloseConnection();
+			return Family;
+		}
+	}
 }
