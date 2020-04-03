@@ -171,12 +171,30 @@ namespace Bacchus
             return Res;
         }
 
-        /// <summary>
-        /// Create an object in DataBase
-        /// </summary>
-        /// <param name="Objet"></param>
-        /// <returns></returns>
-        public abstract bool Insert(Obj Objet);
+		public int GetCountRef()
+		{
+			if (TableIsEmpty() == true)
+				return 0;
+			OpenConnection();
+			var Result = ExecuteSelect("SELECT Count(*) FROM " + TableName);
+			int Ref;
+			if (Result.Read())
+			{
+				Ref = Result.GetInt16(0);
+			}
+			else
+				Ref = 0;
+
+			CloseConnection();
+			return Ref;
+		}
+
+		/// <summary>
+		/// Create an object in DataBase
+		/// </summary>
+		/// <param name="Objet"></param>
+		/// <returns></returns>
+		public abstract bool Insert(Obj Objet);
         /// <summary>
         /// Update an object in DataBase
         /// </summary>
@@ -187,12 +205,21 @@ namespace Bacchus
         /// Update an object in DataBase
         /// </summary>
         /// <param name="Objet"></param>
-        /// <returns></returns>
+        /// <returns> true = " job done ", false = "problem lors de la deletion" </returns>
         public abstract bool Delete(Obj Objet);
         /// <summary>
         /// Get all Elements in a table from database
         /// </summary>
         /// <returns></returns>
         public abstract HashSet<Obj> GetAll();
+
+		/// <summary>
+		/// the Objectif is to retrive the real reference in the Database of the Object but 
+		/// </summary>
+		/// <param name="Obj">the partial Object </param>
+		/// <returns>if you don't have the Object in the database the return will be a null</returns>
+		public abstract Obj GetByName(Obj Obj);
+		
+
     }
 }

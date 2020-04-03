@@ -105,10 +105,19 @@ namespace Bacchus
                     SFCont.Update(SFam);
                     SousFamille SFam2 = SFCont.FindByRef(SFam.RefSousFamille);
                     Console.WriteLine(SFam2.RefSousFamille + " " + SFam2.Nom);
-                    SFCont.Delete(SFam);
+
+					// Test of the GetByName on a SF
+					SousFamille SFMock = SFCont.GetByName(SFam);
+					Console.WriteLine("test Get FullObject \n SFMock name = " + SFMock.Nom);
+					SFam.Nom = "Not In the Database";
+					SFMock = SFCont.GetByName(SFam);
+					if (SFMock == null) Console.WriteLine("Done");
+					SFCont.Delete(SFam);
                 }
             }
-            FCont.Delete(f);
+			
+
+			FCont.Delete(f);
             Console.WriteLine("Deletes\nMax sous-famille : " + SFCont.GetMaxRef());
 
             /// ARTICLES 
@@ -127,11 +136,11 @@ namespace Bacchus
             //Create Marque
             Marque Mark = new Marque("Vroom");
             MCont.Insert(Mark);
-            Mark.RefMarque = MCont.GetMaxRef();
+            Mark.RefMarque = MCont.GetCountRef();
             Marque Mark2 = new Marque("Nitro");
             MCont.Insert(Mark2);
             Mark2.RefMarque = MCont.GetMaxRef();
-            Console.WriteLine("\nArticle :\n" + MCont.GetMaxRef() + " Marques / " + SFCont.GetMaxRef() + " ssFamilles / " + FCont.GetMaxRef() + " Familles");
+            Console.WriteLine("\nArticle :\n" + MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles");
             //Articles
             Article a1 = new Article("007","Secret Pen",88,2,Mark,sf1);
             ACont.Insert(a1);
@@ -152,15 +161,20 @@ namespace Bacchus
                     ACont.Delete(Updated);
                 }
             }
+			
 
-            //Delete
-            MCont.Delete(Mark);
+			//Delete
+			
+			ACont.Insert(a1);
+			
+			ACont.Insert(ac);
+			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+			MCont.Delete(Mark);
             MCont.Delete(Mark2);
-            SFCont.Delete(sf1);
-            SFCont.Delete(sf2);
-            FCont.Delete(Fam);
-            Console.WriteLine(MCont.GetMaxRef() + " Marques / " + SFCont.GetMaxRef() + " ssFamilles / " + FCont.GetMaxRef() + " Familles ");
-            */
+			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+			FCont.Delete(Fam);
+            Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+
 
 
             

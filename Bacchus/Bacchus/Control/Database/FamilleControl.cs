@@ -10,7 +10,7 @@ namespace Bacchus.Control
     class FamilleControl : AutoIncrementBaseControl<Famille>
     {
         
-        private string NameName = "Nom";        // Name 
+        
 
         public FamilleControl()
         {
@@ -25,10 +25,28 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Delete(Famille Objet) // TO-DO
         {
-            // TODO CASCADE
-            if (Objet == null)
+			// Init
+			SousFamilleControl SCont = new SousFamilleControl();  // SSFamille Database Access
+			HashSet<SousFamille> ListeSousFamilles;
+
+		
+			if (Objet == null)
                 return false;
-            return ExecuteUpdate("DELETE FROM " + TableName + " WHERE " + RefName + " = " + Objet.RefFamille);
+
+			/*
+			 *remove all "SousFamilles" and "Articles" linked to this "Famille" in the database
+			 */
+			// Step 1 : get all "SousFamilles" Linked to this "Famille"
+			ListeSousFamilles = SCont.FindByFamily(Objet);
+
+			// Step 2 : Delete All
+			foreach(SousFamille SousFamille in ListeSousFamilles)
+			{
+				SCont.Delete(SousFamille);
+			}
+			
+
+			return ExecuteUpdate("DELETE FROM " + TableName + " WHERE " + RefName + " = " + Objet.RefFamille);
         }
 
         /// <summary>
@@ -59,10 +77,10 @@ namespace Bacchus.Control
             if (Objet == null || Exist(Objet.Nom))
                 return false;
             if (Objet.RefFamille > 0 )
-                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + "," + NameName + ") VALUES (" + Objet.RefFamille + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + "," + ValueName + ") VALUES (" + Objet.RefFamille + ",'" + Objet.Nom + "')");
             else
             {
-                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + ", " + NameName + ") VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + ", " + ValueName + ") VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
             }
         }
 
@@ -100,5 +118,20 @@ namespace Bacchus.Control
             CloseConnection();
             return Family;
         }
-    }
+
+		public override Famille GetByName(Famille Obj)
+		{
+			OpenConnection();
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + ValueName + " LIKE '" + Obj.Nom + "'");
+			Famille Family;
+			if (Result.Read())
+			{
+				Family = new Famille(Result.GetString(1), Result.GetInt16(0));
+			}
+			else
+				Family = null;
+			CloseConnection();
+			return Family;
+		}
+	}
 }
