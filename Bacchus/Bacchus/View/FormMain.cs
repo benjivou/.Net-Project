@@ -15,10 +15,16 @@ namespace Bacchus
 {
     public partial class FormMain : Form
     {
+        MarqueControl MCont = new MarqueControl();
+        FamilleControl FCont = new FamilleControl();
+        SousFamilleControl SFCont = new SousFamilleControl();
+        ArticleControl ACont = new ArticleControl();
+
         public FormMain()
         {
             InitializeComponent();
             RefreshTree();
+            RefreshStatusStrip();
         }
 
         private void ImporterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -29,9 +35,6 @@ namespace Bacchus
 
         private void RefreshTree()
         {
-            MarqueControl MCont = new MarqueControl();
-            FamilleControl FCont = new FamilleControl();
-            SousFamilleControl SFCont = new SousFamilleControl();
 
             HashSet<Marque> BrandList;
             HashSet<Famille> FamilyList;
@@ -39,6 +42,7 @@ namespace Bacchus
 
             TreeNodeCollection Root = TypeTree.Nodes;
             Root.Clear();
+
             Root.Add("Tous les articles");
 
             //Add Families
@@ -48,7 +52,17 @@ namespace Bacchus
             {
                 TreeNode FamilyNode = new TreeNode(Family.Nom);
                 FamilyNode.Tag = Family;
-                FamilyNodes.Nodes.Add(Family.Nom);
+
+                //Add Child Families
+                ChildFamilyList = SFCont.FindByFamily(Family);
+                foreach (SousFamille ChildFamily in ChildFamilyList)
+                {
+                    TreeNode ChildFamilyNode = new TreeNode(ChildFamily.Nom);
+                    ChildFamilyNode.Tag = ChildFamily;
+                    FamilyNode.Nodes.Add(ChildFamilyNode);
+                }
+
+                FamilyNodes.Nodes.Add(FamilyNode);
             }
             Root.Add(FamilyNodes);
 
@@ -59,10 +73,29 @@ namespace Bacchus
             {
                 TreeNode BrandNode = new TreeNode(Brand.Nom);
                 BrandNode.Tag = Brand;
-                BrandNodes.Nodes.Add(Brand.Nom);
+                BrandNodes.Nodes.Add(BrandNode);
             }
             Root.Add(BrandNodes);
+        }
 
+        private void ActualiserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshTree();
+            RefreshStatusStrip();
+        }
+
+        private void RefreshStatusStrip()
+        {
+            NbArticles.Text = "Articles : " + ACont.GetCountRef();
+            NbFamilles.Text = "Familles : " + FCont.GetCountRef();
+            NbMarques.Text = "Marques : " + MCont.GetCountRef();
+            NbSousFamilles.Text = "Sous-Familles : " + SFCont.GetCountRef();
+        }
+
+        private void ExporterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormExport Frame = new FormExport();
+            Frame.ShowDialog();
         }
     }
 }
