@@ -29,14 +29,7 @@ namespace Bacchus.Control
         }
 
 
-		public bool Exist(Obj Objet)
-		{
-
-			Obj Result = GetByName(Objet);
-			bool state  = !(Result == null);
-			
-			return state;
-		}
+		
 
 
 		abstract public Obj FindByRef(int Ref);

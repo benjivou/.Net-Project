@@ -189,6 +189,14 @@ namespace Bacchus
 			return Ref;
 		}
 
+		public bool Exist(Obj Objet)
+		{
+
+			Obj Result = GetByName(Objet);
+			bool state = !(Result == null);
+
+			return state;
+		}
 		/// <summary>
 		/// Create an object in DataBase
 		/// </summary>
