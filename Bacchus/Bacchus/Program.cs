@@ -21,6 +21,7 @@ namespace Bacchus
         [STAThread]
         static void Main()
         {
+            /*
             /// TESTS BDD - EXAMPLE ///
             
             /// MARQUES
@@ -176,12 +177,11 @@ namespace Bacchus
 
 
 
-            // Launch View Part
-            /*
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
-            */
+            
         }
     }
 }
