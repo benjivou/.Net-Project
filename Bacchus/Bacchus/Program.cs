@@ -21,6 +21,7 @@ namespace Bacchus
         [STAThread]
         static void Main()
         {
+            /*
             /// TESTS BDD - EXAMPLE ///
             
             /// MARQUES
@@ -175,13 +176,12 @@ namespace Bacchus
             Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 
 
-
-            // Launch View Part
-            /*
+            */
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
-            */
+            
         }
     }
 }
