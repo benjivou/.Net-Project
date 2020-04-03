@@ -176,7 +176,7 @@ namespace Bacchus
             Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 
 
-            */
+
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
