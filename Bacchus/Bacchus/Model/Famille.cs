@@ -16,5 +16,9 @@ namespace Bacchus.Model
             RefFamille = Ref;
             Nom = Name;
         }
-    }
+
+		public Famille()
+		{
+		}
+	}
 }

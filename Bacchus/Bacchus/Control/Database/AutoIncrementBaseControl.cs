@@ -28,19 +28,10 @@ namespace Bacchus.Control
             return Ref;
         }
 
-        public bool Exist(string Name)
-        {
-            OpenConnection();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE Nom = '" + Name + "'");
-            bool state;
-            if (Result != null && Result.Read())
-                state = true;
-            else
-                state = false;
-            CloseConnection();
-            return state;
-        }
 
-        abstract public Obj FindByRef(int Ref);
+		
+
+
+		abstract public Obj FindByRef(int Ref);
     }
 }

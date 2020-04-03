@@ -62,6 +62,8 @@ namespace Bacchus.Control
 		public override bool Update(Article Objet)
 		{
 			if (Objet != null && ExistantRef(Objet.RefArticle) && CheckParam(Objet))
+			{
+				Console.WriteLine("Article ready to import");
 				return ExecuteUpdate("UPDATE " + TableName + " SET " +
 					"Description = '" + Objet.Description + "', " +
 					"RefSousFamille = " + Objet.SousFamille.RefSousFamille + ", " +
@@ -69,6 +71,7 @@ namespace Bacchus.Control
 					"PrixHT = " + Objet.PrixHT + ", " +
 					"Quantite = " + Objet.Quantite + " " +
 					"WHERE " + RefName + " = '" + Objet.RefArticle + "'");
+			}
 			else
 				return false;
 		}
