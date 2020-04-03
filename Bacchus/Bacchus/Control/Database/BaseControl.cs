@@ -18,7 +18,10 @@ namespace Bacchus
         private string dataBaseName;
         private string databaseSource;
         private SQLiteConnection Connection;
-        public SQLiteCommand Command { get; set; }
+        protected SQLiteCommand Command { get; set; }
+
+        protected string TableName { get; set; }
+        protected string RefName { get; set; }
 
         // Attributes with modified set 
         public string DataBaseName{
@@ -85,13 +88,15 @@ namespace Bacchus
                 return true;
         }
 
-
         /// <summary>
         /// For INSERT - UPDATE Query (Writing)
         /// </summary>
         /// <param name="Query"></param>
         /// <returns></returns>
         public bool ExecuteUpdate(string Query) {
+            if (Query == null)
+                return false;
+
             OpenConnection();
             if (IsOpened())
             {
@@ -145,11 +150,51 @@ namespace Bacchus
         }
 
         /// <summary>
-        /// Create an object in DataBase
+        /// Return true if its empty
         /// </summary>
-        /// <param name="Objet"></param>
         /// <returns></returns>
-        public abstract bool Insert(Obj Objet);
+        public bool TableIsEmpty()
+        {
+            bool Res = false;
+            if (TableName != null)
+            {
+                OpenConnection();
+                var Result = ExecuteSelect("SELECT * FROM " + TableName);
+                if (Result.Read())
+                    Res = false;
+                else
+                    Res = true;
+                CloseConnection();
+            }
+            else
+                Res = false;
+            return Res;
+        }
+
+		public int GetCountRef()
+		{
+			if (TableIsEmpty() == true)
+				return 0;
+			OpenConnection();
+			var Result = ExecuteSelect("SELECT Count(*) FROM " + TableName);
+			int Ref;
+			if (Result.Read())
+			{
+				Ref = Result.GetInt16(0);
+			}
+			else
+				Ref = 0;
+
+			CloseConnection();
+			return Ref;
+		}
+
+		/// <summary>
+		/// Create an object in DataBase
+		/// </summary>
+		/// <param name="Objet"></param>
+		/// <returns></returns>
+		public abstract bool Insert(Obj Objet);
         /// <summary>
         /// Update an object in DataBase
         /// </summary>
@@ -160,12 +205,21 @@ namespace Bacchus
         /// Update an object in DataBase
         /// </summary>
         /// <param name="Objet"></param>
-        /// <returns></returns>
+        /// <returns> true = " job done ", false = "problem lors de la deletion" </returns>
         public abstract bool Delete(Obj Objet);
         /// <summary>
         /// Get all Elements in a table from database
         /// </summary>
         /// <returns></returns>
         public abstract HashSet<Obj> GetAll();
+
+		/// <summary>
+		/// the Objectif is to retrive the real reference in the Database of the Object but 
+		/// </summary>
+		/// <param name="Obj">the partial Object </param>
+		/// <returns>if you don't have the Object in the database the return will be a null</returns>
+		public abstract Obj GetByName(Obj Obj);
+		
+
     }
 }
