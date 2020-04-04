@@ -25,7 +25,7 @@ namespace Bacchus.Control
 		/// <returns></returns>
 		public static bool ImportFile(String Path)
 		{
-			using (var reader = new StreamReader(Path))
+			using (var reader = new StreamReader(Path, Encoding.Default))
 			{
 
 				Console.WriteLine("We are importing this file " + Path);
@@ -124,6 +124,54 @@ namespace Bacchus.Control
 
 				return true;
 			}
+		}
+
+
+		public static bool ExportFile(String Path)
+		{
+
+			/*
+				 * Step 0 : initialise DAO Controller and  Variables
+				 */
+			ArticleControl ACont = new ArticleControl();
+
+
+			/*
+			 * Step 1 : Get All Article 
+			 */
+
+			HashSet<Model.Article> ListA = ACont.GetAll();
+
+			/*
+			 * Step 2 : Serialise everything  
+			 */
+
+			using (var w = new StreamWriter(Path, false, Encoding.Default))
+			{
+				// Write the first line 
+				w.WriteLine("Description;Ref;Marque;Famille;Sous-Famille;Prix H.T.");
+				w.Flush();
+
+				// Serialise Data
+				foreach (Model.Article AMock in ListA )
+				{
+					
+					var line = string.Format("{"+DESCRIPTION+"},{"+REF+"},{"+MARQUE+"},{"+FAMILLE+"},{"+SOUSFAMILLE + "},{" +PRIXHT+"}", 
+						AMock.Description,
+						AMock.RefArticle,
+						AMock.Marque,
+						AMock.SousFamille.Famille.Nom,
+						AMock.SousFamille.Nom,
+						AMock.PrixHT);
+					w.WriteLine(line);
+					w.Flush();
+				}
+
+
+			}
+
+			
+			return true;		// Job Done
 		}
 	}
 }

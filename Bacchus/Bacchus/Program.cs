@@ -179,6 +179,7 @@ namespace Bacchus
 
 			FileControl.ImportFile("E:\\Document\\.Net-Project\\Bacchus\\Bacchus\\Data_to_integrate.csv");
 			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+			FileControl.ExportFile("E:\\Bureau\\Toto.csv");
 
 			// Launch View Part
 			/*
