@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.ImportLab = new System.Windows.Forms.Label();
-            this.ImportProgress = new System.Windows.Forms.ProgressBar();
+            this.ExportLab = new System.Windows.Forms.Label();
+            this.ExportProgress = new System.Windows.Forms.ProgressBar();
             this.BackBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.SelectCsvBtn = new System.Windows.Forms.Button();
             this.CsvPathText = new System.Windows.Forms.TextBox();
             this.FileLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.EcrasementBtn = new System.Windows.Forms.Button();
+            this.ExportBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -47,8 +47,8 @@
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.ImportLab, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.ImportProgress, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.ExportLab, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.ExportProgress, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.BackBtn, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 109);
@@ -60,26 +60,26 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(337, 74);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
-            // ImportLab
+            // ExportLab
             // 
-            this.ImportLab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ExportLab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImportLab.Location = new System.Drawing.Point(3, 0);
-            this.ImportLab.Name = "ImportLab";
-            this.ImportLab.Size = new System.Drawing.Size(331, 14);
-            this.ImportLab.TabIndex = 0;
-            this.ImportLab.Text = "Importation :";
-            this.ImportLab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ExportLab.Location = new System.Drawing.Point(3, 0);
+            this.ExportLab.Name = "ExportLab";
+            this.ExportLab.Size = new System.Drawing.Size(331, 14);
+            this.ExportLab.TabIndex = 0;
+            this.ExportLab.Text = "Exportation :";
+            this.ExportLab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ImportProgress
+            // ExportProgress
             // 
-            this.ImportProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ExportProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ImportProgress.Location = new System.Drawing.Point(3, 17);
-            this.ImportProgress.Name = "ImportProgress";
-            this.ImportProgress.Size = new System.Drawing.Size(331, 14);
-            this.ImportProgress.TabIndex = 1;
+            this.ExportProgress.Location = new System.Drawing.Point(3, 17);
+            this.ExportProgress.Name = "ExportProgress";
+            this.ExportProgress.Size = new System.Drawing.Size(331, 14);
+            this.ExportProgress.TabIndex = 1;
             // 
             // BackBtn
             // 
@@ -90,13 +90,14 @@
             this.BackBtn.TabIndex = 2;
             this.BackBtn.Text = "Retour";
             this.BackBtn.UseVisualStyleBackColor = true;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.91667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.08334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tableLayoutPanel1.Controls.Add(this.SelectCsvBtn, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.CsvPathText, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FileLabel, 0, 0);
@@ -111,9 +112,9 @@
             // SelectCsvBtn
             // 
             this.SelectCsvBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.SelectCsvBtn.Location = new System.Drawing.Point(259, 7);
+            this.SelectCsvBtn.Location = new System.Drawing.Point(258, 10);
             this.SelectCsvBtn.Name = "SelectCsvBtn";
-            this.SelectCsvBtn.Size = new System.Drawing.Size(65, 28);
+            this.SelectCsvBtn.Size = new System.Drawing.Size(65, 23);
             this.SelectCsvBtn.TabIndex = 0;
             this.SelectCsvBtn.Text = "Ouvrir";
             this.SelectCsvBtn.UseVisualStyleBackColor = true;
@@ -123,7 +124,7 @@
             this.CsvPathText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CsvPathText.Location = new System.Drawing.Point(87, 11);
             this.CsvPathText.Name = "CsvPathText";
-            this.CsvPathText.Size = new System.Drawing.Size(166, 20);
+            this.CsvPathText.Size = new System.Drawing.Size(165, 20);
             this.CsvPathText.TabIndex = 2;
             // 
             // FileLabel
@@ -140,7 +141,7 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.EcrasementBtn, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.ExportBtn, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 43);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -149,15 +150,15 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(337, 66);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
-            // EcrasementBtn
+            // ExportBtn
             // 
-            this.EcrasementBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EcrasementBtn.Location = new System.Drawing.Point(112, 6);
-            this.EcrasementBtn.Name = "EcrasementBtn";
-            this.EcrasementBtn.Size = new System.Drawing.Size(113, 53);
-            this.EcrasementBtn.TabIndex = 1;
-            this.EcrasementBtn.Text = "Exporter";
-            this.EcrasementBtn.UseVisualStyleBackColor = true;
+            this.ExportBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ExportBtn.Location = new System.Drawing.Point(112, 6);
+            this.ExportBtn.Name = "ExportBtn";
+            this.ExportBtn.Size = new System.Drawing.Size(113, 53);
+            this.ExportBtn.TabIndex = 1;
+            this.ExportBtn.Text = "Exporter";
+            this.ExportBtn.UseVisualStyleBackColor = true;
             // 
             // FormExport
             // 
@@ -181,14 +182,14 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Label ImportLab;
-        private System.Windows.Forms.ProgressBar ImportProgress;
+        private System.Windows.Forms.Label ExportLab;
+        private System.Windows.Forms.ProgressBar ExportProgress;
         private System.Windows.Forms.Button BackBtn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button SelectCsvBtn;
         private System.Windows.Forms.TextBox CsvPathText;
         private System.Windows.Forms.Label FileLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button EcrasementBtn;
+        private System.Windows.Forms.Button ExportBtn;
     }
 }

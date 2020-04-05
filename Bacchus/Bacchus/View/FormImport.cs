@@ -19,7 +19,7 @@ namespace Bacchus.View
 
         private void OKBtn_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

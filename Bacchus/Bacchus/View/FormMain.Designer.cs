@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Tous les articles");
-            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Familles");
-            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Marques");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tous les articles");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Familles");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Marques");
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.FichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ActualiserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +61,7 @@
             this.FichierToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Size = new System.Drawing.Size(628, 24);
+            this.MenuStrip.Size = new System.Drawing.Size(548, 24);
             this.MenuStrip.TabIndex = 0;
             this.MenuStrip.Text = "MenuStrip";
             // 
@@ -103,9 +103,9 @@
             this.NbFamilles,
             this.NbSousFamilles,
             this.NbMarques});
-            this.StatusStrip.Location = new System.Drawing.Point(0, 210);
+            this.StatusStrip.Location = new System.Drawing.Point(0, 434);
             this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(628, 22);
+            this.StatusStrip.Size = new System.Drawing.Size(548, 22);
             this.StatusStrip.TabIndex = 1;
             this.StatusStrip.Text = "StatusStrip";
             // 
@@ -151,7 +151,7 @@
             // Splitter.Panel2
             // 
             this.Splitter.Panel2.Controls.Add(this.DisplayList);
-            this.Splitter.Size = new System.Drawing.Size(628, 186);
+            this.Splitter.Size = new System.Drawing.Size(548, 410);
             this.Splitter.SplitterDistance = 200;
             this.Splitter.TabIndex = 2;
             // 
@@ -160,17 +160,17 @@
             this.TypeTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TypeTree.Location = new System.Drawing.Point(0, 0);
             this.TypeTree.Name = "TypeTree";
-            treeNode46.Name = "AllNode";
-            treeNode46.Text = "Tous les articles";
-            treeNode47.Name = "FamilyNode";
-            treeNode47.Text = "Familles";
-            treeNode48.Name = "BrandNode";
-            treeNode48.Text = "Marques";
+            treeNode1.Name = "AllNode";
+            treeNode1.Text = "Tous les articles";
+            treeNode2.Name = "FamilyNode";
+            treeNode2.Text = "Familles";
+            treeNode3.Name = "BrandNode";
+            treeNode3.Text = "Marques";
             this.TypeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode46,
-            treeNode47,
-            treeNode48});
-            this.TypeTree.Size = new System.Drawing.Size(200, 186);
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            this.TypeTree.Size = new System.Drawing.Size(200, 410);
             this.TypeTree.TabIndex = 0;
             this.TypeTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TypeTree_AfterSelect);
             // 
@@ -185,18 +185,16 @@
             this.DisplayList.HideSelection = false;
             this.DisplayList.Location = new System.Drawing.Point(0, 0);
             this.DisplayList.Name = "DisplayList";
-            this.DisplayList.Size = new System.Drawing.Size(424, 186);
+            this.DisplayList.Size = new System.Drawing.Size(344, 410);
             this.DisplayList.TabIndex = 0;
             this.DisplayList.UseCompatibleStateImageBehavior = false;
             this.DisplayList.View = System.Windows.Forms.View.Details;
-            this.DisplayList.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.DisplayList_DrawColumnHeader);
-            this.DisplayList.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.DisplayList_DrawItem);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 232);
+            this.ClientSize = new System.Drawing.Size(548, 456);
             this.Controls.Add(this.Splitter);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
@@ -204,6 +202,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Application";
+            this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.StatusStrip.ResumeLayout(false);
