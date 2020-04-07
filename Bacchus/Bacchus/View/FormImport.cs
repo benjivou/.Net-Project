@@ -14,7 +14,8 @@ namespace Bacchus.View
 {
     public partial class FormImport : Form
     {
-
+        MarqueControl MCont = new MarqueControl();
+        FamilleControl FCont = new FamilleControl();
         public FormImport()
         {
             InitializeComponent();
@@ -38,7 +39,14 @@ namespace Bacchus.View
             {
                 if (File.Exists(CsvPathText.Text))
                 {
-                    FileControl.ImportFile(CsvPathText.Text);
+                    if(FileControl.ImportFile(CsvPathText.Text))
+                    {
+                        DialogResult result = MessageBox.Show(
+                        "L'ajout est terminé",
+                        "Confirmation",
+                        MessageBoxButtons.OK);
+                        this.Close();
+                    }
                 }
                 else
                 {
@@ -68,6 +76,40 @@ namespace Bacchus.View
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void EcrasementBtn_Click(object sender, EventArgs e)
+        {
+            if (CsvPathText.Text == "")
+            {
+                DialogResult result = MessageBox.Show(
+                    "ERREUR : Veuillez selectionner un fichier csv",
+                    "Erreur",
+                    MessageBoxButtons.OK);
+            }
+            else
+            {
+                if (File.Exists(CsvPathText.Text))
+                {
+                    MCont.FlushTable();
+                    FCont.FlushTable();
+                    if (FileControl.ImportFile(CsvPathText.Text))
+                    {
+                        DialogResult result = MessageBox.Show(
+                        "L'ajout est terminé",
+                        "Confirmation",
+                        MessageBoxButtons.OK);
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show(
+                        "ERREUR : Le fichier csv n'existe pas",
+                        "Erreur",
+                        MessageBoxButtons.OK);
+                }
+            }
         }
     }
 }

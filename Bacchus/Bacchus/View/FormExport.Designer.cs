@@ -97,7 +97,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.91667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.08334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
             this.tableLayoutPanel1.Controls.Add(this.SelectCsvBtn, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.CsvPathText, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FileLabel, 0, 0);
@@ -112,7 +112,7 @@
             // SelectCsvBtn
             // 
             this.SelectCsvBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.SelectCsvBtn.Location = new System.Drawing.Point(258, 10);
+            this.SelectCsvBtn.Location = new System.Drawing.Point(257, 10);
             this.SelectCsvBtn.Name = "SelectCsvBtn";
             this.SelectCsvBtn.Size = new System.Drawing.Size(65, 23);
             this.SelectCsvBtn.TabIndex = 0;
@@ -122,7 +122,7 @@
             // CsvPathText
             // 
             this.CsvPathText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.CsvPathText.Location = new System.Drawing.Point(87, 11);
+            this.CsvPathText.Location = new System.Drawing.Point(86, 11);
             this.CsvPathText.Name = "CsvPathText";
             this.CsvPathText.Size = new System.Drawing.Size(165, 20);
             this.CsvPathText.TabIndex = 2;
@@ -132,7 +132,7 @@
             this.FileLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.FileLabel.Location = new System.Drawing.Point(3, 10);
             this.FileLabel.Name = "FileLabel";
-            this.FileLabel.Size = new System.Drawing.Size(78, 23);
+            this.FileLabel.Size = new System.Drawing.Size(77, 23);
             this.FileLabel.TabIndex = 1;
             this.FileLabel.Text = "Fichier csv :";
             this.FileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -159,6 +159,7 @@
             this.ExportBtn.TabIndex = 1;
             this.ExportBtn.Text = "Exporter";
             this.ExportBtn.UseVisualStyleBackColor = true;
+            this.ExportBtn.Click += new System.EventHandler(this.ExportBtn_Click);
             // 
             // FormExport
             // 
