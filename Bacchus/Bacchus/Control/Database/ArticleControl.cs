@@ -55,7 +55,7 @@ namespace Bacchus.Control
 					"'" + Objet.Description + "', " +
 					" " + Objet.SousFamille.RefSousFamille + ", " +
 					" " + Objet.Marque.RefMarque + ", " +
-					" " + Objet.PrixHT.ToString("0.0", CultureInfo.InvariantCulture) + ", " +
+					" " + Objet.PrixHT.ToString("0.00", CultureInfo.InvariantCulture) + ", " +
 					" " + Objet.Quantite + ")");
 		}
 
