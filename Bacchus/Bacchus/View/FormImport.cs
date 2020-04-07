@@ -28,10 +28,10 @@ namespace Bacchus.View
 
         private void AddModeBtn_Click(object sender, EventArgs e)
         {
-            if (CsvPathText.Text == "")
+            if (CsvPathText.Text == "" || CsvPathText.Text.Contains(" "))
             {
                 DialogResult result = MessageBox.Show(
-                    "ERREUR : Veuillez selectionner un fichier csv",
+                    "ERREUR : Le nom du fichier n'est pas valide ou contient des espaces",
                     "Erreur",
                     MessageBoxButtons.OK);
             }
@@ -46,6 +46,13 @@ namespace Bacchus.View
                         "Confirmation",
                         MessageBoxButtons.OK);
                         this.Close();
+                    }
+                    else
+                    {
+                        DialogResult result = MessageBox.Show(
+                        "Une erreur est survenue.",
+                        "Erreur",
+                        MessageBoxButtons.OK);
                     }
                 }
                 else
@@ -80,10 +87,10 @@ namespace Bacchus.View
 
         private void EcrasementBtn_Click(object sender, EventArgs e)
         {
-            if (CsvPathText.Text == "")
+            if (CsvPathText.Text == "" || CsvPathText.Text.Contains(" "))
             {
                 DialogResult result = MessageBox.Show(
-                    "ERREUR : Veuillez selectionner un fichier csv",
+                    "ERREUR : Le nom du fichier n'est pas valide ou contient des espaces",
                     "Erreur",
                     MessageBoxButtons.OK);
             }
