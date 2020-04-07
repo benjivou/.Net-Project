@@ -228,6 +228,23 @@ namespace Bacchus
 		/// <returns>if you don't have the Object in the database the return will be a null</returns>
 		public abstract Obj GetByName(Obj Obj);
 		
+		/// <summary>
+		/// Flush the Table Elements and Set to O the autoIncrement element
+		/// </summary>
+		public void FlushTable()
+		{
+			HashSet<Obj> Liste = GetAll();
+
+			foreach(Obj Obj in Liste)
+			{
+				Delete(Obj);
+			}
+
+			OpenConnection();
+			var Result = ExecuteSelect("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='"+this.TableName+"'");
+			
+			CloseConnection();
+		}
 
     }
 }

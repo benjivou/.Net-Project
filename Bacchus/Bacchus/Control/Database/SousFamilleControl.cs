@@ -77,11 +77,11 @@ namespace Bacchus.Control
             if (Objet == null || !CheckFamille(Objet.Famille) || Exist(Objet))
                 return false;
             if (Objet.RefSousFamille > 0)
-                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom,RefFamille) VALUES (" + Objet.RefSousFamille + ",'" + Objet.Nom + "' , " + Objet.Famille.RefFamille + ")");
+                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom,RefFamille) VALUES (null,'" + Objet.Nom + "' , " + Objet.Famille.RefFamille + ")");
             else
             {
                 // Pseodo Auto-Increment
-                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom,RefFamille) VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "'," + Objet.Famille.RefFamille + ")");
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom,RefFamille) VALUES (null,'" + Objet.Nom + "'," + Objet.Famille.RefFamille + ")");
             }
         }
 
