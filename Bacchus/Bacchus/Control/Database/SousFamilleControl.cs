@@ -14,7 +14,6 @@ namespace Bacchus.Control
         {
             TableName = "SousFamilles";
             RefName = "RefSousFamille";
-            
         }
 		
         /// <summary>
