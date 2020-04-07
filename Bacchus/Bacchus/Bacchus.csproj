@@ -75,6 +75,12 @@
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Famille.cs" />
     <Compile Include="Model\SousFamille.cs" />
+    <Compile Include="View\FormExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormExport.Designer.cs">
+      <DependentUpon>FormExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="Model\Marque.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\FormExport.resx">
+      <DependentUpon>FormExport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormImport.resx">
       <DependentUpon>FormImport.cs</DependentUpon>
     </EmbeddedResource>

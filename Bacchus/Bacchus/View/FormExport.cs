@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
-    public partial class FormImport : Form
+    public partial class FormExport : Form
     {
-        public FormImport()
+        public FormExport()
         {
             InitializeComponent();
         }
 
-        private void OKBtn_Click(object sender, EventArgs e)
+        private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
