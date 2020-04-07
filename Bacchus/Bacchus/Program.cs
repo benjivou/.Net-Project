@@ -178,7 +178,8 @@ namespace Bacchus
 
 
 			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
-			FileControl.ImportFile("C:\\Users\\Foxinow\\Desktop\\net\\.Net-Project\\Bacchus\\Bacchus\\Data_to_integrate.csv");
+			//FileControl.ImportFile("C:\\Users\\Foxinow\\Desktop\\net\\.Net-Project\\Bacchus\\Bacchus\\Data_to_integrate.csv");
+			FileControl.ImportFile("E:\\Document\\.Net-Project\\Bacchus\\Bacchus\\Data_to_integrate.csv");
 			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 			FileControl.ExportFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+ "\\toto.csv");
 			ACont.FlushTable();
