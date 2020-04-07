@@ -10,23 +10,7 @@ namespace Bacchus.Control
     {
 		protected string ValueName = "Nom";
 
-		public int GetMaxRef()
-        {
-            if (TableIsEmpty() == true)
-                return 0;
-            OpenConnection();
-            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom FROM " + TableName);
-            int Ref;
-            if (Result.Read())
-            {
-                Ref = Result.GetInt16(0);
-            }
-            else
-                Ref = 0;
-
-            CloseConnection();
-            return Ref;
-        }
+		
 
 
 		

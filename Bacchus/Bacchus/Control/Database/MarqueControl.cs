@@ -29,11 +29,11 @@ namespace Bacchus.Control
             if (Objet == null || Exist(Objet))
                 return false;
             if(Objet.RefMarque > 0)
-                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom) VALUES (" + Objet.RefMarque + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom) VALUES (null,'" + Objet.Nom + "')");
             else
             {
                 // Auto-inc
-                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom) VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom) VALUES (null,'" + Objet.Nom + "')");
             }
         }
 
@@ -114,6 +114,7 @@ namespace Bacchus.Control
             CloseConnection();
             return Brand;
         }
+
 		public override Marque GetByName(Marque obj)
 		{
 			OpenConnection();
@@ -128,5 +129,6 @@ namespace Bacchus.Control
 			CloseConnection();
 			return Brand;
 		}
+
 	}
 }

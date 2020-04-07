@@ -77,10 +77,10 @@ namespace Bacchus.Control
             if (Objet == null || Exist(Objet))
                 return false;
             if (Objet.RefFamille > 0 )
-                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + "," + ValueName + ") VALUES (" + Objet.RefFamille + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + "," + ValueName + ") VALUES (null,'" + Objet.Nom + "')");
             else
             {
-                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + ", " + ValueName + ") VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + ", " + ValueName + ") VALUES (null,'" + Objet.Nom + "')");
             }
         }
 
