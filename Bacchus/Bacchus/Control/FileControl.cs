@@ -163,7 +163,7 @@ namespace Bacchus.Control
 					foreach (Model.Article AMock in ListA)
 					{
 
-						var line = string.Format("{" + DESCRIPTION + "};{" + REF + "};{" + MARQUE + "}:{" + FAMILLE + "};{" + SOUSFAMILLE + "};{" + PRIXHT + "}",
+						var line = string.Format("{" + DESCRIPTION + "};{" + REF + "};{" + MARQUE + "};{" + FAMILLE + "};{" + SOUSFAMILLE + "};{" + PRIXHT + "}",
 							AMock.Description,
 							AMock.RefArticle,
 							AMock.Marque.Nom,
