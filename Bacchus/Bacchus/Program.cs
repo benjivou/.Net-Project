@@ -123,6 +123,7 @@ namespace Bacchus
 
    //         /// ARTICLES 
             ArticleControl ACont = new ArticleControl();
+          
 			//         // Create famille first
 			//         Famille Fam = new Famille("Pere");
 			//         FCont.Insert(Fam);
@@ -174,7 +175,19 @@ namespace Bacchus
 			//         MCont.Delete(Mark2);
 			//Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 			//FCont.Delete(Fam);
-			//         
+			//   
+
+            ////Delete
+
+            //ACont.Insert(a1);
+
+            //ACont.Insert(ac);
+            //Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+            //MCont.Delete(Mark);
+            //         MCont.Delete(Mark2);
+            //Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+            //FCont.Delete(Fam);
+            //         Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 
 
 			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
@@ -188,11 +201,10 @@ namespace Bacchus
 			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 
 			// Launch View Part
-			/*
+			
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
-            */
 		}
 
 
