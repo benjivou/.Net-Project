@@ -49,7 +49,7 @@ namespace Bacchus.Control
 		{
 			if (Objet == null || !CheckParam(Objet) || ExistantRef(Objet.RefArticle))
 				return false;
-			// Pseodo Auto-Increment
+			
 			return ExecuteUpdate("INSERT INTO " + TableName + " VALUES (" +
 					"'" + Objet.RefArticle + "', " +
 					"'" + Objet.Description + "', " +

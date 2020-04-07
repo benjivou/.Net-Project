@@ -129,7 +129,7 @@ namespace Bacchus.Control
 
 		public static bool ExportFile(String Path)
 		{
-
+			bool IsItDone = true;
 			/*
 				 * Step 0 : initialise DAO Controller and  Variables
 				 */
@@ -145,33 +145,39 @@ namespace Bacchus.Control
 			/*
 			 * Step 2 : Serialise everything  
 			 */
-
-			using (var w = new StreamWriter(Path, false, Encoding.Default))
+			try
 			{
-				// Write the first line 
-				w.WriteLine("Description;Ref;Marque;Famille;Sous-Famille;Prix H.T.");
-				w.Flush();
-
-				// Serialise Data
-				foreach (Model.Article AMock in ListA )
+				using (var w = new StreamWriter(Path, false, Encoding.Default))
 				{
-					
-					var line = string.Format("{"+DESCRIPTION+"},{"+REF+"},{"+MARQUE+"},{"+FAMILLE+"},{"+SOUSFAMILLE + "},{" +PRIXHT+"}", 
-						AMock.Description,
-						AMock.RefArticle,
-						AMock.Marque,
-						AMock.SousFamille.Famille.Nom,
-						AMock.SousFamille.Nom,
-						AMock.PrixHT);
-					w.WriteLine(line);
+					// Write the first line 
+					w.WriteLine("Description;Ref;Marque;Famille;Sous-Famille;Prix H.T.");
 					w.Flush();
+
+					// Serialise Data
+					foreach (Model.Article AMock in ListA)
+					{
+
+						var line = string.Format("{" + DESCRIPTION + "},{" + REF + "},{" + MARQUE + "},{" + FAMILLE + "},{" + SOUSFAMILLE + "},{" + PRIXHT + "}",
+							AMock.Description,
+							AMock.RefArticle,
+							AMock.Marque,
+							AMock.SousFamille.Famille.Nom,
+							AMock.SousFamille.Nom,
+							AMock.PrixHT);
+						w.WriteLine(line);
+						w.Flush();
+					}
 				}
+				
 
-
+			}
+			catch(IOException FileUnReacheable)
+			{
+				IsItDone = false;
 			}
 
 			
-			return true;		// Job Done
+			return IsItDone;		// Job Done
 		}
 	}
 }
