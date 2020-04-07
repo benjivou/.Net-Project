@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,13 +50,12 @@ namespace Bacchus.Control
 		{
 			if (Objet == null || !CheckParam(Objet) || ExistantRef(Objet.RefArticle))
 				return false;
-			
 			return ExecuteUpdate("INSERT INTO " + TableName + " VALUES (" +
 					"'" + Objet.RefArticle + "', " +
 					"'" + Objet.Description + "', " +
 					" " + Objet.SousFamille.RefSousFamille + ", " +
 					" " + Objet.Marque.RefMarque + ", " +
-					" " + Objet.PrixHT + ", " +
+					" " + Objet.PrixHT.ToString("0.0", CultureInfo.InvariantCulture) + ", " +
 					" " + Objet.Quantite + ")");
 		}
 
