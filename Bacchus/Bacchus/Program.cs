@@ -123,70 +123,68 @@ namespace Bacchus
 
    //         /// ARTICLES 
             ArticleControl ACont = new ArticleControl();
-   //         // Create famille first
-   //         Famille Fam = new Famille("Pere");
-   //         FCont.Insert(Fam);
-   //         Fam.RefFamille = FCont.GetMaxRef();
-   //         // Then create SousFamilles
-   //         SousFamille sf1 = new SousFamille("Fils",Fam);
-   //         SousFamille sf2 = new SousFamille("Fille",Fam);
-   //         SFCont.Insert(sf1);
-   //         sf1.RefSousFamille = SFCont.GetMaxRef();
-   //         SFCont.Insert(sf2);
-   //         sf2.RefSousFamille = SFCont.GetMaxRef();
-   //         //Create Marque
-   //         Marque Mark = new Marque("Vroom");
-   //         MCont.Insert(Mark);
-   //         Mark.RefMarque = MCont.GetCountRef();
-   //         Marque Mark2 = new Marque("Nitro");
-   //         MCont.Insert(Mark2);
-   //         Mark2.RefMarque = MCont.GetMaxRef();
-   //         Console.WriteLine("\nArticle :\n" + MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles");
-   //         //Articles
-   //         Article a1 = new Article("007","Secret Pen",88,2,Mark,sf1);
-   //         ACont.Insert(a1);
-   //         Article ac = new Article("008", "Secret copieur", 71, 12, Mark2, sf2);
-   //         ACont.Insert(ac);
-   //         HashSet<Article> Alist = ACont.GetAll();
-   //         if(Alist != null)
-   //         {
-   //             foreach(Article Art in Alist)
-   //             {
-   //                 Console.WriteLine(Art.RefArticle + " " + Art.Description + " " + Art.Marque.Nom + " " + Art.SousFamille.Nom);
-   //                 Art.Description = "Secret changed ";
-   //                 Art.Marque = Mark2;
-   //                 Art.SousFamille = sf2;
-   //                 ACont.Update(Art);
-   //                 Article Updated = ACont.FindByRef(Art.RefArticle);
-   //                 Console.WriteLine(Updated.RefArticle + " " + Updated.Description + " " + Updated.Marque.Nom + " " + Updated.SousFamille.Nom);
-   //                 ACont.Delete(Updated);
-   //             }
-   //         }
-			
-
-			////Delete
-			
-			//ACont.Insert(a1);
-			
-			//ACont.Insert(ac);
-			//Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
-			//MCont.Delete(Mark);
-   //         MCont.Delete(Mark2);
-			//Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
-			//FCont.Delete(Fam);
-   //         Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+            //         // Create famille first
+            //         Famille Fam = new Famille("Pere");
+            //         FCont.Insert(Fam);
+            //         Fam.RefFamille = FCont.GetMaxRef();
+            //         // Then create SousFamilles
+            //         SousFamille sf1 = new SousFamille("Fils",Fam);
+            //         SousFamille sf2 = new SousFamille("Fille",Fam);
+            //         SFCont.Insert(sf1);
+            //         sf1.RefSousFamille = SFCont.GetMaxRef();
+            //         SFCont.Insert(sf2);
+            //         sf2.RefSousFamille = SFCont.GetMaxRef();
+            //         //Create Marque
+            //         Marque Mark = new Marque("Vroom");
+            //         MCont.Insert(Mark);
+            //         Mark.RefMarque = MCont.GetCountRef();
+            //         Marque Mark2 = new Marque("Nitro");
+            //         MCont.Insert(Mark2);
+            //         Mark2.RefMarque = MCont.GetMaxRef();
+            //         Console.WriteLine("\nArticle :\n" + MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles");
+            //         //Articles
+            //         Article a1 = new Article("007","Secret Pen",88,2,Mark,sf1);
+            //         ACont.Insert(a1);
+            //         Article ac = new Article("008", "Secret copieur", 71, 12, Mark2, sf2);
+            //         ACont.Insert(ac);
+            //         HashSet<Article> Alist = ACont.GetAll();
+            //         if(Alist != null)
+            //         {
+            //             foreach(Article Art in Alist)
+            //             {
+            //                 Console.WriteLine(Art.RefArticle + " " + Art.Description + " " + Art.Marque.Nom + " " + Art.SousFamille.Nom);
+            //                 Art.Description = "Secret changed ";
+            //                 Art.Marque = Mark2;
+            //                 Art.SousFamille = sf2;
+            //                 ACont.Update(Art);
+            //                 Article Updated = ACont.FindByRef(Art.RefArticle);
+            //                 Console.WriteLine(Updated.RefArticle + " " + Updated.Description + " " + Updated.Marque.Nom + " " + Updated.SousFamille.Nom);
+            //                 ACont.Delete(Updated);
+            //             }
+            //         }
 
 
-			FileControl.ImportFile("E:\\Document\\.Net-Project\\Bacchus\\Bacchus\\Data_to_integrate.csv");
+            ////Delete
+
+            //ACont.Insert(a1);
+
+            //ACont.Insert(ac);
+            //Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+            //MCont.Delete(Mark);
+            //         MCont.Delete(Mark2);
+            //Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+            //FCont.Delete(Fam);
+            //         Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
+
+            
+			FileControl.ImportFile("C:\\Users\\Foxinow\\Desktop\\net\\Donnee.csv");
 			Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 			FileControl.ExportFile(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+ "\\toto.csv");
-
-			// Launch View Part
-			/*
+            
+            // Launch View Part
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
-            */
 		}
 
 

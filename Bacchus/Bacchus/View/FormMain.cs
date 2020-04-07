@@ -41,6 +41,7 @@ namespace Bacchus
         {
             FormImport Frame = new FormImport();
             Frame.ShowDialog();
+            RefreshAllData();
         }
 
         /// <summary>
