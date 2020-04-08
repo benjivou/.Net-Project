@@ -131,7 +131,7 @@ namespace Bacchus.Control
 		}
 
 
-		public static bool ExportFile(String Path)
+		public static bool ExportFile(String Path, ProgressBar Progress)
 		{
 			bool IsItDone = true;
 			/*
@@ -157,11 +157,12 @@ namespace Bacchus.Control
 					w.WriteLine("Description;Ref;Marque;Famille;Sous-Famille;Prix H.T.");
 					w.Flush();
 
-					// Serialise Data
-					foreach (Model.Article AMock in ListA)
+                    Progress.Maximum = ListA.Count();
+                    // Serialise Data
+                    foreach (Model.Article AMock in ListA)
 					{
-
-						var line = string.Format("{" + DESCRIPTION + "};{" + REF + "};{" + MARQUE + "};{" + FAMILLE + "};{" + SOUSFAMILLE + "};{" + PRIXHT + "}",
+                        Progress.PerformStep();
+                        var line = string.Format("{" + DESCRIPTION + "};{" + REF + "};{" + MARQUE + "};{" + FAMILLE + "};{" + SOUSFAMILLE + "};{" + PRIXHT + "}",
 							AMock.Description,
 							AMock.RefArticle,
 							AMock.Marque.Nom,

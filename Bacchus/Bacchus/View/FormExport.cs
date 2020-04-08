@@ -20,6 +20,13 @@ namespace Bacchus.View
 
         }
 
+        private void InitProgressBar()
+        {
+            ExportProgress.Minimum = 1;
+            ExportProgress.Value = 1;
+            ExportProgress.Step = 1;
+            ExportProgress.Visible = true;
+        }
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -41,7 +48,10 @@ namespace Bacchus.View
                 SaveDialog.FileName = CsvName.Text + ".csv";
                 if (SaveDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (FileControl.ExportFile(SaveDialog.FileName))
+                    InitProgressBar();
+                    ExportLab.Text = "Exportation de la base de données en cours...";
+                    ExportLab.Visible = true;
+                    if (FileControl.ExportFile(SaveDialog.FileName,ExportProgress))
                     {
                         DialogResult result = MessageBox.Show(
                         "L'export est terminé",

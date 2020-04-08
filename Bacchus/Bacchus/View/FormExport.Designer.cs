@@ -50,13 +50,13 @@
             this.tableLayoutPanel3.Controls.Add(this.ExportProgress, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.BackBtn, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 51);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 41);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.37931F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.62069F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(383, 74);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.81818F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.18182F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(356, 74);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
             // ExportLab
@@ -66,24 +66,24 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ExportLab.Location = new System.Drawing.Point(3, 0);
             this.ExportLab.Name = "ExportLab";
-            this.ExportLab.Size = new System.Drawing.Size(377, 14);
+            this.ExportLab.Size = new System.Drawing.Size(350, 25);
             this.ExportLab.TabIndex = 0;
-            this.ExportLab.Text = "Exportation :";
+            this.ExportLab.Text = "Veuillez choisir un nom ainsi qu\'un répertoire";
             this.ExportLab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ExportProgress
             // 
             this.ExportProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExportProgress.Location = new System.Drawing.Point(3, 17);
+            this.ExportProgress.Location = new System.Drawing.Point(3, 28);
             this.ExportProgress.Name = "ExportProgress";
-            this.ExportProgress.Size = new System.Drawing.Size(377, 14);
+            this.ExportProgress.Size = new System.Drawing.Size(350, 13);
             this.ExportProgress.TabIndex = 1;
             // 
             // BackBtn
             // 
             this.BackBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BackBtn.Location = new System.Drawing.Point(154, 48);
+            this.BackBtn.Location = new System.Drawing.Point(140, 48);
             this.BackBtn.Name = "BackBtn";
             this.BackBtn.Size = new System.Drawing.Size(75, 23);
             this.BackBtn.TabIndex = 2;
@@ -96,7 +96,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.91667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.08334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.tableLayoutPanel1.Controls.Add(this.SaveCsvBtn, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.CsvName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FileLabel, 0, 0);
@@ -105,13 +105,13 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.29167F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(383, 43);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(356, 43);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // SaveCsvBtn
             // 
             this.SaveCsvBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.SaveCsvBtn.Location = new System.Drawing.Point(302, 10);
+            this.SaveCsvBtn.Location = new System.Drawing.Point(274, 10);
             this.SaveCsvBtn.Name = "SaveCsvBtn";
             this.SaveCsvBtn.Size = new System.Drawing.Size(65, 23);
             this.SaveCsvBtn.TabIndex = 0;
@@ -122,15 +122,15 @@
             // CsvName
             // 
             this.CsvName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.CsvName.Location = new System.Drawing.Point(101, 11);
+            this.CsvName.Location = new System.Drawing.Point(92, 11);
             this.CsvName.Name = "CsvName";
-            this.CsvName.Size = new System.Drawing.Size(195, 20);
+            this.CsvName.Size = new System.Drawing.Size(176, 20);
             this.CsvName.TabIndex = 2;
             // 
             // FileLabel
             // 
             this.FileLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.FileLabel.Location = new System.Drawing.Point(17, 10);
+            this.FileLabel.Location = new System.Drawing.Point(8, 10);
             this.FileLabel.Name = "FileLabel";
             this.FileLabel.Size = new System.Drawing.Size(78, 23);
             this.FileLabel.TabIndex = 1;
@@ -146,7 +146,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(383, 8);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(356, 0);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
             // SaveDialog
@@ -158,7 +158,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 125);
+            this.ClientSize = new System.Drawing.Size(356, 115);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel3);
