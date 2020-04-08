@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Bacchus.Control
 {
@@ -24,7 +25,7 @@ namespace Bacchus.Control
 		/// </summary>
 		/// <param name="Path"></param>
 		/// <returns></returns>
-		public static bool ImportFile(String Path)
+		public static bool ImportFile(String Path, ProgressBar Progress)
 		{
             try
             {
@@ -36,11 +37,12 @@ namespace Bacchus.Control
                     FamilleControl FCont = new FamilleControl();
                     SousFamilleControl SFCont = new SousFamilleControl();
                     MarqueControl MCont = new MarqueControl();
-
-                    reader.ReadLine(); // remove the first line
+                    
+                    Progress.Maximum = reader.ReadLine().Count() - 1;// remove the first line
 
                     while (!reader.EndOfStream)
                     {
+                        Progress.PerformStep();
                         Model.Marque Mark = new Model.Marque();
                         Model.Article Artic = new Model.Article();
                         Model.SousFamille SousFam = new Model.SousFamille();
@@ -117,9 +119,8 @@ namespace Bacchus.Control
                             //Console.WriteLine("Insert");
                             ACont.Insert(Artic);
                         }
-
-
                     }
+                    Progress.Value = Progress.Maximum;
                 }
                 return true;
             }

@@ -50,7 +50,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.51724F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.48276F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
             this.tableLayoutPanel1.Controls.Add(this.SelectCsvBtn, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.CsvPathText, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FileLabel, 0, 0);
@@ -66,7 +66,7 @@
             // SelectCsvBtn
             // 
             this.SelectCsvBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.SelectCsvBtn.Location = new System.Drawing.Point(317, 10);
+            this.SelectCsvBtn.Location = new System.Drawing.Point(316, 10);
             this.SelectCsvBtn.Name = "SelectCsvBtn";
             this.SelectCsvBtn.Size = new System.Drawing.Size(64, 23);
             this.SelectCsvBtn.TabIndex = 0;
@@ -79,7 +79,7 @@
             this.CsvPathText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CsvPathText.Location = new System.Drawing.Point(83, 11);
             this.CsvPathText.Name = "CsvPathText";
-            this.CsvPathText.Size = new System.Drawing.Size(228, 20);
+            this.CsvPathText.Size = new System.Drawing.Size(227, 20);
             this.CsvPathText.TabIndex = 2;
             // 
             // FileLabel
@@ -120,6 +120,7 @@
             this.ImportLab.TabIndex = 0;
             this.ImportLab.Text = "Importation :";
             this.ImportLab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ImportLab.Visible = false;
             // 
             // ImportProgress
             // 
@@ -129,6 +130,7 @@
             this.ImportProgress.Name = "ImportProgress";
             this.ImportProgress.Size = new System.Drawing.Size(379, 14);
             this.ImportProgress.TabIndex = 1;
+            this.ImportProgress.Visible = false;
             // 
             // BackBtn
             // 

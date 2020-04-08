@@ -19,6 +19,15 @@ namespace Bacchus.View
         public FormImport()
         {
             InitializeComponent();
+            
+        }
+
+        private void InitProgressBar()
+        {
+            ImportProgress.Minimum = 1;
+            ImportProgress.Value = 1;
+            ImportProgress.Step = 1;
+            ImportProgress.Visible = true;
         }
 
         private void OKBtn_Click(object sender, EventArgs e)
@@ -39,7 +48,11 @@ namespace Bacchus.View
             {
                 if (File.Exists(CsvPathText.Text))
                 {
-                    if(FileControl.ImportFile(CsvPathText.Text))
+                    InitProgressBar();
+                    ImportLab.Text = "Importation de la nouvelle base de données en cours...";
+                    ImportLab.Visible = true;
+
+                    if (FileControl.ImportFile(CsvPathText.Text,ImportProgress))
                     {
                         DialogResult result = MessageBox.Show(
                         "L'ajout est terminé",
@@ -98,9 +111,14 @@ namespace Bacchus.View
             {
                 if (File.Exists(CsvPathText.Text))
                 {
+                    InitProgressBar();
+                    ImportLab.Text = "Suppression de tout les éléments actuels en cours...";
+                    ImportLab.Visible = true;
                     MCont.FlushTable();
                     FCont.FlushTable();
-                    if (FileControl.ImportFile(CsvPathText.Text))
+                    ImportLab.Text = "Importation de la nouvelle base de données en cours...";
+                    ImportLab.Refresh();
+                    if (FileControl.ImportFile(CsvPathText.Text,ImportProgress))
                     {
                         DialogResult result = MessageBox.Show(
                         "L'ajout est terminé",
