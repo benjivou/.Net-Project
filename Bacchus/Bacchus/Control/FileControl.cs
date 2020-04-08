@@ -103,7 +103,7 @@ namespace Bacchus.Control
 						 * Create the "Article" and stock it in the database
 						 */
 						Artic.RefArticle = values[REF];
-						Artic.PrixHT = float.Parse(values[PRIXHT].Replace('.', ','))/ 100;
+						Artic.PrixHT = float.Parse(values[PRIXHT].Replace('.', ','));
 						Console.WriteLine(Artic.PrixHT);
 						Artic.Description = values[DESCRIPTION];
 						Artic.Marque = Mark;
