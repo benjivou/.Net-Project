@@ -26,110 +26,107 @@ namespace Bacchus.Control
 		/// <returns></returns>
 		public static bool ImportFile(String Path)
 		{
-		
-			using (var reader = new StreamReader(Path, Encoding.Default))
-				{
+            try
+            {
+                using (var reader = new StreamReader(Path, Encoding.Default))
+                {
+                    Console.WriteLine("We are importing this file " + Path);
+                    
+                    ArticleControl ACont = new ArticleControl();
+                    FamilleControl FCont = new FamilleControl();
+                    SousFamilleControl SFCont = new SousFamilleControl();
+                    MarqueControl MCont = new MarqueControl();
 
-					Console.WriteLine("We are importing this file " + Path);
+                    reader.ReadLine(); // remove the first line
 
-
-
-
-					ArticleControl ACont = new ArticleControl();
-					FamilleControl FCont = new FamilleControl();
-					SousFamilleControl SFCont = new SousFamilleControl();
-					MarqueControl MCont = new MarqueControl();
-
-					reader.ReadLine(); // remove the first line
-
-					while (!reader.EndOfStream)
-					{
-						Model.Marque Mark = new Model.Marque();
-						Model.Article Artic = new Model.Article();
-						Model.SousFamille SousFam = new Model.SousFamille();
-						Model.Famille Fam = new Model.Famille();
-						/*
+                    while (!reader.EndOfStream)
+                    {
+                        Model.Marque Mark = new Model.Marque();
+                        Model.Article Artic = new Model.Article();
+                        Model.SousFamille SousFam = new Model.SousFamille();
+                        Model.Famille Fam = new Model.Famille();
+                        /*
 						 *Parser 
 						 * 
 						 */
-						var line = reader.ReadLine();
-						//Console.WriteLine(line);
-						string[] values = line.Split(';');
+                        var line = reader.ReadLine();
+                        //Console.WriteLine(line);
+                        string[] values = line.Split(';');
 
-						/*
+                        /*
 						 * Create a "Marque" in the Database and get the Id
 						 */
 
-						Mark.Nom = values[MARQUE];
+                        Mark.Nom = values[MARQUE];
 
-						// the "Marque" object is not in the Database
-						if (!MCont.Exist(Mark))
-						{
-							// Create one
-							MCont.Insert(Mark);
+                        // the "Marque" object is not in the Database
+                        if (!MCont.Exist(Mark))
+                        {
+                            // Create one
+                            MCont.Insert(Mark);
 
-						}
+                        }
 
-						// get it 
-						Mark = MCont.GetByName(Mark);
+                        // get it 
+                        Mark = MCont.GetByName(Mark);
 
 
-						/*
+                        /*
 						 * Create a "Famille" in the Database and get the ID 
 						 */
 
-						Fam.Nom = values[FAMILLE];
+                        Fam.Nom = values[FAMILLE];
 
-						if (!FCont.Exist(Fam))
-						{
-							FCont.Insert(Fam);
-						}
+                        if (!FCont.Exist(Fam))
+                        {
+                            FCont.Insert(Fam);
+                        }
 
-						Fam = FCont.GetByName(Fam);
+                        Fam = FCont.GetByName(Fam);
 
 
-						/*
+                        /*
 						* Create a "SousFamille" in the Database and get the ID 
 						*/
-						SousFam.Nom = values[SOUSFAMILLE];
-						SousFam.Famille = Fam;
-						if (!SFCont.Exist(SousFam))
-						{
-							SFCont.Insert(SousFam);
-						}
-						SousFam = SFCont.GetByName(SousFam);
+                        SousFam.Nom = values[SOUSFAMILLE];
+                        SousFam.Famille = Fam;
+                        if (!SFCont.Exist(SousFam))
+                        {
+                            SFCont.Insert(SousFam);
+                        }
+                        SousFam = SFCont.GetByName(SousFam);
 
-						/*
+                        /*
 						 * Create the "Article" and stock it in the database
 						 */
-						Artic.RefArticle = values[REF];
-						Artic.PrixHT = float.Parse(values[PRIXHT].Replace('.', ','));
-						Console.WriteLine(Artic.PrixHT);
-						Artic.Description = values[DESCRIPTION];
-						Artic.Marque = Mark;
-						Artic.SousFamille = SousFam;
-						
-						// the Article object need to be update in the Database
-						if (ACont.Exist(Artic))
-						{
-							//Console.WriteLine("Update");
-							ACont.Update(Artic);
-						}
-						else
-						{
-							//Console.WriteLine("Insert");
-							ACont.Insert(Artic);
-						}
+                        Artic.RefArticle = values[REF];
+                        Artic.PrixHT = float.Parse(values[PRIXHT].Replace('.', ','));
+                        //Console.WriteLine(Artic.PrixHT);
+                        Artic.Description = values[DESCRIPTION];
+                        Artic.Marque = Mark;
+                        Artic.SousFamille = SousFam;
+
+                        // the Article object need to be update in the Database
+                        if (ACont.Exist(Artic))
+                        {
+                            //Console.WriteLine("Update");
+                            ACont.Update(Artic);
+                        }
+                        else
+                        {
+                            //Console.WriteLine("Insert");
+                            ACont.Insert(Artic);
+                        }
 
 
-					}
-				}
-
-				
-
-
-				return true;
-			
+                    }
+                }
+                return true;
+            }
+            catch ( Exception e)
+            {
+                return false;
+            }
 		}
 
 

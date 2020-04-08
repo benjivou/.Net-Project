@@ -55,7 +55,7 @@ namespace Bacchus.Control
 			HashSet<Article> Liste = ACont.FindByMarque(Objet);
 			foreach(Article Element in Liste)
 			{
-				Console.WriteLine(Element.ToString());
+				//Console.WriteLine(Element.ToString());
 				ACont.Delete(Element);
 			}
 			/*

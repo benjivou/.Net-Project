@@ -9,13 +9,7 @@ namespace Bacchus.Control
     abstract class AutoIncrementBaseControl<Obj> : BaseControl<Obj>
     {
 		protected string ValueName = "Nom";
-
-		
-
-
-		
-
-
+        
 		abstract public Obj FindByRef(int Ref);
     }
 }

@@ -63,7 +63,7 @@ namespace Bacchus.Control
 		{
 			if (Objet != null && ExistantRef(Objet.RefArticle) && CheckParam(Objet))
 			{
-				Console.WriteLine("Article ready to import");
+				//Console.WriteLine("Article ready to import");
 				return ExecuteUpdate("UPDATE " + TableName + " SET " +
 					"Description = '" + Objet.Description + "', " +
 					"RefSousFamille = " + Objet.SousFamille.RefSousFamille + ", " +

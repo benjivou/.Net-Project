@@ -50,7 +50,7 @@ namespace Bacchus.View
                     else
                     {
                         DialogResult result = MessageBox.Show(
-                        "Une erreur est survenue.",
+                        "Une erreur est survenue lors de l'import. Le fichier est suremement utilisé par une autre application",
                         "Erreur",
                         MessageBoxButtons.OK);
                     }
@@ -107,6 +107,13 @@ namespace Bacchus.View
                         "Confirmation",
                         MessageBoxButtons.OK);
                         this.Close();
+                    }
+                    else
+                    {
+                        DialogResult result = MessageBox.Show(
+                        "Une erreur est survenue lors de l'import. Le fichier est suremement utilisé par une autre application",
+                        "Erreur",
+                        MessageBoxButtons.OK);
                     }
                 }
                 else
