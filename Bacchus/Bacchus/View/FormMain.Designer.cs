@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Tous les articles");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Familles");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Marques");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Tous les articles");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Familles");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Marques");
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.FichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ActualiserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -160,16 +160,16 @@
             this.TypeTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TypeTree.Location = new System.Drawing.Point(0, 0);
             this.TypeTree.Name = "TypeTree";
-            treeNode1.Name = "AllNode";
-            treeNode1.Text = "Tous les articles";
-            treeNode2.Name = "FamilyNode";
-            treeNode2.Text = "Familles";
-            treeNode3.Name = "BrandNode";
-            treeNode3.Text = "Marques";
+            treeNode4.Name = "AllNode";
+            treeNode4.Text = "Tous les articles";
+            treeNode5.Name = "FamilyNode";
+            treeNode5.Text = "Familles";
+            treeNode6.Name = "BrandNode";
+            treeNode6.Text = "Marques";
             this.TypeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.TypeTree.Size = new System.Drawing.Size(200, 410);
             this.TypeTree.TabIndex = 0;
             this.TypeTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TypeTree_AfterSelect);
@@ -189,6 +189,7 @@
             this.DisplayList.TabIndex = 0;
             this.DisplayList.UseCompatibleStateImageBehavior = false;
             this.DisplayList.View = System.Windows.Forms.View.Details;
+            this.DisplayList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.DisplayList_ColumnClick);
             // 
             // FormMain
             // 

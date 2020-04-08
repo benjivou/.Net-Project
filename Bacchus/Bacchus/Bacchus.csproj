@@ -75,6 +75,7 @@
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Famille.cs" />
     <Compile Include="Model\SousFamille.cs" />
+    <Compile Include="View\DisplayListComparer.cs" />
     <Compile Include="View\FormExport.cs">
       <SubType>Form</SubType>
     </Compile>
