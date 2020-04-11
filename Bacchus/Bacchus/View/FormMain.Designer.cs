@@ -47,6 +47,9 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.affichageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DevelopTool = new System.Windows.Forms.ToolStripMenuItem();
+            this.MinimizeTool = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Splitter)).BeginInit();
@@ -58,7 +61,8 @@
             // MenuStrip
             // 
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FichierToolStripMenuItem});
+            this.FichierToolStripMenuItem,
+            this.affichageToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(548, 24);
@@ -191,6 +195,29 @@
             this.DisplayList.View = System.Windows.Forms.View.Details;
             this.DisplayList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.DisplayList_ColumnClick);
             // 
+            // affichageToolStripMenuItem
+            // 
+            this.affichageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DevelopTool,
+            this.MinimizeTool});
+            this.affichageToolStripMenuItem.Name = "affichageToolStripMenuItem";
+            this.affichageToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.affichageToolStripMenuItem.Text = "Affichage";
+            // 
+            // DevelopTool
+            // 
+            this.DevelopTool.Name = "DevelopTool";
+            this.DevelopTool.Size = new System.Drawing.Size(180, 22);
+            this.DevelopTool.Text = "Développer l\'arbre";
+            this.DevelopTool.Click += new System.EventHandler(this.DevelopTool_Click);
+            // 
+            // MinimizeTool
+            // 
+            this.MinimizeTool.Name = "MinimizeTool";
+            this.MinimizeTool.Size = new System.Drawing.Size(180, 22);
+            this.MinimizeTool.Text = "Minimiser l\'arbre";
+            this.MinimizeTool.Click += new System.EventHandler(this.MinimizeTool_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,6 +262,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ToolStripMenuItem affichageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DevelopTool;
+        private System.Windows.Forms.ToolStripMenuItem MinimizeTool;
     }
 }
 

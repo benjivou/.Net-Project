@@ -19,7 +19,6 @@ namespace Bacchus.View
         public FormImport()
         {
             InitializeComponent();
-            
         }
 
         private void InitProgressBar()
@@ -35,52 +34,32 @@ namespace Bacchus.View
             this.Close();
         }
 
-        private void AddModeBtn_Click(object sender, EventArgs e)
+        private bool CheckPath()
         {
             if (CsvPathText.Text == "" || CsvPathText.Text.Contains(" "))
             {
-                DialogResult result = MessageBox.Show(
-                    "ERREUR : Le nom du fichier n'est pas valide ou contient des espaces",
-                    "Erreur",
-                    MessageBoxButtons.OK);
+                MessageBoxes.DispError("ERREUR : Le nom du fichier n'est pas valide ou contient des espaces");
+                return false;
             }
-            else
+            return true;
+        }
+
+        private void AddModeBtn_Click(object sender, EventArgs e)
+        {
+            if (CheckPath())
             {
                 if (File.Exists(CsvPathText.Text))
                 {
                     InitProgressBar();
                     ImportLab.Text = "Importation de la nouvelle base de données en cours...";
                     ImportLab.Visible = true;
-
-                    if (FileControl.ImportFile(CsvPathText.Text,ImportProgress))
-                    {
-                        DialogResult result = MessageBox.Show(
-                        "L'ajout est terminé",
-                        "Confirmation",
-                        MessageBoxButtons.OK);
-                        this.Close();
-                    }
-                    else
-                    {
-                        DialogResult result = MessageBox.Show(
-                        "Une erreur est survenue lors de l'import. Le fichier est suremement utilisé par une autre application",
-                        "Erreur",
-                        MessageBoxButtons.OK);
-                    }
+                    LaunchImport();
                 }
                 else
                 {
-                    DialogResult result = MessageBox.Show(
-                        "ERREUR : Le fichier csv n'existe pas",
-                        "Erreur",
-                        MessageBoxButtons.OK);
+                    MessageBoxes.DispError("ERREUR : Le fichier csv n'existe pas");
                 }
             }
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void SelectCsvBtn_Click(object sender, EventArgs e)
@@ -93,21 +72,9 @@ namespace Bacchus.View
             }
         }
 
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void EcrasementBtn_Click(object sender, EventArgs e)
         {
-            if (CsvPathText.Text == "" || CsvPathText.Text.Contains(" "))
-            {
-                DialogResult result = MessageBox.Show(
-                    "ERREUR : Le nom du fichier n'est pas valide ou contient des espaces",
-                    "Erreur",
-                    MessageBoxButtons.OK);
-            }
-            else
+            if (CheckPath())
             {
                 if (File.Exists(CsvPathText.Text))
                 {
@@ -118,29 +85,28 @@ namespace Bacchus.View
                     FCont.FlushTable();
                     ImportLab.Text = "Importation de la nouvelle base de données en cours...";
                     ImportLab.Refresh();
-                    if (FileControl.ImportFile(CsvPathText.Text,ImportProgress))
-                    {
-                        DialogResult result = MessageBox.Show(
-                        "L'ajout est terminé",
-                        "Confirmation",
-                        MessageBoxButtons.OK);
-                        this.Close();
-                    }
-                    else
-                    {
-                        DialogResult result = MessageBox.Show(
-                        "Une erreur est survenue lors de l'import. Le fichier est suremement utilisé par une autre application",
-                        "Erreur",
-                        MessageBoxButtons.OK);
-                    }
+                    LaunchImport();
                 }
                 else
                 {
-                    DialogResult result = MessageBox.Show(
-                        "ERREUR : Le fichier csv n'existe pas",
-                        "Erreur",
-                        MessageBoxButtons.OK);
+                    MessageBoxes.DispError("ERREUR : Le fichier csv n'existe pas");
                 }
+            }
+        }
+
+        public void LaunchImport()
+        {
+            if (FileControl.ImportFile(CsvPathText.Text, ImportProgress))
+            {
+                MessageBoxes.DispConfirmation("L'ajout est terminé");
+                this.Close();
+            }
+            else
+            {
+                MessageBoxes.DispError(
+                    "Une erreur est survenue lors de l'import. " +
+                    "Le fichier est suremement utilisé par une autre application");
+                ImportLab.Text = "L'opération a été intérompu, veuillez réessayer";
             }
         }
     }

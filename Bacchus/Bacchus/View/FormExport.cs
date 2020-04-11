@@ -36,10 +36,7 @@ namespace Bacchus.View
         {
             if(CsvName.Text == "" || CsvName.Text.Contains(" "))
             {
-                DialogResult result = MessageBox.Show(
-                    "ERREUR : Le nom du fichier n'est pas valide ou contient des espaces",
-                    "Erreur",
-                    MessageBoxButtons.OK);
+                MessageBoxes.DispError("ERREUR : Le nom du fichier n'est pas valide ou contient des espaces");
             }
             else
             {
@@ -53,18 +50,13 @@ namespace Bacchus.View
                     ExportLab.Visible = true;
                     if (FileControl.ExportFile(SaveDialog.FileName,ExportProgress))
                     {
-                        DialogResult result = MessageBox.Show(
-                        "L'export est terminé",
-                        "Confirmation",
-                        MessageBoxButtons.OK);
+                        MessageBoxes.DispConfirmation("L'export est terminé");
                         this.Close();
                     }
                     else
                     {
-                        DialogResult result = MessageBox.Show(
-                        "Une erreur est survenue.",
-                        "Erreur",
-                        MessageBoxButtons.OK);
+                        MessageBoxes.DispError("Une erreur est survenue lors de l'exportation");
+                        ExportLab.Text = "L'opération a été intérompu, veuillez réessayer";
                     }
                 }
             }            

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Bacchus.Model;
 using Bacchus.Control;
+using System.Collections;
 
 namespace Bacchus
 {
@@ -20,8 +21,12 @@ namespace Bacchus
         SousFamilleControl SFCont = new SousFamilleControl();
         ArticleControl ACont = new ArticleControl();
 
+        private bool isRunningXPOrLater = OSFeature.Feature.IsPresent(OSFeature.Themes);
+
+        ListViewGrouper Grouper;
+
         // The column we are currently using for sorting.
-        private ColumnHeader SortingColumn = null;
+        // private ColumnHeader SortingColumn = null;
 
         /// <summary>
         /// Initialize window
@@ -29,10 +34,14 @@ namespace Bacchus
         public FormMain()
         {
             InitializeComponent();
+
+            Grouper = new ListViewGrouper(DisplayList);
+
             RefreshTree();
             RefreshStatusStrip();
             ClearList();
             DispHelp();
+
         }
 
         /// <summary>
@@ -93,6 +102,8 @@ namespace Bacchus
                 BrandNodes.Nodes.Add(BrandNode);
             }
             Root.Add(BrandNodes);
+
+            //TypeTree.ExpandAll();
         }
 
         /// <summary>
@@ -153,6 +164,8 @@ namespace Bacchus
         /// <param name="e"></param>
         private void TypeTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            // Loading could take a little bit time, that's why we hide list during loading to don't show "noises"
+            DisplayList.Visible = false;
             // Clear
             ClearList();
 
@@ -161,6 +174,7 @@ namespace Bacchus
             if (ClickedNode == TypeTree.Nodes[0])   // All Articles
             {
                 DispAllArticles();
+                
             }
             else if (ClickedNode == TypeTree.Nodes[1])  // All Families
             {
@@ -193,6 +207,23 @@ namespace Bacchus
                     DispHelp();
                 }
             }
+            if (isRunningXPOrLater)
+            {
+                // Create the groupsTable array and populate it with one 
+                // hash table for each column.
+                Grouper.GroupTables = new Hashtable[DisplayList.Columns.Count];
+                for (int column = 0; column < DisplayList.Columns.Count; column++)
+                {
+                    // Create a hash table containing all the groups 
+                    // needed for a single column.
+                    Grouper.GroupTables[column] = Grouper.CreateGroupsTable(column);
+                }
+
+                // Start with the groups created for the Title column.
+                Grouper.SetGroups(0);
+                
+            }
+            DisplayList.Visible = true;
         }
 
         /// <summary>
@@ -355,7 +386,13 @@ namespace Bacchus
         /// <summary>
         /// Resize column automaticly 
         /// </summary>
-        public void AutoResizeColumns() { DisplayList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize); }
+        public void AutoResizeColumns()
+        {
+            // Auto resize take time and make "noises", so we hide list during loading
+            DisplayList.Visible = false;
+            DisplayList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            DisplayList.Visible = true;
+        }
 
         /// <summary>
         /// Update column of list view to display families / brand / child family
@@ -384,62 +421,39 @@ namespace Bacchus
         /// <param name="e"></param>
         private void FormMain_Resize(object sender, EventArgs e)
         {
-            AutoResizeColumns();
+           // AutoResizeColumns();
         }
 
         private void DisplayList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            // Get the new sorting column.
-            ColumnHeader new_sorting_column = DisplayList.Columns[e.Column];
-
-            // Figure out the new sorting order.
-            System.Windows.Forms.SortOrder sort_order;
-            if (SortingColumn == null)
+            // Set the sort order to ascending when changing
+            // column groups; otherwise, reverse the sort order.
+            if (DisplayList.Sorting == SortOrder.Descending ||
+                (isRunningXPOrLater && (e.Column != Grouper.GroupColumn)))
             {
-                // New column. Sort ascending.
-                sort_order = SortOrder.Ascending;
+                DisplayList.Sorting = SortOrder.Ascending;
             }
             else
             {
-                // See if this is the same column.
-                if (new_sorting_column == SortingColumn)
-                {
-                    // Same column. Switch the sort order.
-                    if (SortingColumn.Text.StartsWith("> "))
-                    {
-                        sort_order = SortOrder.Descending;
-                    }
-                    else
-                    {
-                        sort_order = SortOrder.Ascending;
-                    }
-                }
-                else
-                {
-                    // New column. Sort ascending.
-                    sort_order = SortOrder.Ascending;
-                }
-
-                // Remove the old sort indicator.
-                SortingColumn.Text = SortingColumn.Text.Substring(2);
+                DisplayList.Sorting = SortOrder.Descending;
             }
+            Grouper.GroupColumn = e.Column;
 
-            // Display the new sort order.
-            SortingColumn = new_sorting_column;
-            if (sort_order == SortOrder.Ascending)
+            // Set the groups to those created for the clicked column.
+            if (isRunningXPOrLater)
             {
-                SortingColumn.Text = "> " + SortingColumn.Text;
+                Grouper.SetGroups(e.Column);
             }
-            else
-            {
-                SortingColumn.Text = "< " + SortingColumn.Text;
-            }
+        }
 
-            // Create a comparer.
-            DisplayList.ListViewItemSorter = new DisplayListComparer(e.Column, sort_order);
+        private void DevelopTool_Click(object sender, EventArgs e)
+        {
+            TypeTree.ExpandAll();
+        }
 
-            // Sort.
-            DisplayList.Sort();
+        private void MinimizeTool_Click(object sender, EventArgs e)
+        {
+            TypeTree.CollapseAll();
         }
     }
 }
