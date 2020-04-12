@@ -18,13 +18,22 @@ namespace Bacchus.View
                 MessageBoxIcon.Error);
         }
 
-        public static DialogResult DispConfirmation(string Message)
+        public static DialogResult DispInfo(string Message)
         {
             return MessageBox.Show(
                 Message,
                 "Confirmation",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+        public static DialogResult DispConfirmation(string Message)
+        {
+            return MessageBox.Show(
+                Message,
+                "Confirmation",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning);
         }
     }
 }

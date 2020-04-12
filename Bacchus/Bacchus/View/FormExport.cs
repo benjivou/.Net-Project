@@ -50,7 +50,7 @@ namespace Bacchus.View
                     ExportLab.Visible = true;
                     if (FileControl.ExportFile(SaveDialog.FileName,ExportProgress))
                     {
-                        MessageBoxes.DispConfirmation("L'export est terminé");
+                        MessageBoxes.DispInfo("L'export est terminé");
                         this.Close();
                     }
                     else

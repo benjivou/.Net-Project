@@ -164,6 +164,8 @@ namespace Bacchus
         /// <param name="e"></param>
         private void TypeTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            RefreshDisplayList();
+            /*
             // Loading could take a little bit time, that's why we hide list during loading to don't show "noises"
             DisplayList.Visible = false;
             // Clear
@@ -224,6 +226,7 @@ namespace Bacchus
                 
             }
             DisplayList.Visible = true;
+            */
         }
 
         /// <summary>
@@ -454,6 +457,130 @@ namespace Bacchus
         private void MinimizeTool_Click(object sender, EventArgs e)
         {
             TypeTree.CollapseAll();
+        }
+
+        private void DeleteItem()
+        {
+            int NbItem = DisplayList.SelectedItems.Count;
+            if (NbItem == 0)
+            {
+                MessageBoxes.DispError("ERREUR : Vous devez sélectionner au moins un élément avant de le supprimer");
+            }
+            else
+            {
+                var Arti = DisplayList.SelectedItems[0].Tag as Article;
+                var Brand = DisplayList.SelectedItems[0].Tag as Marque;
+                var ChildFamily = DisplayList.SelectedItems[0].Tag as SousFamille;
+                var Family = DisplayList.SelectedItems[0].Tag as Famille;
+
+                // Check if it's not an article and alert the user
+                if (Arti == null &&
+                    MessageBoxes.DispConfirmation("ATTENTION : Les éléments liés à cette sélection seront aussi supprimés")
+                    == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                // For each article selected
+                foreach (ListViewItem Item in DisplayList.SelectedItems)
+                {
+                    Arti = Item.Tag as Article;
+                    Brand = Item.Tag as Marque;
+                    ChildFamily = Item.Tag as SousFamille;
+                    Family = Item.Tag as Famille;
+
+                    if (Arti != null)
+                    {
+                        ACont.Delete(Arti);
+                    }
+                    if (Brand != null)
+                    {
+                        MCont.Delete(Brand);
+                    }
+
+                    if (ChildFamily != null)
+                    {
+                        SFCont.Delete(ChildFamily);
+                    }
+
+                    if (Family != null)
+                    {
+                        FCont.Delete(Family);
+                    }
+                }
+                //Refresh list
+                RefreshDisplayList();
+                if (Arti == null)
+                {
+                    //Refresh Tree
+                    RefreshTree();
+                }
+                // Refresh status Bar
+                RefreshStatusStrip();
+            }
+        }
+
+        private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteItem();
+        }
+
+        public void RefreshDisplayList()
+        {
+            ClearList();
+            // No node selected
+            if(TypeTree.SelectedNode == null)
+            {
+                DispHelp();
+                return;
+            }
+
+            var Brand = TypeTree.SelectedNode.Tag as Marque;
+            var ChildFamily = TypeTree.SelectedNode.Tag as SousFamille;
+            var Family = TypeTree.SelectedNode.Tag as Famille;
+
+            // Brand node selected
+            if (Brand != null)
+                DispArticles(Brand);
+            // CF Node selected
+            else if (ChildFamily != null)
+                DispArticles(ChildFamily);
+            // F node selected
+            else if (Family != null)
+                DispChildFamilies(Family);
+            // Root node selected
+            else
+            {
+                if (TypeTree.SelectedNode == TypeTree.Nodes[0])
+                    DispAllArticles();
+                else if (TypeTree.SelectedNode == TypeTree.Nodes[1])
+                    DispFamilies();
+                else if (TypeTree.SelectedNode == TypeTree.Nodes[2])
+                    DispMarques();
+                else DispHelp();
+            }
+            if (isRunningXPOrLater)
+            {
+                // Create the groupsTable array and populate it with one 
+                // hash table for each column.
+                Grouper.GroupTables = new Hashtable[DisplayList.Columns.Count];
+                for (int column = 0; column < DisplayList.Columns.Count; column++)
+                {
+                    // Create a hash table containing all the groups 
+                    // needed for a single column.
+                    Grouper.GroupTables[column] = Grouper.CreateGroupsTable(column);
+                }
+
+                // Start with the groups created for the Title column.
+                Grouper.SetGroups(0);
+            }
+        }
+        
+
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                DeleteItem();
         }
     }
 }

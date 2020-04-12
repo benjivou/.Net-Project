@@ -98,14 +98,14 @@ namespace Bacchus.View
         {
             if (FileControl.ImportFile(CsvPathText.Text, ImportProgress))
             {
-                MessageBoxes.DispConfirmation("L'ajout est terminé");
+                MessageBoxes.DispInfo("L'ajout est terminé");
                 this.Close();
             }
             else
             {
                 MessageBoxes.DispError(
                     "Une erreur est survenue lors de l'import. " +
-                    "Le fichier est suremement utilisé par une autre application");
+                    "Le fichier est suremement utilisé par une autre application ou le format n'est pas correct");
                 ImportLab.Text = "L'opération a été intérompu, veuillez réessayer";
             }
         }

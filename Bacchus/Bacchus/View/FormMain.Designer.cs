@@ -28,14 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Tous les articles");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Familles");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Marques");
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Tous les articles");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Familles");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Marques");
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.FichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ActualiserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.affichageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DevelopTool = new System.Windows.Forms.ToolStripMenuItem();
+            this.MinimizeTool = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.NbArticles = new System.Windows.Forms.ToolStripStatusLabel();
             this.NbFamilles = new System.Windows.Forms.ToolStripStatusLabel();
@@ -47,15 +51,17 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.affichageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DevelopTool = new System.Windows.Forms.ToolStripMenuItem();
-            this.MinimizeTool = new System.Windows.Forms.ToolStripMenuItem();
+            this.RightClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ajouterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supprimerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Splitter)).BeginInit();
             this.Splitter.Panel1.SuspendLayout();
             this.Splitter.Panel2.SuspendLayout();
             this.Splitter.SuspendLayout();
+            this.RightClickMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuStrip
@@ -99,6 +105,29 @@
             this.ExporterToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.ExporterToolStripMenuItem.Text = "Exporter";
             this.ExporterToolStripMenuItem.Click += new System.EventHandler(this.ExporterToolStripMenuItem_Click);
+            // 
+            // affichageToolStripMenuItem
+            // 
+            this.affichageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DevelopTool,
+            this.MinimizeTool});
+            this.affichageToolStripMenuItem.Name = "affichageToolStripMenuItem";
+            this.affichageToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.affichageToolStripMenuItem.Text = "Affichage";
+            // 
+            // DevelopTool
+            // 
+            this.DevelopTool.Name = "DevelopTool";
+            this.DevelopTool.Size = new System.Drawing.Size(170, 22);
+            this.DevelopTool.Text = "Développer l\'arbre";
+            this.DevelopTool.Click += new System.EventHandler(this.DevelopTool_Click);
+            // 
+            // MinimizeTool
+            // 
+            this.MinimizeTool.Name = "MinimizeTool";
+            this.MinimizeTool.Size = new System.Drawing.Size(170, 22);
+            this.MinimizeTool.Text = "Minimiser l\'arbre";
+            this.MinimizeTool.Click += new System.EventHandler(this.MinimizeTool_Click);
             // 
             // StatusStrip
             // 
@@ -164,16 +193,16 @@
             this.TypeTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TypeTree.Location = new System.Drawing.Point(0, 0);
             this.TypeTree.Name = "TypeTree";
-            treeNode4.Name = "AllNode";
-            treeNode4.Text = "Tous les articles";
-            treeNode5.Name = "FamilyNode";
-            treeNode5.Text = "Familles";
-            treeNode6.Name = "BrandNode";
-            treeNode6.Text = "Marques";
+            treeNode16.Name = "AllNode";
+            treeNode16.Text = "Tous les articles";
+            treeNode17.Name = "FamilyNode";
+            treeNode17.Text = "Familles";
+            treeNode18.Name = "BrandNode";
+            treeNode18.Text = "Marques";
             this.TypeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5,
-            treeNode6});
+            treeNode16,
+            treeNode17,
+            treeNode18});
             this.TypeTree.Size = new System.Drawing.Size(200, 410);
             this.TypeTree.TabIndex = 0;
             this.TypeTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TypeTree_AfterSelect);
@@ -184,6 +213,7 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.DisplayList.ContextMenuStrip = this.RightClickMenu;
             this.DisplayList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DisplayList.GridLines = true;
             this.DisplayList.HideSelection = false;
@@ -195,28 +225,33 @@
             this.DisplayList.View = System.Windows.Forms.View.Details;
             this.DisplayList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.DisplayList_ColumnClick);
             // 
-            // affichageToolStripMenuItem
+            // RightClickMenu
             // 
-            this.affichageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DevelopTool,
-            this.MinimizeTool});
-            this.affichageToolStripMenuItem.Name = "affichageToolStripMenuItem";
-            this.affichageToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.affichageToolStripMenuItem.Text = "Affichage";
+            this.RightClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ajouterToolStripMenuItem,
+            this.modifierToolStripMenuItem,
+            this.supprimerToolStripMenuItem});
+            this.RightClickMenu.Name = "RightClickMenu";
+            this.RightClickMenu.Size = new System.Drawing.Size(130, 70);
             // 
-            // DevelopTool
+            // ajouterToolStripMenuItem
             // 
-            this.DevelopTool.Name = "DevelopTool";
-            this.DevelopTool.Size = new System.Drawing.Size(180, 22);
-            this.DevelopTool.Text = "Développer l\'arbre";
-            this.DevelopTool.Click += new System.EventHandler(this.DevelopTool_Click);
+            this.ajouterToolStripMenuItem.Name = "ajouterToolStripMenuItem";
+            this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.ajouterToolStripMenuItem.Text = "Ajouter";
             // 
-            // MinimizeTool
+            // modifierToolStripMenuItem
             // 
-            this.MinimizeTool.Name = "MinimizeTool";
-            this.MinimizeTool.Size = new System.Drawing.Size(180, 22);
-            this.MinimizeTool.Text = "Minimiser l\'arbre";
-            this.MinimizeTool.Click += new System.EventHandler(this.MinimizeTool_Click);
+            this.modifierToolStripMenuItem.Name = "modifierToolStripMenuItem";
+            this.modifierToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.modifierToolStripMenuItem.Text = "Modifier";
+            // 
+            // supprimerToolStripMenuItem
+            // 
+            this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
+            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.supprimerToolStripMenuItem.Text = "Supprimer";
+            this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -226,10 +261,12 @@
             this.Controls.Add(this.Splitter);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.MenuStrip;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Application";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
@@ -239,6 +276,7 @@
             this.Splitter.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Splitter)).EndInit();
             this.Splitter.ResumeLayout(false);
+            this.RightClickMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,6 +303,10 @@
         private System.Windows.Forms.ToolStripMenuItem affichageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DevelopTool;
         private System.Windows.Forms.ToolStripMenuItem MinimizeTool;
+        private System.Windows.Forms.ContextMenuStrip RightClickMenu;
+        private System.Windows.Forms.ToolStripMenuItem ajouterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modifierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem supprimerToolStripMenuItem;
     }
 }
 

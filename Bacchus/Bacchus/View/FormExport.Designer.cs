@@ -96,7 +96,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.91667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.08334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
             this.tableLayoutPanel1.Controls.Add(this.SaveCsvBtn, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.CsvName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FileLabel, 0, 0);
@@ -111,7 +111,7 @@
             // SaveCsvBtn
             // 
             this.SaveCsvBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.SaveCsvBtn.Location = new System.Drawing.Point(272, 10);
+            this.SaveCsvBtn.Location = new System.Drawing.Point(271, 10);
             this.SaveCsvBtn.Name = "SaveCsvBtn";
             this.SaveCsvBtn.Size = new System.Drawing.Size(65, 23);
             this.SaveCsvBtn.TabIndex = 0;
@@ -124,7 +124,7 @@
             this.CsvName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CsvName.Location = new System.Drawing.Point(91, 11);
             this.CsvName.Name = "CsvName";
-            this.CsvName.Size = new System.Drawing.Size(175, 20);
+            this.CsvName.Size = new System.Drawing.Size(174, 20);
             this.CsvName.TabIndex = 2;
             // 
             // FileLabel
