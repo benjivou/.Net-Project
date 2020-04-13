@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Tous les articles");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Familles");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Marques");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Tous les articles");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Familles");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Marques");
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.FichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ActualiserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -193,16 +193,16 @@
             this.TypeTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TypeTree.Location = new System.Drawing.Point(0, 0);
             this.TypeTree.Name = "TypeTree";
-            treeNode16.Name = "AllNode";
-            treeNode16.Text = "Tous les articles";
-            treeNode17.Name = "FamilyNode";
-            treeNode17.Text = "Familles";
-            treeNode18.Name = "BrandNode";
-            treeNode18.Text = "Marques";
+            treeNode4.Name = "AllNode";
+            treeNode4.Text = "Tous les articles";
+            treeNode5.Name = "FamilyNode";
+            treeNode5.Text = "Familles";
+            treeNode6.Name = "BrandNode";
+            treeNode6.Text = "Marques";
             this.TypeTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode16,
-            treeNode17,
-            treeNode18});
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.TypeTree.Size = new System.Drawing.Size(200, 410);
             this.TypeTree.TabIndex = 0;
             this.TypeTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TypeTree_AfterSelect);
@@ -215,7 +215,6 @@
             this.columnHeader3});
             this.DisplayList.ContextMenuStrip = this.RightClickMenu;
             this.DisplayList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DisplayList.GridLines = true;
             this.DisplayList.HideSelection = false;
             this.DisplayList.Location = new System.Drawing.Point(0, 0);
             this.DisplayList.Name = "DisplayList";
@@ -224,6 +223,7 @@
             this.DisplayList.UseCompatibleStateImageBehavior = false;
             this.DisplayList.View = System.Windows.Forms.View.Details;
             this.DisplayList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.DisplayList_ColumnClick);
+            this.DisplayList.DoubleClick += new System.EventHandler(this.DisplayList_DoubleClick);
             // 
             // RightClickMenu
             // 
@@ -245,11 +245,12 @@
             this.modifierToolStripMenuItem.Name = "modifierToolStripMenuItem";
             this.modifierToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.modifierToolStripMenuItem.Text = "Modifier";
+            this.modifierToolStripMenuItem.Click += new System.EventHandler(this.modifierToolStripMenuItem_Click);
             // 
             // supprimerToolStripMenuItem
             // 
             this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
             this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
             // 

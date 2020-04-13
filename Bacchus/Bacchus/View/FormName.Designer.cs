@@ -32,8 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.NameBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.OKBtn = new System.Windows.Forms.Button();
             this.BackBtn = new System.Windows.Forms.Button();
+            this.OKBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -79,23 +79,12 @@
             this.tableLayoutPanel2.Controls.Add(this.BackBtn, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.OKBtn, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 53);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 42);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(281, 48);
             this.tableLayoutPanel2.TabIndex = 1;
-            // 
-            // OKBtn
-            // 
-            this.OKBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.OKBtn.Location = new System.Drawing.Point(32, 12);
-            this.OKBtn.Name = "OKBtn";
-            this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 0;
-            this.OKBtn.Text = "Appliquer";
-            this.OKBtn.UseVisualStyleBackColor = true;
-            this.OKBtn.Click += new System.EventHandler(this.OKBtn_Click);
             // 
             // BackBtn
             // 
@@ -108,18 +97,31 @@
             this.BackBtn.UseVisualStyleBackColor = true;
             this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
+            // OKBtn
+            // 
+            this.OKBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.OKBtn.Location = new System.Drawing.Point(32, 12);
+            this.OKBtn.Name = "OKBtn";
+            this.OKBtn.Size = new System.Drawing.Size(75, 23);
+            this.OKBtn.TabIndex = 0;
+            this.OKBtn.Text = "Appliquer";
+            this.OKBtn.UseVisualStyleBackColor = true;
+            this.OKBtn.Click += new System.EventHandler(this.OKBtn_Click);
+            // 
             // FormName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 101);
+            this.ClientSize = new System.Drawing.Size(281, 90);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "FormName";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormName";
+            this.Load += new System.EventHandler(this.FormName_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

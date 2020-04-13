@@ -25,6 +25,8 @@ namespace Bacchus
 
         ListViewGrouper Grouper;
 
+        private int SelectedColumn;
+
         // The column we are currently using for sorting.
         // private ColumnHeader SortingColumn = null;
 
@@ -42,6 +44,7 @@ namespace Bacchus
             ClearList();
             DispHelp();
 
+            SelectedColumn = 0;
         }
 
         /// <summary>
@@ -165,68 +168,6 @@ namespace Bacchus
         private void TypeTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             RefreshDisplayList();
-            /*
-            // Loading could take a little bit time, that's why we hide list during loading to don't show "noises"
-            DisplayList.Visible = false;
-            // Clear
-            ClearList();
-
-            TreeNode ClickedNode = e.Node;
-
-            if (ClickedNode == TypeTree.Nodes[0])   // All Articles
-            {
-                DispAllArticles();
-                
-            }
-            else if (ClickedNode == TypeTree.Nodes[1])  // All Families
-            {
-                DispFamilies();
-            }
-            else if (ClickedNode == TypeTree.Nodes[2])  // All Brands
-            {
-                DispMarques();
-            }
-            else
-            {
-                var TypeMarque = ClickedNode.Tag as Marque;
-                var TypeSSFamille = ClickedNode.Tag as SousFamille;
-                var TypeFamille = ClickedNode.Tag as Famille;
-                if (TypeMarque != null) // Article with a specific Brand
-                {
-                    DispArticles((Marque)ClickedNode.Tag);
-                }
-                else if (TypeSSFamille != null) // Article with a specific Child Family
-                {
-                    DispArticles((SousFamille)ClickedNode.Tag);
-                }
-                else if (TypeFamille != null)   // Child Family with a specific Family
-                {
-                    DispChildFamilies((Famille) ClickedNode.Tag);
-                }
-                // No node selected
-                else
-                {
-                    DispHelp();
-                }
-            }
-            if (isRunningXPOrLater)
-            {
-                // Create the groupsTable array and populate it with one 
-                // hash table for each column.
-                Grouper.GroupTables = new Hashtable[DisplayList.Columns.Count];
-                for (int column = 0; column < DisplayList.Columns.Count; column++)
-                {
-                    // Create a hash table containing all the groups 
-                    // needed for a single column.
-                    Grouper.GroupTables[column] = Grouper.CreateGroupsTable(column);
-                }
-
-                // Start with the groups created for the Title column.
-                Grouper.SetGroups(0);
-                
-            }
-            DisplayList.Visible = true;
-            */
         }
 
         /// <summary>
@@ -429,6 +370,7 @@ namespace Bacchus
 
         private void DisplayList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
+            SelectedColumn = e.Column;
             // Set the sort order to ascending when changing
             // column groups; otherwise, reverse the sort order.
             if (DisplayList.Sorting == SortOrder.Descending ||
@@ -459,7 +401,7 @@ namespace Bacchus
             TypeTree.CollapseAll();
         }
 
-        private void DeleteItem()
+        private void DeleteSelectedItems()
         {
             int NbItem = DisplayList.SelectedItems.Count;
             if (NbItem == 0)
@@ -522,7 +464,7 @@ namespace Bacchus
 
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DeleteItem();
+            DeleteSelectedItems();
         }
 
         public void RefreshDisplayList()
@@ -572,7 +514,7 @@ namespace Bacchus
                 }
 
                 // Start with the groups created for the Title column.
-                Grouper.SetGroups(0);
+                Grouper.SetGroups(SelectedColumn);
             }
         }
         
@@ -580,7 +522,111 @@ namespace Bacchus
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
-                DeleteItem();
+                DeleteSelectedItems();
+            if (e.KeyCode == Keys.F5)
+                RefreshAllData();
+            if (e.KeyCode == Keys.Enter)
+                ModifieSelectedItem();
+        }
+
+        private void ModifieSelectedItem()
+        {
+            int NbItem = DisplayList.SelectedItems.Count;
+            if (NbItem != 1)
+            {
+                MessageBoxes.DispError("ERREUR : Vous devez sélectionner un seul élément");
+            }
+            else
+            {
+                var Arti = DisplayList.SelectedItems[0].Tag as Article;
+                var Brand = DisplayList.SelectedItems[0].Tag as Marque;
+                var ChildFamily = DisplayList.SelectedItems[0].Tag as SousFamille;
+                var Family = DisplayList.SelectedItems[0].Tag as Famille;
+                
+                if (Arti != null)
+                {
+                    // todo
+                    FormArticle ModifiedArticle = new FormArticle(Arti);
+                    ModifiedArticle.ShowDialog();
+                    RefreshDisplayList();
+                }
+                else
+                {
+                    FormName NameAsked;
+                    if (Brand != null)
+                    {
+                        NameAsked = new FormName("Gestion Marque", Brand.Nom);
+                        NameAsked.ShowDialog();
+                        if (NameAsked.IsApplicated)
+                        {
+                            if (Brand.Nom != NameAsked.NewName && MCont.GetByName(new Marque(NameAsked.NewName)) != null)
+                            {
+                                MessageBoxes.DispError("Le nom est déjà utilisé");
+                                NameAsked.IsApplicated = false;
+                            }
+                            else
+                            {
+                                Brand.Nom = NameAsked.NewName;
+                                MCont.Update(Brand);
+                            }
+                        }
+                    }
+                    else if (ChildFamily != null)
+                    {
+                        NameAsked = new FormName("Gestion Sous Famille", ChildFamily.Nom);
+                        NameAsked.ShowDialog();
+                        if (NameAsked.IsApplicated)
+                        {
+                            if (ChildFamily.Nom != NameAsked.NewName && SFCont.GetByName(new SousFamille(NameAsked.NewName)) != null)
+                            {
+                                MessageBoxes.DispError("Le nom est déjà utilisé");
+                                NameAsked.IsApplicated = false;
+                            }
+                            else
+                            {
+                                ChildFamily.Nom = NameAsked.NewName;
+                                SFCont.Update(ChildFamily);
+                            }
+                        }
+                    }
+                    else if (Family != null)
+                    {
+                        NameAsked = new FormName("Gestion Famille", Family.Nom);
+                        NameAsked.ShowDialog();
+                        if (NameAsked.IsApplicated)
+                        {
+                            if (FCont.GetByName(new Famille(NameAsked.NewName)) != null)
+                            {
+                                MessageBoxes.DispError("Le nom est déjà utilisé");
+                                NameAsked.IsApplicated = false;
+                            }
+                            else
+                            {
+                                Family.Nom = NameAsked.NewName;
+                                FCont.Update(Family);
+                            }
+                        }
+                    }
+                    else
+                        return;
+                    if (NameAsked.IsApplicated)
+                    {
+                        RefreshDisplayList();
+                        RefreshTree();
+                    }
+                }
+            }
+        }
+
+        private void modifierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ModifieSelectedItem();
+        }
+       
+
+        private void DisplayList_DoubleClick(object sender, EventArgs e)
+        {
+            ModifieSelectedItem();
         }
     }
 }

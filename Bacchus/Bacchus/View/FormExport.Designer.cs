@@ -96,7 +96,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.91667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.08334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 87F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.tableLayoutPanel1.Controls.Add(this.SaveCsvBtn, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.CsvName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FileLabel, 0, 0);
@@ -111,7 +111,7 @@
             // SaveCsvBtn
             // 
             this.SaveCsvBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.SaveCsvBtn.Location = new System.Drawing.Point(271, 10);
+            this.SaveCsvBtn.Location = new System.Drawing.Point(269, 10);
             this.SaveCsvBtn.Name = "SaveCsvBtn";
             this.SaveCsvBtn.Size = new System.Drawing.Size(65, 23);
             this.SaveCsvBtn.TabIndex = 0;
@@ -122,15 +122,15 @@
             // CsvName
             // 
             this.CsvName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.CsvName.Location = new System.Drawing.Point(91, 11);
+            this.CsvName.Location = new System.Drawing.Point(90, 11);
             this.CsvName.Name = "CsvName";
-            this.CsvName.Size = new System.Drawing.Size(174, 20);
+            this.CsvName.Size = new System.Drawing.Size(173, 20);
             this.CsvName.TabIndex = 2;
             // 
             // FileLabel
             // 
             this.FileLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.FileLabel.Location = new System.Drawing.Point(7, 10);
+            this.FileLabel.Location = new System.Drawing.Point(6, 10);
             this.FileLabel.Name = "FileLabel";
             this.FileLabel.Size = new System.Drawing.Size(78, 23);
             this.FileLabel.TabIndex = 1;
@@ -162,6 +162,7 @@
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel3);
+            this.MaximizeBox = false;
             this.Name = "FormExport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Exporter";

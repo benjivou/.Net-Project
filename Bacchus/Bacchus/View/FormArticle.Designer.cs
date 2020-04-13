@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.QuantityBox = new System.Windows.Forms.NumericUpDown();
             this.ChildFamilyBox = new System.Windows.Forms.ComboBox();
             this.RefBox = new System.Windows.Forms.TextBox();
             this.DescriptionLab = new System.Windows.Forms.Label();
@@ -45,7 +45,7 @@
             this.BackBtn = new System.Windows.Forms.Button();
             this.OKBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.QuantityBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriceBox)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,9 +53,9 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 252F));
-            this.tableLayoutPanel1.Controls.Add(this.numericUpDown1, 1, 5);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 269F));
+            this.tableLayoutPanel1.Controls.Add(this.QuantityBox, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.ChildFamilyBox, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.RefBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.DescriptionLab, 0, 0);
@@ -70,6 +70,7 @@
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
@@ -77,23 +78,27 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(323, 351);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(269, 351);
             this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
-            // numericUpDown1
+            // QuantityBox
             // 
-            this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDown1.Location = new System.Drawing.Point(96, 309);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(69, 20);
-            this.numericUpDown1.TabIndex = 11;
+            this.QuantityBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.QuantityBox.Location = new System.Drawing.Point(79, 314);
+            this.QuantityBox.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.QuantityBox.Name = "QuantityBox";
+            this.QuantityBox.Size = new System.Drawing.Size(69, 20);
+            this.QuantityBox.TabIndex = 11;
             // 
             // ChildFamilyBox
             // 
             this.ChildFamilyBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ChildFamilyBox.FormattingEnabled = true;
-            this.ChildFamilyBox.Location = new System.Drawing.Point(96, 194);
+            this.ChildFamilyBox.Location = new System.Drawing.Point(79, 204);
             this.ChildFamilyBox.Name = "ChildFamilyBox";
             this.ChildFamilyBox.Size = new System.Drawing.Size(121, 21);
             this.ChildFamilyBox.TabIndex = 9;
@@ -101,7 +106,7 @@
             // RefBox
             // 
             this.RefBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.RefBox.Location = new System.Drawing.Point(96, 82);
+            this.RefBox.Location = new System.Drawing.Point(79, 92);
             this.RefBox.Multiline = true;
             this.RefBox.Name = "RefBox";
             this.RefBox.Size = new System.Drawing.Size(121, 22);
@@ -109,9 +114,9 @@
             // 
             // DescriptionLab
             // 
-            this.DescriptionLab.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.DescriptionLab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DescriptionLab.AutoSize = true;
-            this.DescriptionLab.Location = new System.Drawing.Point(24, 25);
+            this.DescriptionLab.Location = new System.Drawing.Point(7, 10);
             this.DescriptionLab.Name = "DescriptionLab";
             this.DescriptionLab.Size = new System.Drawing.Size(66, 13);
             this.DescriptionLab.TabIndex = 0;
@@ -121,7 +126,7 @@
             // 
             this.RefLab.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.RefLab.AutoSize = true;
-            this.RefLab.Location = new System.Drawing.Point(27, 86);
+            this.RefLab.Location = new System.Drawing.Point(10, 96);
             this.RefLab.Name = "RefLab";
             this.RefLab.Size = new System.Drawing.Size(63, 13);
             this.RefLab.TabIndex = 1;
@@ -131,7 +136,7 @@
             // 
             this.BrandLab.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.BrandLab.AutoSize = true;
-            this.BrandLab.Location = new System.Drawing.Point(41, 143);
+            this.BrandLab.Location = new System.Drawing.Point(24, 153);
             this.BrandLab.Name = "BrandLab";
             this.BrandLab.Size = new System.Drawing.Size(49, 13);
             this.BrandLab.TabIndex = 2;
@@ -141,9 +146,9 @@
             // 
             this.ChildFamilyLab.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ChildFamilyLab.AutoSize = true;
-            this.ChildFamilyLab.Location = new System.Drawing.Point(18, 198);
+            this.ChildFamilyLab.Location = new System.Drawing.Point(4, 202);
             this.ChildFamilyLab.Name = "ChildFamilyLab";
-            this.ChildFamilyLab.Size = new System.Drawing.Size(72, 13);
+            this.ChildFamilyLab.Size = new System.Drawing.Size(69, 26);
             this.ChildFamilyLab.TabIndex = 3;
             this.ChildFamilyLab.Text = "Sous-Famille :";
             // 
@@ -151,7 +156,7 @@
             // 
             this.PriceLab.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.PriceLab.AutoSize = true;
-            this.PriceLab.Location = new System.Drawing.Point(60, 254);
+            this.PriceLab.Location = new System.Drawing.Point(43, 264);
             this.PriceLab.Name = "PriceLab";
             this.PriceLab.Size = new System.Drawing.Size(30, 13);
             this.PriceLab.TabIndex = 4;
@@ -161,7 +166,7 @@
             // 
             this.QuantityLab.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.QuantityLab.AutoSize = true;
-            this.QuantityLab.Location = new System.Drawing.Point(37, 313);
+            this.QuantityLab.Location = new System.Drawing.Point(20, 318);
             this.QuantityLab.Name = "QuantityLab";
             this.QuantityLab.Size = new System.Drawing.Size(53, 13);
             this.QuantityLab.TabIndex = 5;
@@ -169,18 +174,19 @@
             // 
             // DescriptionBox
             // 
-            this.DescriptionBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.DescriptionBox.Location = new System.Drawing.Point(96, 21);
+            this.DescriptionBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.DescriptionBox.Location = new System.Drawing.Point(79, 13);
             this.DescriptionBox.Multiline = true;
             this.DescriptionBox.Name = "DescriptionBox";
-            this.DescriptionBox.Size = new System.Drawing.Size(201, 21);
+            this.DescriptionBox.Size = new System.Drawing.Size(187, 58);
             this.DescriptionBox.TabIndex = 6;
             // 
             // BrandBox
             // 
             this.BrandBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.BrandBox.FormattingEnabled = true;
-            this.BrandBox.Location = new System.Drawing.Point(96, 139);
+            this.BrandBox.Location = new System.Drawing.Point(79, 149);
             this.BrandBox.Name = "BrandBox";
             this.BrandBox.Size = new System.Drawing.Size(121, 21);
             this.BrandBox.TabIndex = 8;
@@ -188,7 +194,13 @@
             // PriceBox
             // 
             this.PriceBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.PriceBox.Location = new System.Drawing.Point(96, 250);
+            this.PriceBox.DecimalPlaces = 2;
+            this.PriceBox.Location = new System.Drawing.Point(79, 260);
+            this.PriceBox.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
             this.PriceBox.Name = "PriceBox";
             this.PriceBox.Size = new System.Drawing.Size(69, 20);
             this.PriceBox.TabIndex = 10;
@@ -205,43 +217,46 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(323, 48);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(269, 48);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // BackBtn
             // 
             this.BackBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BackBtn.Location = new System.Drawing.Point(204, 12);
+            this.BackBtn.Location = new System.Drawing.Point(164, 12);
             this.BackBtn.Name = "BackBtn";
             this.BackBtn.Size = new System.Drawing.Size(75, 23);
             this.BackBtn.TabIndex = 0;
             this.BackBtn.Text = "Annuler";
             this.BackBtn.UseVisualStyleBackColor = true;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
             // OKBtn
             // 
             this.OKBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.OKBtn.Location = new System.Drawing.Point(43, 12);
+            this.OKBtn.Location = new System.Drawing.Point(29, 12);
             this.OKBtn.Name = "OKBtn";
             this.OKBtn.Size = new System.Drawing.Size(75, 23);
             this.OKBtn.TabIndex = 1;
             this.OKBtn.Text = "Appliquer";
             this.OKBtn.UseVisualStyleBackColor = true;
+            this.OKBtn.Click += new System.EventHandler(this.OKBtn_Click);
             // 
             // FormArticle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 402);
+            this.ClientSize = new System.Drawing.Size(269, 402);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormArticle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormArticle";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.QuantityBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriceBox)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -262,7 +277,7 @@
         private System.Windows.Forms.TextBox DescriptionBox;
         private System.Windows.Forms.ComboBox BrandBox;
         private System.Windows.Forms.NumericUpDown PriceBox;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown QuantityBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button BackBtn;
         private System.Windows.Forms.Button OKBtn;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Model
 {
-    class Article
+    public class Article
     {
         public string RefArticle { get; set; }
         public string Description { get; set; }

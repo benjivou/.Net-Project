@@ -12,19 +12,23 @@ namespace Bacchus.View
 {
     public partial class FormName : Form
     {
-        string Name = null;
-        bool IsApplicated = false;
+        public string NewName = null;
+        private string InitialName;
+        public bool IsApplicated = false;
 
         public FormName(string Title, string ActualName)
         {
             InitializeComponent();
             this.Text = Title;
+            NameBox.Text = ActualName;
+            InitialName = ActualName;
         }
 
         private void OKBtn_Click(object sender, EventArgs e)
         {
-            IsApplicated = true;
-            Name = NameBox.Text;
+            NewName = NameBox.Text;
+            if (InitialName != NewName)
+                IsApplicated = true;
             this.Close();
         }
 
@@ -32,6 +36,11 @@ namespace Bacchus.View
         {
             IsApplicated = false;
             this.Close();
+        }
+
+        private void FormName_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

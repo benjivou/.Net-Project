@@ -84,7 +84,7 @@ namespace Bacchus.Control
 		public bool CheckParam(Article Arti)
 		{
 			if (Arti == null
-				|| Arti.Marque == null
+				|| Arti.SousFamille == null
 				|| Arti.PrixHT < 0
 				|| Arti.Quantite < 0
 				|| Arti.Marque == null)

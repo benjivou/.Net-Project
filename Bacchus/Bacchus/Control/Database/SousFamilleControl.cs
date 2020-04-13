@@ -163,7 +163,7 @@ namespace Bacchus.Control
 			// We have to compare the FamilleRef and the Sous Famille Name to fin it 
 			var Result = ExecuteSelect("SELECT * FROM " + TableName + 
 				" WHERE " + ValueName + " = '" + obj.Nom +
-				"' AND RefFamille = "+ obj.Famille.RefFamille);
+				"' ");
 
 
 			SousFamille ChildFamily = null;
