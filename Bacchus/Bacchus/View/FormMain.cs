@@ -21,7 +21,7 @@ namespace Bacchus
         SousFamilleControl SFCont = new SousFamilleControl();
         ArticleControl ACont = new ArticleControl();
 
-        private bool isRunningXPOrLater = OSFeature.Feature.IsPresent(OSFeature.Themes);
+        private bool IsRunningXPOrLater = OSFeature.Feature.IsPresent(OSFeature.Themes);
 
         ListViewGrouper Grouper;
 
@@ -374,7 +374,7 @@ namespace Bacchus
             // Set the sort order to ascending when changing
             // column groups; otherwise, reverse the sort order.
             if (DisplayList.Sorting == SortOrder.Descending ||
-                (isRunningXPOrLater && (e.Column != Grouper.GroupColumn)))
+                (IsRunningXPOrLater && (e.Column != Grouper.GroupColumn)))
             {
                 DisplayList.Sorting = SortOrder.Ascending;
             }
@@ -385,7 +385,7 @@ namespace Bacchus
             Grouper.GroupColumn = e.Column;
 
             // Set the groups to those created for the clicked column.
-            if (isRunningXPOrLater)
+            if (IsRunningXPOrLater)
             {
                 Grouper.SetGroups(e.Column);
             }
@@ -501,7 +501,7 @@ namespace Bacchus
                     DispMarques();
                 else DispHelp();
             }
-            if (isRunningXPOrLater)
+            if (IsRunningXPOrLater)
             {
                 // Create the groupsTable array and populate it with one 
                 // hash table for each column.
@@ -545,10 +545,20 @@ namespace Bacchus
                 
                 if (Arti != null)
                 {
-                    // todo
                     FormArticle ModifiedArticle = new FormArticle(Arti);
                     ModifiedArticle.ShowDialog();
-                    RefreshDisplayList();
+                    if( ModifiedArticle.IsApplicated == true)
+                        RefreshDisplayList();
+                }
+                else if (ChildFamily != null)
+                {
+                    FormChildFamily ModifiedCF = new FormChildFamily(ChildFamily);
+                    ModifiedCF.ShowDialog();
+                    if (ModifiedCF.IsApplicated == true)
+                    {
+                        RefreshDisplayList();
+                        RefreshTree();
+                    }
                 }
                 else
                 {
@@ -568,24 +578,6 @@ namespace Bacchus
                             {
                                 Brand.Nom = NameAsked.NewName;
                                 MCont.Update(Brand);
-                            }
-                        }
-                    }
-                    else if (ChildFamily != null)
-                    {
-                        NameAsked = new FormName("Gestion Sous Famille", ChildFamily.Nom);
-                        NameAsked.ShowDialog();
-                        if (NameAsked.IsApplicated)
-                        {
-                            if (ChildFamily.Nom != NameAsked.NewName && SFCont.GetByName(new SousFamille(NameAsked.NewName)) != null)
-                            {
-                                MessageBoxes.DispError("Le nom est déjà utilisé");
-                                NameAsked.IsApplicated = false;
-                            }
-                            else
-                            {
-                                ChildFamily.Nom = NameAsked.NewName;
-                                SFCont.Update(ChildFamily);
                             }
                         }
                     }
@@ -627,6 +619,95 @@ namespace Bacchus
         private void DisplayList_DoubleClick(object sender, EventArgs e)
         {
             ModifieSelectedItem();
+        }
+
+        private void ajouterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var Brand = TypeTree.SelectedNode.Tag as Marque;
+            var ChildFamily = TypeTree.SelectedNode.Tag as SousFamille;
+            var Family = TypeTree.SelectedNode.Tag as Famille;
+
+            // Brand node selected
+            if (Brand != null)
+                NewArticle();
+            // CF Node selected
+            else if (ChildFamily != null)
+                NewArticle();
+            // F node selected
+            else if (Family != null)
+                NewChildFamily();
+            // Root node selected
+            else
+            {
+                if (TypeTree.SelectedNode == TypeTree.Nodes[0])
+                    NewArticle();
+                else if (TypeTree.SelectedNode == TypeTree.Nodes[1])
+                {
+                    NewFamily();
+                }
+                else if (TypeTree.SelectedNode == TypeTree.Nodes[2])
+                {
+                    NewMarque();
+                }
+                else DispHelp();
+            }
+        }
+
+        private void NewArticle()
+        {
+            FormArticle CreateForm = new FormArticle();
+            CreateForm.ShowDialog();
+            if (CreateForm.IsApplicated == true)
+                RefreshDisplayList();
+        }
+
+        private void NewChildFamily()
+        {
+            FormChildFamily CreateForm = new FormChildFamily();
+            CreateForm.ShowDialog();
+            if (CreateForm.IsApplicated == true)
+            {
+                RefreshDisplayList();
+                RefreshTree();
+            }
+        }
+
+        private void NewMarque()
+        {
+            FormName NameAsked = new FormName("Nouvelle Marque", null);
+            NameAsked.ShowDialog();
+            if (NameAsked.IsApplicated)
+            {
+                if (MCont.GetByName(new Marque (NameAsked.NewName)) == null)
+                {
+                    MCont.Insert(new Marque(NameAsked.NewName));
+                    RefreshDisplayList();
+                    RefreshTree();
+                }
+                else
+                {
+                    MessageBoxes.DispError("Ce nom est déjà utilisé.");
+                }
+            }
+        }
+
+        private void NewFamily()
+        {
+            FormName NameAsked = new FormName("Nouvelle Famille", null);
+            NameAsked.ShowDialog();
+            if (NameAsked.IsApplicated)
+            {
+                if (FCont.GetByName(new Famille (NameAsked.NewName)) == null)
+                {
+                    bool a = FCont.Insert(new Famille(NameAsked.NewName));
+                    RefreshDisplayList();
+                    RefreshTree();
+                }
+                else
+                {
+                    MessageBoxes.DispError("Ce nom est déjà utilisé.");
+                }
+            }
         }
     }
 }

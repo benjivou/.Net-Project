@@ -97,6 +97,7 @@
             // ChildFamilyBox
             // 
             this.ChildFamilyBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ChildFamilyBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ChildFamilyBox.FormattingEnabled = true;
             this.ChildFamilyBox.Location = new System.Drawing.Point(79, 204);
             this.ChildFamilyBox.Name = "ChildFamilyBox";
@@ -185,6 +186,7 @@
             // BrandBox
             // 
             this.BrandBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BrandBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BrandBox.FormattingEnabled = true;
             this.BrandBox.Location = new System.Drawing.Point(79, 149);
             this.BrandBox.Name = "BrandBox";

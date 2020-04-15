@@ -26,10 +26,17 @@ namespace Bacchus.View
 
         private void OKBtn_Click(object sender, EventArgs e)
         {
-            NewName = NameBox.Text;
-            if (InitialName != NewName)
-                IsApplicated = true;
-            this.Close();
+            if(AreInputOK() == false)
+            {
+                MessageBoxes.DispError("Le champs ne peut pas etre vide");
+            }
+            else
+            {
+                NewName = NameBox.Text;
+                if (InitialName != NewName)
+                    IsApplicated = true;
+                this.Close();
+            }
         }
 
         private void BackBtn_Click(object sender, EventArgs e)
@@ -41,6 +48,13 @@ namespace Bacchus.View
         private void FormName_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public bool AreInputOK()
+        {
+            if (NameBox.Text.Replace(" ", "") == "")
+                return false;
+            return true;
         }
     }
 }

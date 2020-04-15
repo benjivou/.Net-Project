@@ -81,6 +81,12 @@
     <Compile Include="View\FormArticle.Designer.cs">
       <DependentUpon>FormArticle.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FormChildFamily.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormChildFamily.Designer.cs">
+      <DependentUpon>FormChildFamily.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormExport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     <Compile Include="View\MessageBoxes.cs" />
     <EmbeddedResource Include="View\FormArticle.resx">
       <DependentUpon>FormArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormChildFamily.resx">
+      <DependentUpon>FormChildFamily.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormExport.resx">
       <DependentUpon>FormExport.cs</DependentUpon>

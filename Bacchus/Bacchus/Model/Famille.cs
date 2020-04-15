@@ -20,5 +20,10 @@ namespace Bacchus.Model
 		public Famille()
 		{
 		}
-	}
+
+        public override string ToString()
+        {
+            return Nom;
+        }
+    }
 }

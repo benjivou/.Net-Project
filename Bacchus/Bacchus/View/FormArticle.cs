@@ -18,6 +18,7 @@ namespace Bacchus.View
         private MarqueControl MCont = new MarqueControl();
         private ArticleControl ACont = new ArticleControl();
         private string InitialRef;
+        public bool IsApplicated = false;
 
         public FormArticle()
         {
@@ -25,6 +26,8 @@ namespace Bacchus.View
             InitBoxes();
 
             InitialRef = "";
+
+            this.Text = "Nouvel article";
         }
 
         public FormArticle(Article Arti)
@@ -69,8 +72,7 @@ namespace Bacchus.View
             Arti.SousFamille = (SousFamille) ChildFamilyBox.SelectedItem;
             Arti.PrixHT = (float) PriceBox.Value;
             Arti.Quantite = (int) QuantityBox.Value;
-
-            // Todo
+            
             return Arti;
         }
 
@@ -78,6 +80,8 @@ namespace Bacchus.View
         {
             if (AreInputOK())
             {
+                IsApplicated = true;
+
                 if (InitialRef == RefBox.Text)
                     ACont.Update(GetArticle());
                 else
