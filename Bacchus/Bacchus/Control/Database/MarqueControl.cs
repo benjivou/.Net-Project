@@ -72,7 +72,7 @@ namespace Bacchus.Control
         {
             OpenConnection();
             HashSet<Marque> Liste = new HashSet<Marque>();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName );
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " ORDER BY Nom");
             while (Result.Read())
             {
                 Marque Brand = new Marque(Result.GetString(1), Result.GetInt16(0));

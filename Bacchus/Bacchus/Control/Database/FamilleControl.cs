@@ -57,7 +57,7 @@ namespace Bacchus.Control
         {
             OpenConnection();
             HashSet<Famille> Liste = new HashSet<Famille>();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName);
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " ORDER BY Nom");
             while (Result.Read())
             {
                 Famille Family = new Famille(Result.GetString(1), Result.GetInt16(0));

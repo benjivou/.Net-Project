@@ -56,7 +56,7 @@ namespace Bacchus.Control
         {
             OpenConnection();
             HashSet<SousFamille> Liste = new HashSet<SousFamille>();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName);
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " ORDER BY Nom");
             FamilleControl FCont = new FamilleControl();
             while (Result.Read())
             {
@@ -143,7 +143,7 @@ namespace Bacchus.Control
 		public HashSet<SousFamille> FindByFamily(Famille Objet)
 		{
 			OpenConnection();
-			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + "RefFamille" + " = " + Objet.RefFamille);
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + "RefFamille" + " = " + Objet.RefFamille + " ORDER BY Nom");
 			HashSet<SousFamille> Liste = new HashSet<SousFamille>();
 
 			FamilleControl FCont = new FamilleControl();
