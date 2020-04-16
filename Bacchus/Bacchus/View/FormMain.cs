@@ -623,6 +623,8 @@ namespace Bacchus
 
         private void ajouterToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsNodeSelected() == false)
+                return;
             var Brand = TypeTree.SelectedNode.Tag as Marque;
             var ChildFamily = TypeTree.SelectedNode.Tag as SousFamille;
             var Family = TypeTree.SelectedNode.Tag as Famille;
@@ -650,6 +652,19 @@ namespace Bacchus
                     NewMarque();
                 }
                 else DispHelp();
+            }
+            RefreshStatusStrip();
+        }
+
+        public bool IsNodeSelected()
+        {
+            if(TypeTree.SelectedNode == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 

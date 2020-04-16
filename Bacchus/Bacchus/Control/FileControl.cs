@@ -126,6 +126,7 @@ namespace Bacchus.Control
             }
             catch ( Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 return false;
             }
 		}
@@ -176,11 +177,10 @@ namespace Bacchus.Control
 
 					}
 				}
-				
-
 			}
 			catch(IOException FileUnReacheable)
 			{
+                Console.WriteLine(FileUnReacheable.StackTrace);
 				IsItDone = false;
 			}
 
