@@ -64,6 +64,11 @@ namespace Bacchus
         /// </summary>
         private void RefreshTree()
         {
+            TreeNode SelectedNode = null;
+            if (IsNodeSelected() == true)
+            {
+                SelectedNode = TypeTree.SelectedNode;
+            }
 
             HashSet<Marque> BrandList;
             HashSet<Famille> FamilyList;
@@ -106,6 +111,10 @@ namespace Bacchus
             }
             Root.Add(BrandNodes);
 
+            if (SelectedNode != null)
+            {
+                TypeTree.SelectedNode = SelectedNode;
+            }
             //TypeTree.ExpandAll();
         }
 
