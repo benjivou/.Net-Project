@@ -178,6 +178,32 @@ namespace Bacchus
         {
             SelectedColumn = 0;
             RefreshDisplayList();
+            SetSelectedNodeBold(TypeTree.Nodes);
+        }
+
+        private void SetSelectedNodeBold(TreeNodeCollection ParentNodes)
+        {
+            foreach(TreeNode Node in ParentNodes)
+            {
+                if(Node == TypeTree.SelectedNode)
+                {
+                    Font BoldFont = new Font(TypeTree.Font, FontStyle.Bold);
+                    Node.NodeFont = BoldFont;
+                    // Refresh when reset the text
+                    Node.Text = Node.Text;
+                }
+                else
+                {
+                    if (Node.NodeFont != null && Node.NodeFont.Bold == true)
+                    {
+                        Font RegFont = new Font(TypeTree.Font, FontStyle.Regular);
+                        Node.NodeFont = RegFont;
+                        // Refresh when reset the text
+                        Node.Text = Node.Text;
+                    }
+                }
+                SetSelectedNodeBold(Node.Nodes);
+            }
         }
 
         /// <summary>
