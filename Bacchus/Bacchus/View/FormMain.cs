@@ -64,16 +64,6 @@ namespace Bacchus
         /// </summary>
         private void RefreshTree()
         {
-            TreeNode SelectedNode = null;
-            if (IsNodeSelected() == true)
-            {
-                SelectedNode = TypeTree.SelectedNode;
-            }
-
-            HashSet<Marque> BrandList;
-            HashSet<Famille> FamilyList;
-            HashSet<SousFamille> ChildFamilyList;
-
             TreeNodeCollection Root = TypeTree.Nodes;
             Root.Clear();
 
@@ -81,41 +71,56 @@ namespace Bacchus
 
             //Add Families
             TreeNode FamilyNodes = new TreeNode("Familles");
+            RefreshFamilyTree(FamilyNodes);
+            Root.Add(FamilyNodes);
+
+            // Add all brands
+            TreeNode BrandNodes = new TreeNode("Marques");
+            RefreshBrandTree(BrandNodes);
+            Root.Add(BrandNodes);
+            //TypeTree.ExpandAll();
+        }
+
+        private void RefreshChildFamilyTree(TreeNode FamilyNode)
+        {
+            FamilyNode.Nodes.Clear();
+            Famille Family = (Famille) FamilyNode.Tag;
+            //Add Child Families
+            HashSet<SousFamille> ChildFamilyList = SFCont.FindByFamily(Family);
+            foreach (SousFamille ChildFamily in ChildFamilyList)
+            {
+                TreeNode ChildFamilyNode = new TreeNode(ChildFamily.Nom);
+                ChildFamilyNode.Tag = ChildFamily;
+                FamilyNode.Nodes.Add(ChildFamilyNode);
+            }
+        }
+
+        private void RefreshFamilyTree(TreeNode FamilyNodes)
+        {
+            FamilyNodes.Nodes.Clear();
+            HashSet<Famille> FamilyList;
             FamilyList = FCont.GetAll();
             foreach (Famille Family in FamilyList)
             {
                 TreeNode FamilyNode = new TreeNode(Family.Nom);
                 FamilyNode.Tag = Family;
 
-                //Add Child Families
-                ChildFamilyList = SFCont.FindByFamily(Family);
-                foreach (SousFamille ChildFamily in ChildFamilyList)
-                {
-                    TreeNode ChildFamilyNode = new TreeNode(ChildFamily.Nom);
-                    ChildFamilyNode.Tag = ChildFamily;
-                    FamilyNode.Nodes.Add(ChildFamilyNode);
-                }
+                RefreshChildFamilyTree(FamilyNode);
 
                 FamilyNodes.Nodes.Add(FamilyNode);
             }
-            Root.Add(FamilyNodes);
+        }
 
-            // Add all brands
-            TreeNode BrandNodes = new TreeNode("Marques");
-            BrandList = MCont.GetAll();
-            foreach(Marque Brand in BrandList)
+        private void RefreshBrandTree(TreeNode BrandNodes)
+        {
+            BrandNodes.Nodes.Clear();
+            HashSet<Marque> BrandList = MCont.GetAll();
+            foreach (Marque Brand in BrandList)
             {
                 TreeNode BrandNode = new TreeNode(Brand.Nom);
                 BrandNode.Tag = Brand;
                 BrandNodes.Nodes.Add(BrandNode);
             }
-            Root.Add(BrandNodes);
-
-            if (SelectedNode != null)
-            {
-                TypeTree.SelectedNode = SelectedNode;
-            }
-            //TypeTree.ExpandAll();
         }
 
         /// <summary>
@@ -187,10 +192,7 @@ namespace Bacchus
             {
                 if(Node == TypeTree.SelectedNode)
                 {
-                    Font BoldFont = new Font(TypeTree.Font, FontStyle.Bold);
-                    Node.NodeFont = BoldFont;
-                    // Refresh when reset the text
-                    Node.Text = Node.Text;
+                    SetBold(Node);
                 }
                 else
                 {
@@ -204,6 +206,18 @@ namespace Bacchus
                 }
                 SetSelectedNodeBold(Node.Nodes);
             }
+        }
+
+        private void SetBold(TreeNode Node)
+        {
+            if(Node != null)
+            {
+                Font BoldFont = new Font(TypeTree.Font, FontStyle.Bold);
+                Node.NodeFont = BoldFont;
+                // Refresh when reset the text
+                Node.Text = Node.Text;
+            }
+            
         }
 
         /// <summary>
@@ -474,16 +488,19 @@ namespace Bacchus
                     if (Brand != null)
                     {
                         MCont.Delete(Brand);
+                        RefreshBrandTree(TypeTree.SelectedNode);
                     }
 
                     if (ChildFamily != null)
                     {
                         SFCont.Delete(ChildFamily);
+                        RefreshChildFamilyTree(TypeTree.SelectedNode);
                     }
 
                     if (Family != null)
                     {
                         FCont.Delete(Family);
+                        RefreshFamilyTree(TypeTree.SelectedNode);
                     }
                 }
                 //Refresh list
@@ -491,7 +508,7 @@ namespace Bacchus
                 if (Arti == null)
                 {
                     //Refresh Tree
-                    RefreshTree();
+                    //RefreshTree();
                 }
                 // Refresh status Bar
                 RefreshStatusStrip();
@@ -593,7 +610,7 @@ namespace Bacchus
                     if (ModifiedCF.IsApplicated == true)
                     {
                         RefreshDisplayList();
-                        RefreshTree();
+                        RefreshChildFamilyTree(TypeTree.SelectedNode);
                     }
                 }
                 else
@@ -615,6 +632,7 @@ namespace Bacchus
                                 Brand.Nom = NameAsked.NewName;
                                 MCont.Update(Brand);
                             }
+                            RefreshBrandTree(TypeTree.SelectedNode);
                         }
                     }
                     else if (Family != null)
@@ -633,6 +651,7 @@ namespace Bacchus
                                 Family.Nom = NameAsked.NewName;
                                 FCont.Update(Family);
                             }
+                            RefreshFamilyTree(TypeTree.SelectedNode);
                         }
                     }
                     else
@@ -640,7 +659,7 @@ namespace Bacchus
                     if (NameAsked.IsApplicated)
                     {
                         RefreshDisplayList();
-                        RefreshTree();
+                        //RefreshTree();
                     }
                 }
             }
@@ -719,7 +738,7 @@ namespace Bacchus
             if (CreateForm.IsApplicated == true)
             {
                 RefreshDisplayList();
-                RefreshTree();
+                RefreshChildFamilyTree(TypeTree.SelectedNode);
             }
         }
 
@@ -733,7 +752,7 @@ namespace Bacchus
                 {
                     MCont.Insert(new Marque(NameAsked.NewName));
                     RefreshDisplayList();
-                    RefreshTree();
+                    RefreshBrandTree(TypeTree.SelectedNode);
                 }
                 else
                 {
@@ -752,7 +771,7 @@ namespace Bacchus
                 {
                     bool a = FCont.Insert(new Famille(NameAsked.NewName));
                     RefreshDisplayList();
-                    RefreshTree();
+                    RefreshFamilyTree(TypeTree.SelectedNode);
                 }
                 else
                 {
