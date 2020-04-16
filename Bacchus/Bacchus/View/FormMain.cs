@@ -167,6 +167,7 @@ namespace Bacchus
         /// <param name="e"></param>
         private void TypeTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            SelectedColumn = 0;
             RefreshDisplayList();
         }
 
