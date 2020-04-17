@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Model
 {
+    /// <summary>
+    /// Represent a sousfamille object in the database
+    /// </summary>
     public class SousFamille
     {
         public int RefSousFamille{ get; set; }

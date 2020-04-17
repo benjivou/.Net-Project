@@ -12,14 +12,29 @@ using Bacchus.Control;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Window to create or modify a childFamily
+    /// </summary>
     public partial class FormChildFamily : Form
     {
         private SousFamilleControl SFCont = new SousFamilleControl();
         private FamilleControl FCont = new FamilleControl();
+        /// <summary>
+        /// Ref brefore modification
+        /// </summary>
         private string InitialName;
+        /// <summary>
+        /// Ref before modification
+        /// </summary>
         private int InitialRef = -1;
+        /// <summary>
+        /// If the user valide his choice
+        /// </summary>
         public bool IsApplicated = false;
 
+        /// <summary>
+        /// Constructor for create window
+        /// </summary>
         public FormChildFamily()
         {
             InitializeComponent();
@@ -30,6 +45,10 @@ namespace Bacchus.View
             this.Text = "Nouvelle Sous-Famille";
         }
 
+        /// <summary>
+        /// Constructor for a modification window
+        /// </summary>
+        /// <param name="ChildFamily"></param>
         public FormChildFamily(SousFamille ChildFamily)
         {
             InitializeComponent();
@@ -44,6 +63,9 @@ namespace Bacchus.View
             FamBox.SelectedIndex = FamBox.FindStringExact(ChildFamily.Famille.Nom);
         }
 
+        /// <summary>
+        /// Initialize the combobox with existant families
+        /// </summary>
         public void InitBoxes()
         {
             HashSet<Famille> FList = FCont.GetAll();
@@ -53,6 +75,10 @@ namespace Bacchus.View
             }
         }
 
+        /// <summary>
+        /// Check if the fields are ok
+        /// </summary>
+        /// <returns></returns>
         public bool AreInputOK()
         {
             SousFamille Used = SFCont.GetByName(new SousFamille(NameBox.Text));
@@ -70,11 +96,20 @@ namespace Bacchus.View
             return true;
         }
 
+        /// <summary>
+        /// Get the child family with the input fields
+        /// </summary>
+        /// <returns></returns>
         private SousFamille GetChildFamily()
         {
             return new SousFamille(NameBox.Text,(Famille) FamBox.SelectedItem, InitialRef);
         }
 
+        /// <summary>
+        /// When the Okbtn is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OKBtn_Click(object sender, EventArgs e)
         {
             if (AreInputOK())
@@ -91,6 +126,11 @@ namespace Bacchus.View
             }
         }
 
+        /// <summary>
+        /// When the backbtn is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelBtn_Click(object sender, EventArgs e)
         {
             Close();

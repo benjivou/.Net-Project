@@ -14,21 +14,32 @@ using System.Collections;
 
 namespace Bacchus
 {
+    /// <summary>
+    /// Main window of the application to manage the database with a treeview and a list view
+    /// </summary>
     public partial class FormMain : Form
     {
+        // Constrollers
         MarqueControl MCont = new MarqueControl();
         FamilleControl FCont = new FamilleControl();
         SousFamilleControl SFCont = new SousFamilleControl();
         ArticleControl ACont = new ArticleControl();
 
+        /// <summary>
+        /// If the user is on a xp OS or later
+        /// </summary>
         private bool IsRunningXPOrLater = OSFeature.Feature.IsPresent(OSFeature.Themes);
 
+        /// <summary>
+        /// To manage the groups in the listview
+        /// </summary>
         ListViewGrouper Grouper;
 
+        /// <summary>
+        /// number of the selected column, column where the sort refered on
+        /// </summary>
         private int SelectedColumn;
 
-        // The column we are currently using for sorting.
-        // private ColumnHeader SortingColumn = null;
 
         /// <summary>
         /// Initialize window
@@ -81,6 +92,10 @@ namespace Bacchus
             //TypeTree.ExpandAll();
         }
 
+        /// <summary>
+        /// refresh all childfamily of a family in the treeview
+        /// </summary>
+        /// <param name="FamilyNode"></param>
         private void RefreshChildFamilyTree(TreeNode FamilyNode)
         {
             FamilyNode.Nodes.Clear();
@@ -95,6 +110,10 @@ namespace Bacchus
             }
         }
 
+        /// <summary>
+        /// Refresh all family in the treeview
+        /// </summary>
+        /// <param name="FamilyNodes"></param>
         private void RefreshFamilyTree(TreeNode FamilyNodes)
         {
             FamilyNodes.Nodes.Clear();
@@ -111,6 +130,10 @@ namespace Bacchus
             }
         }
 
+        /// <summary>
+        /// Refresh all brands in the treeview
+        /// </summary>
+        /// <param name="BrandNodes"></param>
         private void RefreshBrandTree(TreeNode BrandNodes)
         {
             BrandNodes.Nodes.Clear();
@@ -133,6 +156,9 @@ namespace Bacchus
             RefreshAllData();
         }
 
+        /// <summary>
+        /// Refresh all data in the treeview and list view
+        /// </summary>
         private void RefreshAllData()
         {
             RefreshTree();
@@ -186,6 +212,10 @@ namespace Bacchus
             SetSelectedNodeBold(TypeTree.Nodes);
         }
 
+        /// <summary>
+        /// Set in bold the seleted node in the treeview
+        /// </summary>
+        /// <param name="ParentNodes"></param>
         private void SetSelectedNodeBold(TreeNodeCollection ParentNodes)
         {
             foreach(TreeNode Node in ParentNodes)
@@ -208,6 +238,10 @@ namespace Bacchus
             }
         }
 
+        /// <summary>
+        /// Set in bold a treenode
+        /// </summary>
+        /// <param name="Node"></param>
         private void SetBold(TreeNode Node)
         {
             if(Node != null)
@@ -418,6 +452,11 @@ namespace Bacchus
            // AutoResizeColumns();
         }
 
+        /// <summary>
+        /// When a column is selected by the user, group and sort the list view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DisplayList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             SelectedColumn = e.Column;
@@ -441,16 +480,30 @@ namespace Bacchus
             }
         }
 
+        /// <summary>
+        /// When develop btn is selected, expand the treeview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DevelopTool_Click(object sender, EventArgs e)
         {
             TypeTree.ExpandAll();
         }
 
+        /// <summary>
+        /// When minimize btn is selected, minimize the treeview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MinimizeTool_Click(object sender, EventArgs e)
         {
             TypeTree.CollapseAll();
         }
 
+
+        /// <summary>
+        /// Delete the selected items in the list view
+        /// </summary>
         private void DeleteSelectedItems()
         {
             int NbItem = DisplayList.SelectedItems.Count;
@@ -503,23 +556,25 @@ namespace Bacchus
                         RefreshFamilyTree(TypeTree.SelectedNode);
                     }
                 }
-                //Refresh list
+                //Refresh list and status
                 RefreshDisplayList();
-                if (Arti == null)
-                {
-                    //Refresh Tree
-                    //RefreshTree();
-                }
-                // Refresh status Bar
                 RefreshStatusStrip();
             }
         }
 
+        /// <summary>
+        /// When user select remove btn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteSelectedItems();
         }
 
+        /// <summary>
+        /// Refresh all the list view, refer of the selected node in the treeview
+        /// </summary>
         public void RefreshDisplayList()
         {
             ClearList();
@@ -571,7 +626,11 @@ namespace Bacchus
             }
         }
         
-
+        /// <summary>
+        /// For Shortcuts, triggers when keyboard key is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -582,6 +641,9 @@ namespace Bacchus
                 ModifieSelectedItem();
         }
 
+        /// <summary>
+        /// Modifie the selected item in the list view
+        /// </summary>
         private void ModifieSelectedItem()
         {
             int NbItem = DisplayList.SelectedItems.Count;
@@ -665,17 +727,31 @@ namespace Bacchus
             }
         }
 
+        /// <summary>
+        /// When modify btn is pressed, modifie the selected element
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void modifierToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ModifieSelectedItem();
         }
        
-
+        /// <summary>
+        /// When double click is made in the list view, modifie the selected item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DisplayList_DoubleClick(object sender, EventArgs e)
         {
             ModifieSelectedItem();
         }
 
+        /// <summary>
+        /// Add an item when the add btn is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ajouterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (IsNodeSelected() == false)
@@ -711,6 +787,10 @@ namespace Bacchus
             RefreshStatusStrip();
         }
 
+        /// <summary>
+        /// Check if a node is selected
+        /// </summary>
+        /// <returns></returns>
         public bool IsNodeSelected()
         {
             if(TypeTree.SelectedNode == null)
@@ -723,6 +803,9 @@ namespace Bacchus
             }
         }
 
+        /// <summary>
+        /// Create a new article
+        /// </summary>
         private void NewArticle()
         {
             FormArticle CreateForm = new FormArticle();
@@ -731,6 +814,9 @@ namespace Bacchus
                 RefreshDisplayList();
         }
 
+        /// <summary>
+        /// Create a new childfamily
+        /// </summary>
         private void NewChildFamily()
         {
             FormChildFamily CreateForm = new FormChildFamily();
@@ -742,6 +828,9 @@ namespace Bacchus
             }
         }
 
+        /// <summary>
+        /// Create a new brand
+        /// </summary>
         private void NewMarque()
         {
             FormName NameAsked = new FormName("Nouvelle Marque", null);
@@ -761,6 +850,9 @@ namespace Bacchus
             }
         }
 
+        /// <summary>
+        /// Create a new family
+        /// </summary>
         private void NewFamily()
         {
             FormName NameAsked = new FormName("Nouvelle Famille", null);

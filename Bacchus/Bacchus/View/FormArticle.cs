@@ -12,14 +12,26 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Window to modify or create an article
+    /// </summary>
     public partial class FormArticle : Form
     {
         private SousFamilleControl SFCont = new SousFamilleControl();
         private MarqueControl MCont = new MarqueControl();
         private ArticleControl ACont = new ArticleControl();
+        /// <summary>
+        /// Reference before the modification
+        /// </summary>
         private string InitialRef;
+        /// <summary>
+        /// If the user choose to valide his choice
+        /// </summary>
         public bool IsApplicated = false;
-
+        
+        /// <summary>
+        /// Construtor to create an article
+        /// </summary>
         public FormArticle()
         {
             InitializeComponent();
@@ -30,6 +42,10 @@ namespace Bacchus.View
             this.Text = "Nouvel article";
         }
 
+        /// <summary>
+        /// Constructor to modifie an article
+        /// </summary>
+        /// <param name="Arti"></param>
         public FormArticle(Article Arti)
         {
             InitializeComponent();
@@ -47,6 +63,9 @@ namespace Bacchus.View
             QuantityBox.Value = (Decimal) Arti.Quantite;
         }
 
+        /// <summary>
+        /// Initialize the comboxes with existant Brand and Child Family
+        /// </summary>
         public void InitBoxes()
         {
             HashSet<SousFamille> SFList = SFCont.GetAll();
@@ -63,6 +82,10 @@ namespace Bacchus.View
 
         }
 
+        /// <summary>
+        /// Get the article with fields
+        /// </summary>
+        /// <returns></returns>
         public Article GetArticle()
         {
             Article Arti = new Article();
@@ -75,7 +98,12 @@ namespace Bacchus.View
             
             return Arti;
         }
-
+        
+        /// <summary>
+        /// When OkBtn is pushed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OKBtn_Click(object sender, EventArgs e)
         {
             if (AreInputOK())
@@ -94,6 +122,10 @@ namespace Bacchus.View
             }
         }
 
+        /// <summary>
+        /// Check if the fields are OK
+        /// </summary>
+        /// <returns></returns>
         public bool AreInputOK()
         {
             Article Used = ACont.GetByName(new Article(RefBox.Text, null, 0, 0, null, null));
@@ -113,6 +145,11 @@ namespace Bacchus.View
             return true;
         }
 
+        /// <summary>
+        /// When backbtn is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackBtn_Click(object sender, EventArgs e)
         {
             Close();

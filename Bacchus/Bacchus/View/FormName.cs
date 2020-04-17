@@ -10,12 +10,29 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Window to choose a name, new one or modify one
+    /// </summary>
     public partial class FormName : Form
     {
+        /// <summary>
+        /// New name written by the user
+        /// </summary>
         public string NewName = null;
+        /// <summary>
+        /// Name before modification
+        /// </summary>
         private string InitialName;
+        /// <summary>
+        /// If the user valide his choice
+        /// </summary>
         public bool IsApplicated = false;
 
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="ActualName"></param>
         public FormName(string Title, string ActualName)
         {
             InitializeComponent();
@@ -24,6 +41,11 @@ namespace Bacchus.View
             InitialName = ActualName;
         }
 
+        /// <summary>
+        /// When okbtn is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OKBtn_Click(object sender, EventArgs e)
         {
             if(AreInputOK() == false)
@@ -39,17 +61,21 @@ namespace Bacchus.View
             }
         }
 
+        /// <summary>
+        /// When backbtn is pressed, close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackBtn_Click(object sender, EventArgs e)
         {
             IsApplicated = false;
             this.Close();
         }
-
-        private void FormName_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        
+        /// <summary>
+        /// Check if input are correct
+        /// </summary>
+        /// <returns></returns>
         public bool AreInputOK()
         {
             if (NameBox.Text.Replace(" ", "") == "")

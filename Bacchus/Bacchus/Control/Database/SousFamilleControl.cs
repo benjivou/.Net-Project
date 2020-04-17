@@ -7,9 +7,14 @@ using Bacchus.Model;
 
 namespace Bacchus.Control
 {
+    /// <summary>
+    /// Control the sous famille management
+    /// </summary>
     class SousFamilleControl : AutoIncrementBaseControl<SousFamille>
     {
-		       // Name
+		/// <summary>
+        /// Default Constructor
+        /// </summary>
 		public SousFamilleControl()
         {
             TableName = "SousFamilles";
@@ -156,6 +161,11 @@ namespace Bacchus.Control
 			return Liste;
 		}
 
+        /// <summary>
+        /// Get sousfamille details with his name
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
 		public override SousFamille GetByName(SousFamille obj)
 		{
 			OpenConnection();

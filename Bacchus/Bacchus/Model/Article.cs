@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Model
 {
+    /// <summary>
+    /// Represent a article object in the database
+    /// </summary>
     public class Article
     {
         public string RefArticle { get; set; }

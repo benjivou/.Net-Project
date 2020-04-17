@@ -8,22 +8,39 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Class to manage group in a list view
+    /// </summary>
     class ListViewGrouper
     {
-        // Declare a Hashtable array in which to store the groups.
+        /// <summary>
+        /// Declare a Hashtable array in which to store the groups.
+        /// </summary>
         public Hashtable[] GroupTables;
-        // Declare a variable to store the current grouping column.
+        /// <summary>
+        /// Declare a variable to store the current grouping column
+        /// </summary>
         public int GroupColumn = 0;
-        // The list we work on
+
+        /// <summary>
+        /// The list we work on
+        /// </summary>
         private ListView DisplayList;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="List"></param>
         public ListViewGrouper(ListView List)
         {
             DisplayList = List;
             DisplayList.Sorting = SortOrder.Ascending;
         }
-        
-        // Sets myListView to the groups created for the specified column.
+
+        /// <summary>
+        /// Sets myListView to the groups created for the specified column.
+        /// </summary>
+        /// <param name="column"></param>
         public void SetGroups(int column)
         {
             // Remove the current groups.
@@ -69,7 +86,9 @@ namespace Bacchus.View
             }
         }
 
-        // Sorts ListViewGroup objects by header value.
+        /// <summary>
+        /// Sorts ListViewGroup objects by header value.
+        /// </summary>
         private class ListViewGroupSorter : IComparer
         {
             private SortOrder order;
@@ -99,9 +118,13 @@ namespace Bacchus.View
             }
         }
 
-        // Creates a Hashtable object with one entry for each unique
-        // subitem value (or initial letter for the parent item)
-        // in the specified column.
+        /// <summary>
+        /// Creates a Hashtable object with one entry for each unique
+        /// subitem value (or initial letter for the parent item)
+        /// in the specified column.
+        /// </summary>
+        /// <param name="column"></param>
+        /// <returns></returns>
         public Hashtable CreateGroupsTable(int column)
         {
             // Create a Hashtable object.
@@ -134,7 +157,9 @@ namespace Bacchus.View
             return groups;
         }
 
-        // Compares two ListView items based on a selected column only (no group)
+        /// <summary>
+        /// Compares two ListView items based on a selected column only (no group)
+        /// </summary>
         public class ListViewComparer : System.Collections.IComparer
         {
             private int ColumnNumber;

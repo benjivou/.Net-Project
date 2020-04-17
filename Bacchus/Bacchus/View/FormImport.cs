@@ -12,15 +12,25 @@ using Bacchus.Control;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Window to import a csv file in tha database
+    /// </summary>
     public partial class FormImport : Form
     {
         MarqueControl MCont = new MarqueControl();
         FamilleControl FCont = new FamilleControl();
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public FormImport()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initialize progress bar
+        /// </summary>
         private void InitProgressBar()
         {
             ImportProgress.Minimum = 1;
@@ -29,11 +39,20 @@ namespace Bacchus.View
             ImportProgress.Visible = true;
         }
 
+        /// <summary>
+        /// When the okbtn is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OKBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Check if the path give by the user is correct
+        /// </summary>
+        /// <returns></returns>
         private bool CheckPath()
         {
             if (CsvPathText.Text == "" || CsvPathText.Text.Contains(" "))
@@ -44,6 +63,11 @@ namespace Bacchus.View
             return true;
         }
 
+        /// <summary>
+        /// When the add mode is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddModeBtn_Click(object sender, EventArgs e)
         {
             if (CheckPath())
@@ -62,6 +86,11 @@ namespace Bacchus.View
             }
         }
 
+        /// <summary>
+        /// When the selectcsv btn is pressed, open a select file dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectCsvBtn_Click(object sender, EventArgs e)
         {
             // change initial directory
@@ -72,6 +101,11 @@ namespace Bacchus.View
             }
         }
 
+        /// <summary>
+        /// When ecresement mode is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EcrasementBtn_Click(object sender, EventArgs e)
         {
             if (CheckPath())
@@ -94,6 +128,9 @@ namespace Bacchus.View
             }
         }
 
+        /// <summary>
+        /// Launch the importation
+        /// </summary>
         public void LaunchImport()
         {
             if (FileControl.ImportFile(CsvPathText.Text, ImportProgress))

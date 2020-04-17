@@ -16,7 +16,7 @@ namespace Bacchus
     static class Program
     {
         /// <summary>
-        /// Point d'entrée principal de l'application.
+        /// Main methods of the application
         /// </summary>
         [STAThread]
         static void Main()
@@ -24,6 +24,9 @@ namespace Bacchus
             appli();
 		}
 
+        /// <summary>
+        /// Launch the application
+        /// </summary>
         static void appli()
         {
             // Launch View Part
@@ -33,6 +36,10 @@ namespace Bacchus
             Application.Run(new FormMain());
         }
 
+
+        /// <summary>
+        /// Test the back end structurs
+        /// </summary>
         static void test()
         {
             /// TESTS BDD - EXAMPLE ///

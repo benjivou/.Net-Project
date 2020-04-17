@@ -8,11 +8,13 @@ using Bacchus.Model;
 namespace Bacchus.Control
 {
     /// <summary>
-    /// Link Marque between Model and SQLite
+    /// Control the Marque management
     /// </summary>
     class MarqueControl : AutoIncrementBaseControl<Marque>
     {
-		       // Name 
+		/// <summary>
+        /// Default constructor
+        /// </summary>
 		public MarqueControl()
         {
             TableName = "Marques";
@@ -115,6 +117,11 @@ namespace Bacchus.Control
             return Brand;
         }
 
+        /// <summary>
+        /// Get details of a Marque with his name
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
 		public override Marque GetByName(Marque obj)
 		{
 			OpenConnection();
