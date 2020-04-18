@@ -50,7 +50,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.51724F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.48276F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
             this.tableLayoutPanel1.Controls.Add(this.SelectCsvBtn, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.CsvPathText, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FileLabel, 0, 0);
@@ -65,7 +65,7 @@
             // SelectCsvBtn
             // 
             this.SelectCsvBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.SelectCsvBtn.Location = new System.Drawing.Point(314, 10);
+            this.SelectCsvBtn.Location = new System.Drawing.Point(313, 10);
             this.SelectCsvBtn.Name = "SelectCsvBtn";
             this.SelectCsvBtn.Size = new System.Drawing.Size(64, 23);
             this.SelectCsvBtn.TabIndex = 0;
@@ -78,7 +78,7 @@
             this.CsvPathText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CsvPathText.Location = new System.Drawing.Point(82, 11);
             this.CsvPathText.Name = "CsvPathText";
-            this.CsvPathText.Size = new System.Drawing.Size(226, 20);
+            this.CsvPathText.Size = new System.Drawing.Size(225, 20);
             this.CsvPathText.TabIndex = 2;
             // 
             // FileLabel
@@ -195,6 +195,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Importer";
+            this.Load += new System.EventHandler(this.FormImport_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);

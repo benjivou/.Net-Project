@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -19,6 +20,16 @@ namespace Bacchus.View
     {
         MarqueControl MCont = new MarqueControl();
         FamilleControl FCont = new FamilleControl();
+
+        /// <summary>
+        /// Last path used for export or import
+        /// </summary>
+        private string LastPath;
+
+        /// <summary>
+        /// If the import is a success
+        /// </summary>
+        public bool ImportSucess = false;
 
         /// <summary>
         /// Default constructor
@@ -94,11 +105,27 @@ namespace Bacchus.View
         private void SelectCsvBtn_Click(object sender, EventArgs e)
         {
             // change initial directory
-            OpenDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            OpenDialog.InitialDirectory = LastPath;
             if (OpenDialog.ShowDialog() == DialogResult.OK)
             {
                 CsvPathText.Text = OpenDialog.FileName;
+                // save the path
+                LastPath = CsvPathText.Text;
+                SaveLastPath();
             }
+        }
+
+        /// <summary>
+        /// Save the last path used form the import
+        /// </summary>
+        private void SaveLastPath()
+        {
+            var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            // We will use custom settings
+            Config.AppSettings.Settings["DefaultPath"].Value = "0";
+            Config.AppSettings.Settings["LastPath"].Value = LastPath;
+            // Final Save
+            Config.Save(ConfigurationSaveMode.Full);
         }
 
         /// <summary>
@@ -131,11 +158,12 @@ namespace Bacchus.View
         /// <summary>
         /// Launch the importation
         /// </summary>
-        public void LaunchImport()
+        private void LaunchImport()
         {
             if (FileControl.ImportFile(CsvPathText.Text, ImportProgress))
             {
                 MessageBoxes.DispInfo("L'ajout est terminé");
+                ImportSucess = true;
                 this.Close();
             }
             else
@@ -144,6 +172,25 @@ namespace Bacchus.View
                     "Une erreur est survenue lors de l'import. " +
                     "Le fichier est suremement utilisé par une autre application ou le format n'est pas correct");
                 ImportLab.Text = "L'opération a été intérompu, veuillez réessayer";
+            }
+        }
+
+        /// <summary>
+        /// Load form settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormImport_Load(object sender, EventArgs e)
+        {
+            var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (int.Parse(Config.AppSettings.Settings["DefaultPath"].Value) != 1)
+            {
+                LastPath = Config.AppSettings.Settings["LastPath"].Value;
+            }
+            else
+            {
+                LastPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             }
         }
     }

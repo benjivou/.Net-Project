@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Bacchus.Model;
 using Bacchus.Control;
 using System.Collections;
+using System.Configuration;
 
 namespace Bacchus
 {
@@ -40,6 +41,11 @@ namespace Bacchus
         /// </summary>
         private int SelectedColumn;
 
+        /// <summary>
+        /// Last path used for export or import
+        /// </summary>
+        private string LastPath;
+
 
         /// <summary>
         /// Initialize window
@@ -67,7 +73,8 @@ namespace Bacchus
         {
             FormImport Frame = new FormImport();
             Frame.ShowDialog();
-            RefreshAllData();
+            if(Frame.ImportSucess == true)
+                RefreshAllData();
         }
 
         /// <summary>
@@ -673,6 +680,16 @@ namespace Bacchus
                     {
                         RefreshDisplayList();
                         RefreshChildFamilyTree(TypeTree.SelectedNode);
+
+                        // If the family change, we also need to refresh the new family node
+                        foreach(TreeNode Node in TypeTree.Nodes[1].Nodes)
+                        {
+                            Famille FamiNode = (Famille) Node.Tag;
+                            if (FamiNode.Nom == ModifiedCF.GetChildFamily().Famille.Nom)
+                            {
+                                RefreshChildFamilyTree(Node);
+                            }
+                        }
                     }
                 }
                 else
@@ -870,6 +887,74 @@ namespace Bacchus
                     MessageBoxes.DispError("Ce nom est déjà utilisé.");
                 }
             }
+        }
+
+        /// <summary>
+        /// Save configuration on closing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveConfig();
+        }
+
+        /// <summary>
+        /// Save configuration : location, size, last path used for import or export
+        /// </summary>
+        private void SaveConfig()
+        {
+            var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            // We will use custom settings
+            Config.AppSettings.Settings["DefaultLocation"].Value = "0";
+            Config.AppSettings.Settings["DefaultPath"].Value = "0";
+
+            // save size
+            Config.AppSettings.Settings["Height"].Value = this.Height.ToString();
+            Config.AppSettings.Settings["Width"].Value = this.Width.ToString();
+            // save location
+            Config.AppSettings.Settings["XPos"].Value = this.Left.ToString();
+            Config.AppSettings.Settings["YPos"].Value = this.Top.ToString();
+            Config.AppSettings.Settings["SplitterDistance"].Value = Splitter.SplitterDistance.ToString();
+
+            // save maximized window property
+            if (this.WindowState == FormWindowState.Maximized)
+                Config.AppSettings.Settings["Maximized"].Value = "1";
+            else
+                Config.AppSettings.Settings["Maximized"].Value = "0";
+
+            // last path used
+            Config.AppSettings.Settings["LastPath"].Value = LastPath;
+
+            // Final Save
+            Config.Save(ConfigurationSaveMode.Full);
+        }
+
+        /// <summary>
+        /// Get the configuration when loading form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (int.Parse(Config.AppSettings.Settings["DefaultLocation"].Value) != 1)
+            {
+                // Set size and position form from configuration
+                this.Height = int.Parse(Config.AppSettings.Settings["Height"].Value);
+                this.Width = int.Parse(Config.AppSettings.Settings["Width"].Value);
+                this.StartPosition = FormStartPosition.Manual;
+                this.Left = int.Parse(Config.AppSettings.Settings["XPos"].Value);
+                this.Top = int.Parse(Config.AppSettings.Settings["YPos"].Value);
+                Splitter.SplitterDistance = int.Parse(Config.AppSettings.Settings["SplitterDistance"].Value);
+
+                // Set Maximized or not
+                if (int.Parse(Config.AppSettings.Settings["Maximized"].Value) == 1)
+                    this.WindowState = FormWindowState.Maximized;
+            }
+            
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -17,6 +18,8 @@ namespace Bacchus.View
     /// </summary>
     public partial class FormExport : Form
     {
+        private string LastPath;
+
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -61,7 +64,7 @@ namespace Bacchus.View
             else
             {
                 // change initial directory
-                SaveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                SaveDialog.InitialDirectory = LastPath;
                 SaveDialog.FileName = CsvName.Text + ".csv";
                 if (SaveDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -78,8 +81,39 @@ namespace Bacchus.View
                         MessageBoxes.DispError("Une erreur est survenue lors de l'exportation");
                         ExportLab.Text = "L'opération a été intérompu, veuillez réessayer";
                     }
+
+                    // save the path
+                    LastPath = SaveDialog.FileName;
+                    SaveLastPath();
                 }
             }            
+        }
+
+        /// <summary>
+        /// Save the last path used form the import
+        /// </summary>
+        private void SaveLastPath()
+        {
+            var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            // We will use custom settings
+            Config.AppSettings.Settings["DefaultPath"].Value = "0";
+            Config.AppSettings.Settings["LastPath"].Value = LastPath;
+            // Final Save
+            Config.Save(ConfigurationSaveMode.Full);
+        }
+
+        private void FormExport_Load(object sender, EventArgs e)
+        {
+            var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (int.Parse(Config.AppSettings.Settings["DefaultPath"].Value) != 1)
+            {
+                LastPath = Config.AppSettings.Settings["LastPath"].Value;
+            }
+            else
+            {
+                LastPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            }
         }
     }
 }

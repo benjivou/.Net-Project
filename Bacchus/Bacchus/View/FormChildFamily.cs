@@ -100,7 +100,7 @@ namespace Bacchus.View
         /// Get the child family with the input fields
         /// </summary>
         /// <returns></returns>
-        private SousFamille GetChildFamily()
+        public SousFamille GetChildFamily()
         {
             return new SousFamille(NameBox.Text,(Famille) FamBox.SelectedItem, InitialRef);
         }
