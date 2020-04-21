@@ -57,21 +57,24 @@ namespace Bacchus.View
         /// <param name="e"></param>
         private void SelectCsvBtn_Click(object sender, EventArgs e)
         {
-            if(CsvName.Text == "" || CsvName.Text.Contains(" "))
+            
+            // change initial directory
+            SaveDialog.InitialDirectory = LastPath;
+            SaveDialog.FileName = CsvName.Text;
+            if (SaveDialog.ShowDialog() == DialogResult.OK)
             {
-                MessageBoxes.DispError("ERREUR : Le nom du fichier n'est pas valide ou contient des espaces");
-            }
-            else
-            {
-                // change initial directory
-                SaveDialog.InitialDirectory = LastPath;
-                SaveDialog.FileName = CsvName.Text + ".csv";
-                if (SaveDialog.ShowDialog() == DialogResult.OK)
+                CsvName.Text = SaveDialog.FileName;
+                if (CsvName.Text == "" || CsvName.Text.Contains(" "))
+                {
+                    MessageBoxes.DispError("ERREUR : Le nom du fichier n'est pas valide ou contient des espaces");
+                    CsvName.Text = "";
+                }
+                else
                 {
                     InitProgressBar();
                     ExportLab.Text = "Exportation de la base de données en cours...";
                     ExportLab.Visible = true;
-                    if (FileControl.ExportFile(SaveDialog.FileName,ExportProgress))
+                    if (FileControl.ExportFile(CsvName.Text, ExportProgress))
                     {
                         MessageBoxes.DispInfo("L'export est terminé");
                         this.Close();
@@ -86,7 +89,7 @@ namespace Bacchus.View
                     LastPath = SaveDialog.FileName;
                     SaveLastPath();
                 }
-            }            
+            }
         }
 
         /// <summary>
