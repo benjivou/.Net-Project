@@ -16,7 +16,7 @@ namespace Bacchus
     static class Program
     {
         /// <summary>
-        /// Point d'entrée principal de l'application.
+        /// Main methods of the application
         /// </summary>
         [STAThread]
         static void Main()
@@ -24,6 +24,9 @@ namespace Bacchus
             appli();
 		}
 
+        /// <summary>
+        /// Launch the application
+        /// </summary>
         static void appli()
         {
             // Launch View Part
@@ -33,6 +36,10 @@ namespace Bacchus
             Application.Run(new FormMain());
         }
 
+
+        /// <summary>
+        /// Test the back end structurs
+        /// </summary>
         static void test()
         {
             /// TESTS BDD - EXAMPLE ///
@@ -202,7 +209,7 @@ namespace Bacchus
             //FCont.Delete(Fam);
             //         Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
 
-
+            /*
             Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
             FileControl.ImportFile("C:\\Users\\Foxinow\\Desktop\\net\\.Net-Project\\Bacchus\\Bacchus\\Data_to_integrate.csv");
             Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
@@ -211,7 +218,7 @@ namespace Bacchus
             MCont.FlushTable();
             FCont.FlushTable();
             Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
-
+            */
         }
 
     }

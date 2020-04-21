@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Bacchus.Control
 {
@@ -24,116 +25,114 @@ namespace Bacchus.Control
 		/// </summary>
 		/// <param name="Path"></param>
 		/// <returns></returns>
-		public static bool ImportFile(String Path)
+		public static bool ImportFile(String Path, ProgressBar Progress)
 		{
-		
-			using (var reader = new StreamReader(Path, Encoding.Default))
-				{
+            try
+            {
+                using (var reader = new StreamReader(Path, Encoding.Default))
+                {
+                    Console.WriteLine("We are importing this file " + Path);
+                    
+                    ArticleControl ACont = new ArticleControl();
+                    FamilleControl FCont = new FamilleControl();
+                    SousFamilleControl SFCont = new SousFamilleControl();
+                    MarqueControl MCont = new MarqueControl();
+                    
+                    Progress.Maximum = reader.ReadLine().Count() - 1;// remove the first line
 
-					Console.WriteLine("We are importing this file " + Path);
-
-
-
-
-					ArticleControl ACont = new ArticleControl();
-					FamilleControl FCont = new FamilleControl();
-					SousFamilleControl SFCont = new SousFamilleControl();
-					MarqueControl MCont = new MarqueControl();
-
-					reader.ReadLine(); // remove the first line
-
-					while (!reader.EndOfStream)
-					{
-						Model.Marque Mark = new Model.Marque();
-						Model.Article Artic = new Model.Article();
-						Model.SousFamille SousFam = new Model.SousFamille();
-						Model.Famille Fam = new Model.Famille();
-						/*
+                    while (!reader.EndOfStream)
+                    {
+                        Progress.PerformStep();
+                        Model.Marque Mark = new Model.Marque();
+                        Model.Article Artic = new Model.Article();
+                        Model.SousFamille SousFam = new Model.SousFamille();
+                        Model.Famille Fam = new Model.Famille();
+                        /*
 						 *Parser 
 						 * 
 						 */
-						var line = reader.ReadLine();
-						//Console.WriteLine(line);
-						string[] values = line.Split(';');
+                        var line = reader.ReadLine();
+                        //Console.WriteLine(line);
+                        string[] values = line.Split(';');
 
-						/*
+                        /*
 						 * Create a "Marque" in the Database and get the Id
 						 */
 
-						Mark.Nom = values[MARQUE];
+                        Mark.Nom = values[MARQUE];
 
-						// the "Marque" object is not in the Database
-						if (!MCont.Exist(Mark))
-						{
-							// Create one
-							MCont.Insert(Mark);
+                        // the "Marque" object is not in the Database
+                        if (!MCont.Exist(Mark))
+                        {
+                            // Create one
+                            MCont.Insert(Mark);
 
-						}
+                        }
 
-						// get it 
-						Mark = MCont.GetByName(Mark);
+                        // get it 
+                        Mark = MCont.GetByName(Mark);
 
 
-						/*
+                        /*
 						 * Create a "Famille" in the Database and get the ID 
 						 */
 
-						Fam.Nom = values[FAMILLE];
+                        Fam.Nom = values[FAMILLE];
 
-						if (!FCont.Exist(Fam))
-						{
-							FCont.Insert(Fam);
-						}
+                        if (!FCont.Exist(Fam))
+                        {
+                            FCont.Insert(Fam);
+                        }
 
-						Fam = FCont.GetByName(Fam);
+                        Fam = FCont.GetByName(Fam);
 
 
-						/*
+                        /*
 						* Create a "SousFamille" in the Database and get the ID 
 						*/
-						SousFam.Nom = values[SOUSFAMILLE];
-						SousFam.Famille = Fam;
-						if (!SFCont.Exist(SousFam))
-						{
-							SFCont.Insert(SousFam);
-						}
-						SousFam = SFCont.GetByName(SousFam);
+                        SousFam.Nom = values[SOUSFAMILLE];
+                        SousFam.Famille = Fam;
+                        if (!SFCont.Exist(SousFam))
+                        {
+                            SFCont.Insert(SousFam);
+                        }
+                        SousFam = SFCont.GetByName(SousFam);
 
-						/*
+                        /*
 						 * Create the "Article" and stock it in the database
 						 */
-						Artic.RefArticle = values[REF];
-						Artic.PrixHT = float.Parse(values[PRIXHT].Replace('.', ','))/ 100;
-						Console.WriteLine(Artic.PrixHT);
-						Artic.Description = values[DESCRIPTION];
-						Artic.Marque = Mark;
-						Artic.SousFamille = SousFam;
-						
-						// the Article object need to be update in the Database
-						if (ACont.Exist(Artic))
-						{
-							//Console.WriteLine("Update");
-							ACont.Update(Artic);
-						}
-						else
-						{
-							//Console.WriteLine("Insert");
-							ACont.Insert(Artic);
-						}
+                        Artic.RefArticle = values[REF];
+                        Artic.PrixHT = float.Parse(values[PRIXHT].Replace('.', ','));
+                        //Console.WriteLine(Artic.PrixHT);
+                        Artic.Description = values[DESCRIPTION];
+                        Artic.Marque = Mark;
+                        Artic.SousFamille = SousFam;
 
-
-					}
-				}
-
-				
-
-
-				return true;
-			
+                        // the Article object need to be update in the Database
+                        if (ACont.Exist(Artic))
+                        {
+                            //Console.WriteLine("Update");
+                            ACont.Update(Artic);
+                        }
+                        else
+                        {
+                            //Console.WriteLine("Insert");
+                            ACont.Insert(Artic);
+                        }
+                    }
+                    Progress.Value = Progress.Maximum;
+                }
+                return true;
+            }
+            catch ( Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return false;
+            }
 		}
 
 
-		public static bool ExportFile(String Path)
+		public static bool ExportFile(String Path, ProgressBar Progress)
 		{
 			bool IsItDone = true;
 			/*
@@ -159,11 +158,12 @@ namespace Bacchus.Control
 					w.WriteLine("Description;Ref;Marque;Famille;Sous-Famille;Prix H.T.");
 					w.Flush();
 
-					// Serialise Data
-					foreach (Model.Article AMock in ListA)
+                    Progress.Maximum = ListA.Count();
+                    // Serialise Data
+                    foreach (Model.Article AMock in ListA)
 					{
-
-						var line = string.Format("{" + DESCRIPTION + "};{" + REF + "};{" + MARQUE + "};{" + FAMILLE + "};{" + SOUSFAMILLE + "};{" + PRIXHT + "}",
+                        Progress.PerformStep();
+                        var line = string.Format("{" + DESCRIPTION + "};{" + REF + "};{" + MARQUE + "};{" + FAMILLE + "};{" + SOUSFAMILLE + "};{" + PRIXHT + "}",
 							AMock.Description,
 							AMock.RefArticle,
 							AMock.Marque.Nom,
@@ -177,11 +177,10 @@ namespace Bacchus.Control
 
 					}
 				}
-				
-
 			}
 			catch(IOException FileUnReacheable)
 			{
+                Console.WriteLine(FileUnReacheable.StackTrace);
 				IsItDone = false;
 			}
 

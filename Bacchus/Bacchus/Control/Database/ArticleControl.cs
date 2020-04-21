@@ -8,15 +8,25 @@ using Bacchus.Model;
 
 namespace Bacchus.Control
 {
+    /// <summary>
+    /// Control the article management
+    /// </summary>
 	class ArticleControl : BaseControl<Article>
 	{
-
+        /// <summary>
+        /// Default Construtor
+        /// </summary>
 		public ArticleControl()
 		{
 			TableName = "Articles";
 			RefName = "RefArticle";
 		}
 
+        /// <summary>
+        /// Delete an article in database
+        /// </summary>
+        /// <param name="Objet"></param>
+        /// <returns></returns>
 		public override bool Delete(Article Objet)
 		{
 			if (Objet == null)
@@ -24,6 +34,10 @@ namespace Bacchus.Control
 			return ExecuteUpdate("DELETE FROM " + TableName + " WHERE " + RefName + " = '" + Objet.RefArticle + "'");
 		}
 
+        /// <summary>
+        /// Get all existant article
+        /// </summary>
+        /// <returns></returns>
 		public override HashSet<Article> GetAll()
 		{
 			OpenConnection();
@@ -46,6 +60,11 @@ namespace Bacchus.Control
 			return Liste;
 		}
 
+        /// <summary>
+        /// Insert an article in database
+        /// </summary>
+        /// <param name="Objet"></param>
+        /// <returns></returns>
 		public override bool Insert(Article Objet)
 		{
 			if (Objet == null || !CheckParam(Objet) || ExistantRef(Objet.RefArticle))
@@ -59,11 +78,16 @@ namespace Bacchus.Control
 					" " + Objet.Quantite + ")");
 		}
 
+        /// <summary>
+        /// Update an article in database
+        /// </summary>
+        /// <param name="Objet"></param>
+        /// <returns></returns>
 		public override bool Update(Article Objet)
 		{
 			if (Objet != null && ExistantRef(Objet.RefArticle) && CheckParam(Objet))
 			{
-				Console.WriteLine("Article ready to import");
+				//Console.WriteLine("Article ready to import");
 				return ExecuteUpdate("UPDATE " + TableName + " SET " +
 					"Description = '" + Objet.Description + "', " +
 					"RefSousFamille = " + Objet.SousFamille.RefSousFamille + ", " +
@@ -84,7 +108,7 @@ namespace Bacchus.Control
 		public bool CheckParam(Article Arti)
 		{
 			if (Arti == null
-				|| Arti.Marque == null
+				|| Arti.SousFamille == null
 				|| Arti.PrixHT < 0
 				|| Arti.Quantite < 0
 				|| Arti.Marque == null)
@@ -97,6 +121,11 @@ namespace Bacchus.Control
 			return true;
 		}
 
+        /// <summary>
+        /// Check if a reference is already used
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
 		public bool ExistantRef(string Name)
 		{
 			if (Name == null)
@@ -112,6 +141,11 @@ namespace Bacchus.Control
 			return state;
 		}
 
+        /// <summary>
+        /// Find an article with the reference
+        /// </summary>
+        /// <param name="Ref"></param>
+        /// <returns></returns>
 		public Article FindByRef(string Ref)
 		{
 			OpenConnection();
@@ -192,6 +226,11 @@ namespace Bacchus.Control
 			return Liste;
 		}
 
+        /// <summary>
+        /// Find article details with an incomplete article object
+        /// </summary>
+        /// <param name="Obj"></param>
+        /// <returns></returns>
 		public override Article GetByName(Article Obj)
 		{
 			return FindByRef(Obj.RefArticle);

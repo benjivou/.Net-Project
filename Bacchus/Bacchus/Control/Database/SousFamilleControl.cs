@@ -7,9 +7,14 @@ using Bacchus.Model;
 
 namespace Bacchus.Control
 {
+    /// <summary>
+    /// Control the sous famille management
+    /// </summary>
     class SousFamilleControl : AutoIncrementBaseControl<SousFamille>
     {
-		       // Name
+		/// <summary>
+        /// Default Constructor
+        /// </summary>
 		public SousFamilleControl()
         {
             TableName = "SousFamilles";
@@ -56,7 +61,7 @@ namespace Bacchus.Control
         {
             OpenConnection();
             HashSet<SousFamille> Liste = new HashSet<SousFamille>();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName);
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " ORDER BY Nom");
             FamilleControl FCont = new FamilleControl();
             while (Result.Read())
             {
@@ -143,7 +148,7 @@ namespace Bacchus.Control
 		public HashSet<SousFamille> FindByFamily(Famille Objet)
 		{
 			OpenConnection();
-			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + "RefFamille" + " = " + Objet.RefFamille);
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + "RefFamille" + " = " + Objet.RefFamille + " ORDER BY Nom");
 			HashSet<SousFamille> Liste = new HashSet<SousFamille>();
 
 			FamilleControl FCont = new FamilleControl();
@@ -156,6 +161,11 @@ namespace Bacchus.Control
 			return Liste;
 		}
 
+        /// <summary>
+        /// Get sousfamille details with his name
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
 		public override SousFamille GetByName(SousFamille obj)
 		{
 			OpenConnection();
@@ -163,7 +173,7 @@ namespace Bacchus.Control
 			// We have to compare the FamilleRef and the Sous Famille Name to fin it 
 			var Result = ExecuteSelect("SELECT * FROM " + TableName + 
 				" WHERE " + ValueName + " = '" + obj.Nom +
-				"' AND RefFamille = "+ obj.Famille.RefFamille);
+				"' ");
 
 
 			SousFamille ChildFamily = null;

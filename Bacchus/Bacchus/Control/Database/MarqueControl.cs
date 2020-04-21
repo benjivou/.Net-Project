@@ -8,11 +8,13 @@ using Bacchus.Model;
 namespace Bacchus.Control
 {
     /// <summary>
-    /// Link Marque between Model and SQLite
+    /// Control the Marque management
     /// </summary>
     class MarqueControl : AutoIncrementBaseControl<Marque>
     {
-		       // Name 
+		/// <summary>
+        /// Default constructor
+        /// </summary>
 		public MarqueControl()
         {
             TableName = "Marques";
@@ -55,7 +57,7 @@ namespace Bacchus.Control
 			HashSet<Article> Liste = ACont.FindByMarque(Objet);
 			foreach(Article Element in Liste)
 			{
-				Console.WriteLine(Element.ToString());
+				//Console.WriteLine(Element.ToString());
 				ACont.Delete(Element);
 			}
 			/*
@@ -72,7 +74,7 @@ namespace Bacchus.Control
         {
             OpenConnection();
             HashSet<Marque> Liste = new HashSet<Marque>();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName );
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " ORDER BY Nom");
             while (Result.Read())
             {
                 Marque Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
@@ -115,6 +117,11 @@ namespace Bacchus.Control
             return Brand;
         }
 
+        /// <summary>
+        /// Get details of a Marque with his name
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
 		public override Marque GetByName(Marque obj)
 		{
 			OpenConnection();
