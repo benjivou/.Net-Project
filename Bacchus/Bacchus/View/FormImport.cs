@@ -66,11 +66,13 @@ namespace Bacchus.View
         /// <returns></returns>
         private bool CheckPath()
         {
+            /* This code is disabled because in another version, import cannot read csv file with espace inside the name
             if (CsvPathText.Text == "" || CsvPathText.Text.Contains(" "))
             {
                 MessageBoxes.DispError("ERREUR : Le nom du fichier n'est pas valide ou contient des espaces");
                 return false;
             }
+            */
             return true;
         }
 
