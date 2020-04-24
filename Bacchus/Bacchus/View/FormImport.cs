@@ -29,7 +29,7 @@ namespace Bacchus.View
         /// <summary>
         /// If the import is a success
         /// </summary>
-        public bool ImportSucess = false;
+        public bool ImportLaunched = false;
 
         /// <summary>
         /// Default constructor
@@ -162,10 +162,10 @@ namespace Bacchus.View
         /// </summary>
         private void LaunchImport()
         {
+            ImportLaunched = true;
             if (FileControl.ImportFile(CsvPathText.Text, ImportProgress))
             {
                 MessageBoxes.DispInfo("L'ajout est terminé");
-                ImportSucess = true;
                 this.Close();
             }
             else
