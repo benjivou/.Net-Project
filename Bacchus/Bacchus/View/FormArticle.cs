@@ -17,9 +17,11 @@ namespace Bacchus.View
     /// </summary>
     public partial class FormArticle : Form
     {
+        // Controlers
         private SousFamilleControl SFCont = new SousFamilleControl();
         private MarqueControl MCont = new MarqueControl();
         private ArticleControl ACont = new ArticleControl();
+
         /// <summary>
         /// Reference before the modification
         /// </summary>
@@ -45,7 +47,7 @@ namespace Bacchus.View
         /// <summary>
         /// Constructor to modifie an article
         /// </summary>
-        /// <param name="Arti"></param>
+        /// <param name="Arti">Article to modifie</param>
         public FormArticle(Article Arti)
         {
             InitializeComponent();
@@ -85,7 +87,7 @@ namespace Bacchus.View
         /// <summary>
         /// Get the article with fields
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The article using fields</returns>
         public Article GetArticle()
         {
             Article Arti = new Article();
@@ -102,8 +104,8 @@ namespace Bacchus.View
         /// <summary>
         /// When OkBtn is pushed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">event sender</param>
+        /// <param name="e">event arg</param>
         private void OKBtn_Click(object sender, EventArgs e)
         {
             if (AreInputOK())
@@ -125,7 +127,7 @@ namespace Bacchus.View
         /// <summary>
         /// Check if the fields are OK
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if ok</returns>
         public bool AreInputOK()
         {
             Article Used = ACont.GetByName(new Article(RefBox.Text, null, 0, 0, null, null));
@@ -148,8 +150,8 @@ namespace Bacchus.View
         /// <summary>
         /// When backbtn is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">event sender</param>
+        /// <param name="e">event arg</param>
         private void BackBtn_Click(object sender, EventArgs e)
         {
             Close();

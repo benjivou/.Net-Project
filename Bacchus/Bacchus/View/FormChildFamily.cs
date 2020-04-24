@@ -17,8 +17,10 @@ namespace Bacchus.View
     /// </summary>
     public partial class FormChildFamily : Form
     {
+        // Controlers :
         private SousFamilleControl SFCont = new SousFamilleControl();
         private FamilleControl FCont = new FamilleControl();
+
         /// <summary>
         /// Ref brefore modification
         /// </summary>
@@ -48,7 +50,7 @@ namespace Bacchus.View
         /// <summary>
         /// Constructor for a modification window
         /// </summary>
-        /// <param name="ChildFamily"></param>
+        /// <param name="ChildFamily">Childfamily to modifie</param>
         public FormChildFamily(SousFamille ChildFamily)
         {
             InitializeComponent();
@@ -78,7 +80,7 @@ namespace Bacchus.View
         /// <summary>
         /// Check if the fields are ok
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if ok</returns>
         public bool AreInputOK()
         {
             SousFamille Used = SFCont.GetByName(new SousFamille(NameBox.Text));
@@ -99,7 +101,7 @@ namespace Bacchus.View
         /// <summary>
         /// Get the child family with the input fields
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Childfamily using fields</returns>
         public SousFamille GetChildFamily()
         {
             return new SousFamille(NameBox.Text,(Famille) FamBox.SelectedItem, InitialRef);
@@ -108,8 +110,8 @@ namespace Bacchus.View
         /// <summary>
         /// When the Okbtn is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void OKBtn_Click(object sender, EventArgs e)
         {
             if (AreInputOK())
@@ -129,8 +131,8 @@ namespace Bacchus.View
         /// <summary>
         /// When the backbtn is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void CancelBtn_Click(object sender, EventArgs e)
         {
             Close();

@@ -67,8 +67,8 @@ namespace Bacchus
         /// <summary>
         /// Open Import Window
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void ImporterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormImport Frame = new FormImport();
@@ -102,7 +102,7 @@ namespace Bacchus
         /// <summary>
         /// refresh all childfamily of a family in the treeview
         /// </summary>
-        /// <param name="FamilyNode"></param>
+        /// <param name="FamilyNode">Node of the family</param>
         private void RefreshChildFamilyTree(TreeNode FamilyNode)
         {
             FamilyNode.Nodes.Clear();
@@ -120,7 +120,7 @@ namespace Bacchus
         /// <summary>
         /// Refresh all family in the treeview
         /// </summary>
-        /// <param name="FamilyNodes"></param>
+        /// <param name="FamilyNodes">Node of the families</param>
         private void RefreshFamilyTree(TreeNode FamilyNodes)
         {
             FamilyNodes.Nodes.Clear();
@@ -140,7 +140,7 @@ namespace Bacchus
         /// <summary>
         /// Refresh all brands in the treeview
         /// </summary>
-        /// <param name="BrandNodes"></param>
+        /// <param name="BrandNodes">Node of the brands</param>
         private void RefreshBrandTree(TreeNode BrandNodes)
         {
             BrandNodes.Nodes.Clear();
@@ -156,8 +156,8 @@ namespace Bacchus
         /// <summary>
         /// Refresh both list and tree views
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void ActualiserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RefreshAllData();
@@ -199,8 +199,8 @@ namespace Bacchus
         /// <summary>
         /// Open Export Window
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void ExporterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormExport Frame = new FormExport();
@@ -210,8 +210,8 @@ namespace Bacchus
         /// <summary>
         /// Event when a node is selected
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void TypeTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             SelectedColumn = 0;
@@ -222,7 +222,7 @@ namespace Bacchus
         /// <summary>
         /// Set in bold the seleted node in the treeview
         /// </summary>
-        /// <param name="ParentNodes"></param>
+        /// <param name="ParentNodes">Nodes of the parent / treeview</param>
         private void SetSelectedNodeBold(TreeNodeCollection ParentNodes)
         {
             foreach(TreeNode Node in ParentNodes)
@@ -248,7 +248,7 @@ namespace Bacchus
         /// <summary>
         /// Set in bold a treenode
         /// </summary>
-        /// <param name="Node"></param>
+        /// <param name="Node">Node to set bold</param>
         private void SetBold(TreeNode Node)
         {
             if(Node != null)
@@ -288,7 +288,7 @@ namespace Bacchus
         /// <summary>
         /// Display all articles in list view with a specific child family
         /// </summary>
-        /// <param name="ChildFamily"></param>
+        /// <param name="ChildFamily">Child family filter</param>
         private void DispArticles(SousFamille ChildFamily)
         {
             // Items
@@ -313,7 +313,7 @@ namespace Bacchus
         /// <summary>
         /// Display all articles in list view with a specific brand
         /// </summary>
-        /// <param name="Brand"></param>
+        /// <param name="Brand">Brand filter</param>
         private void DispArticles(Marque Brand)
         {
             // Items
@@ -356,7 +356,7 @@ namespace Bacchus
         /// <summary>
         /// Display all child Family in the list view
         /// </summary>
-        /// <param name="Family"></param>
+        /// <param name="Family">Family filter</param>
         private void DispChildFamilies(Famille Family)
         {
             // Header
@@ -452,8 +452,8 @@ namespace Bacchus
         /// <summary>
         /// Event when the window is resized, resize column sizes of the list view
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void FormMain_Resize(object sender, EventArgs e)
         {
            // AutoResizeColumns();
@@ -462,8 +462,8 @@ namespace Bacchus
         /// <summary>
         /// When a column is selected by the user, group and sort the list view
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void DisplayList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             SelectedColumn = e.Column;
@@ -490,8 +490,8 @@ namespace Bacchus
         /// <summary>
         /// When develop btn is selected, expand the treeview
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void DevelopTool_Click(object sender, EventArgs e)
         {
             TypeTree.ExpandAll();
@@ -500,8 +500,8 @@ namespace Bacchus
         /// <summary>
         /// When minimize btn is selected, minimize the treeview
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void MinimizeTool_Click(object sender, EventArgs e)
         {
             TypeTree.CollapseAll();
@@ -572,8 +572,8 @@ namespace Bacchus
         /// <summary>
         /// When user select remove btn
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteSelectedItems();
@@ -636,8 +636,8 @@ namespace Bacchus
         /// <summary>
         /// For Shortcuts, triggers when keyboard key is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -654,6 +654,7 @@ namespace Bacchus
         private void ModifieSelectedItem()
         {
             int NbItem = DisplayList.SelectedItems.Count;
+            // Check if one selected
             if (NbItem != 1)
             {
                 MessageBoxes.DispError("ERREUR : Vous devez sélectionner un seul élément");
@@ -667,11 +668,13 @@ namespace Bacchus
                 
                 if (Arti != null)
                 {
+                    // if its an article
                     FormArticle ModifiedArticle = new FormArticle(Arti);
                     ModifiedArticle.ShowDialog();
                     if( ModifiedArticle.IsApplicated == true)
                         RefreshDisplayList();
                 }
+                // if its a childfamily
                 else if (ChildFamily != null)
                 {
                     FormChildFamily ModifiedCF = new FormChildFamily(ChildFamily);
@@ -694,9 +697,11 @@ namespace Bacchus
                 }
                 else
                 {
+                    // if its just a name to modifie
                     FormName NameAsked;
                     if (Brand != null)
                     {
+                        //If its a brand
                         NameAsked = new FormName("Gestion Marque", Brand.Nom);
                         NameAsked.ShowDialog();
                         if (NameAsked.IsApplicated)
@@ -716,6 +721,7 @@ namespace Bacchus
                     }
                     else if (Family != null)
                     {
+                        // If its a family
                         NameAsked = new FormName("Gestion Famille", Family.Nom);
                         NameAsked.ShowDialog();
                         if (NameAsked.IsApplicated)
@@ -735,10 +741,10 @@ namespace Bacchus
                     }
                     else
                         return;
+                    // Refresh display
                     if (NameAsked.IsApplicated)
                     {
                         RefreshDisplayList();
-                        //RefreshTree();
                     }
                 }
             }
@@ -747,8 +753,8 @@ namespace Bacchus
         /// <summary>
         /// When modify btn is pressed, modifie the selected element
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void modifierToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ModifieSelectedItem();
@@ -757,8 +763,8 @@ namespace Bacchus
         /// <summary>
         /// When double click is made in the list view, modifie the selected item
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void DisplayList_DoubleClick(object sender, EventArgs e)
         {
             ModifieSelectedItem();
@@ -767,8 +773,8 @@ namespace Bacchus
         /// <summary>
         /// Add an item when the add btn is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void ajouterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (IsNodeSelected() == false)
@@ -807,7 +813,7 @@ namespace Bacchus
         /// <summary>
         /// Check if a node is selected
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if a node is selected</returns>
         public bool IsNodeSelected()
         {
             if(TypeTree.SelectedNode == null)
@@ -892,8 +898,8 @@ namespace Bacchus
         /// <summary>
         /// Save configuration on closing
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveConfig();
@@ -934,8 +940,8 @@ namespace Bacchus
         /// <summary>
         /// Get the configuration when loading form
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event args</param>
         private void FormMain_Load(object sender, EventArgs e)
         {
             var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

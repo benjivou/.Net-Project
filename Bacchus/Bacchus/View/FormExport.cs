@@ -18,6 +18,9 @@ namespace Bacchus.View
     /// </summary>
     public partial class FormExport : Form
     {
+        /// <summary>
+        /// Last path used
+        /// </summary>
         private string LastPath;
 
         /// <summary>
@@ -43,8 +46,8 @@ namespace Bacchus.View
         /// <summary>
         /// When the backbtn is pressed, close the window
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -53,8 +56,8 @@ namespace Bacchus.View
         /// <summary>
         /// When the select csv is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void SelectCsvBtn_Click(object sender, EventArgs e)
         {
             
@@ -98,6 +101,11 @@ namespace Bacchus.View
             Config.Save(ConfigurationSaveMode.Full);
         }
 
+        /// <summary>
+        /// Load configuration
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void FormExport_Load(object sender, EventArgs e)
         {
             var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

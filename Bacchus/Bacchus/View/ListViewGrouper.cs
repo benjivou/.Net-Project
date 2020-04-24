@@ -40,7 +40,7 @@ namespace Bacchus.View
         /// <summary>
         /// Sets myListView to the groups created for the specified column.
         /// </summary>
-        /// <param name="column"></param>
+        /// <param name="column">Selected column index</param>
         public void SetGroups(int column)
         {
             // Remove the current groups.
@@ -123,8 +123,8 @@ namespace Bacchus.View
         /// subitem value (or initial letter for the parent item)
         /// in the specified column.
         /// </summary>
-        /// <param name="column"></param>
-        /// <returns></returns>
+        /// <param name="column">Selected column index</param>
+        /// <returns>Table with groups</returns>
         public Hashtable CreateGroupsTable(int column)
         {
             // Create a Hashtable object.

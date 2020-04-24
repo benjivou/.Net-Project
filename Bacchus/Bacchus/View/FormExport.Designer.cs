@@ -96,7 +96,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.91667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.08334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
             this.tableLayoutPanel1.Controls.Add(this.SaveCsvBtn, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.CsvName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.FileLabel, 0, 0);
@@ -111,7 +111,7 @@
             // SaveCsvBtn
             // 
             this.SaveCsvBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.SaveCsvBtn.Location = new System.Drawing.Point(264, 10);
+            this.SaveCsvBtn.Location = new System.Drawing.Point(263, 10);
             this.SaveCsvBtn.Name = "SaveCsvBtn";
             this.SaveCsvBtn.Size = new System.Drawing.Size(65, 23);
             this.SaveCsvBtn.TabIndex = 0;
@@ -122,7 +122,7 @@
             // CsvName
             // 
             this.CsvName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.CsvName.Location = new System.Drawing.Point(89, 11);
+            this.CsvName.Location = new System.Drawing.Point(88, 11);
             this.CsvName.Name = "CsvName";
             this.CsvName.Size = new System.Drawing.Size(169, 20);
             this.CsvName.TabIndex = 2;
@@ -130,7 +130,7 @@
             // FileLabel
             // 
             this.FileLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.FileLabel.Location = new System.Drawing.Point(5, 10);
+            this.FileLabel.Location = new System.Drawing.Point(4, 10);
             this.FileLabel.Name = "FileLabel";
             this.FileLabel.Size = new System.Drawing.Size(78, 23);
             this.FileLabel.TabIndex = 1;
