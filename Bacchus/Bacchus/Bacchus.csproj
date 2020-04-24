@@ -70,7 +70,9 @@
     <Compile Include="Control\Database\AutoIncrementBaseControl.cs" />
     <Compile Include="Control\Database\BaseControl.cs" />
     <Compile Include="Control\Database\FamilleControl.cs" />
-    <Compile Include="Control\FileControl.cs" />
+    <Compile Include="Control\File\ConstClass.cs" />
+    <Compile Include="Control\File\FileCheck.cs" />
+    <Compile Include="Control\File\FileControl.cs" />
     <Compile Include="Control\Database\MarqueControl.cs" />
     <Compile Include="Control\Database\SousFamilleControl.cs" />
     <Compile Include="Model\Article.cs" />

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using Bacchus.Control;
 using Bacchus.Model;
+using Bacchus.Control.File;
 
 namespace Bacchus
 {
@@ -22,7 +23,6 @@ namespace Bacchus
         static void Main()
         {
 			test();
-            //appli();
 		}
 
         /// <summary>
@@ -220,7 +220,15 @@ namespace Bacchus
             FCont.FlushTable();
             Console.WriteLine(MCont.GetCountRef() + " Marques / " + SFCont.GetCountRef() + " ssFamilles / " + FCont.GetCountRef() + " Familles / " + ACont.GetCountRef() + " Articles ");
             */
-			FileControl.CheckFile("E:\\Bureau\\toto.csv");
+			try
+			{
+				FileCheck.CheckFile("E:\\Bureau\\toto.csv");
+				Console.WriteLine("Lefichier est bon");
+			}
+			catch (ExceptionFile Xceptio)
+			{
+				Console.WriteLine(Xceptio.FileErrorMsg);
+			}
         }
 
     }

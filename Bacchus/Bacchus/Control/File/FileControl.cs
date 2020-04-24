@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bacchus.Control.File;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -9,31 +10,9 @@ using System.Windows.Forms;
 
 namespace Bacchus.Control
 {
-	class FileControl
+	class FileControl : ConstClass
 	{
-		/*
-		 * Position of elements in the Line 
-		 */
-		private static int DESCRIPTION = 0;
-		private static int REF = 1;
-		private static int MARQUE = 2;
-		private static int FAMILLE = 3;
-		private static int SOUSFAMILLE = 4;
-		private static int PRIXHT = 5;
-
-		/*
-		 * Constraint of the file
-		 */
-		private static int CONSTRAINT_LENGTH = 6;
-
-		/*
-		 * Error Message
-		 */
-		private static String ERROR_LENGTH = "Il manque un element";
-		private static String ERROR_INVALID = "Element invalide";
-		private static String ERROR_PRIXHT = "LE prix Ht est invalide";
-		
-
+	
 
 		/// <summary>
 		/// Import the file in the database
@@ -203,83 +182,7 @@ namespace Bacchus.Control
 			return IsItDone;		// Job Done
 		}
 
-		public static bool CheckFile(String Path)
-		{
-			try
-			{
-				using (var reader = new StreamReader(Path, Encoding.Default))
-				{
-
-					int CurrentItem = 0;  // The item counter it say what is the current element we are studying
-					reader.ReadLine(); // Remove the last element
-
-
-					while (!reader.EndOfStream)
-					{
-
-						CurrentItem++; // Move the cursor
-
-						/*
-						 *Parser 
-						 * 
-						 */
-						var Line = reader.ReadLine();
-						
-						//Console.WriteLine(line);
-						string[] Values = Line.Split(';');
-
-						/*
-						 * Test 1 : Length Of the item
-						 */
-						 if(Values.Length != CONSTRAINT_LENGTH)
-						{
-							throw (new Exception(CreateErrorMsg(ERROR_LENGTH, CurrentItem)) );
-							
-						}
-
-						 /*
-						  *	Test 2 : Is Valid Fields
-						  */
-
-						// Not empty
-						foreach(String Val in Values)
-						{
-							// Empty element
-							if(Val == "")
-							{
-								throw (new Exception(CreateErrorMsg(ERROR_INVALID, CurrentItem)));
-							}
-
-	
-						}
-
-						/*
-						 * Test 3 : The price is a float
-						 */
-						try { float.Parse(Values[PRIXHT].Replace('.', ',')); }
-						catch (Exception e)
-						{
-							throw (new Exception(CreateErrorMsg(ERROR_PRIXHT, CurrentItem)));
-						}
-						
-
-
-					}
-					
-				}
-				return true;
-			}
-			catch (Exception e)
-			{
-				throw (e);
-				return false;
-			}
-		}
-
-		private static String CreateErrorMsg(String Msg, int Line)
-		{
-			return "Erreur : " + Msg + " à l'élément " + Line;
-		}
+		
 
 		
 	}
