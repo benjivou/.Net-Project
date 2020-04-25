@@ -31,8 +31,8 @@ namespace Bacchus.View
         /// <summary>
         /// Default Constructor
         /// </summary>
-        /// <param name="Title"></param>
-        /// <param name="ActualName"></param>
+        /// <param name="Title">Title of the form</param>
+        /// <param name="ActualName">Actual name before modification</param>
         public FormName(string Title, string ActualName)
         {
             InitializeComponent();
@@ -44,8 +44,8 @@ namespace Bacchus.View
         /// <summary>
         /// When okbtn is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void OKBtn_Click(object sender, EventArgs e)
         {
             if(AreInputOK() == false)
@@ -64,8 +64,8 @@ namespace Bacchus.View
         /// <summary>
         /// When backbtn is pressed, close the window
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void BackBtn_Click(object sender, EventArgs e)
         {
             IsApplicated = false;
@@ -75,7 +75,7 @@ namespace Bacchus.View
         /// <summary>
         /// Check if input are correct
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if OK</returns>
         public bool AreInputOK()
         {
             if (NameBox.Text.Replace(" ", "") == "")

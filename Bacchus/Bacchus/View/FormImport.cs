@@ -18,6 +18,7 @@ namespace Bacchus.View
     /// </summary>
     public partial class FormImport : Form
     {
+        // Controlers :
         MarqueControl MCont = new MarqueControl();
         FamilleControl FCont = new FamilleControl();
 
@@ -29,7 +30,7 @@ namespace Bacchus.View
         /// <summary>
         /// If the import is a success
         /// </summary>
-        public bool ImportSucess = false;
+        public bool ImportLaunched = false;
 
         /// <summary>
         /// Default constructor
@@ -53,8 +54,8 @@ namespace Bacchus.View
         /// <summary>
         /// When the okbtn is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void OKBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -63,22 +64,24 @@ namespace Bacchus.View
         /// <summary>
         /// Check if the path give by the user is correct
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if OK</returns>
         private bool CheckPath()
         {
+            /* This code is disabled because in another version, import cannot read csv file with espace inside the name
             if (CsvPathText.Text == "" || CsvPathText.Text.Contains(" "))
             {
                 MessageBoxes.DispError("ERREUR : Le nom du fichier n'est pas valide ou contient des espaces");
                 return false;
             }
+            */
             return true;
         }
 
         /// <summary>
         /// When the add mode is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void AddModeBtn_Click(object sender, EventArgs e)
         {
             if (CheckPath())
@@ -100,8 +103,8 @@ namespace Bacchus.View
         /// <summary>
         /// When the selectcsv btn is pressed, open a select file dialog
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void SelectCsvBtn_Click(object sender, EventArgs e)
         {
             // change initial directory
@@ -131,8 +134,8 @@ namespace Bacchus.View
         /// <summary>
         /// When ecresement mode is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void EcrasementBtn_Click(object sender, EventArgs e)
         {
             if (CheckPath())
@@ -160,10 +163,10 @@ namespace Bacchus.View
         /// </summary>
         private void LaunchImport()
         {
+            ImportLaunched = true;
             if (FileControl.ImportFile(CsvPathText.Text, ImportProgress))
             {
                 MessageBoxes.DispInfo("L'ajout est terminé");
-                ImportSucess = true;
                 this.Close();
             }
             else
@@ -178,8 +181,8 @@ namespace Bacchus.View
         /// <summary>
         /// Load form settings
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void FormImport_Load(object sender, EventArgs e)
         {
             var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

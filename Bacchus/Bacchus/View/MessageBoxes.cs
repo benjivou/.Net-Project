@@ -15,8 +15,8 @@ namespace Bacchus.View
         /// <summary>
         /// Create an error messagebox
         /// </summary>
-        /// <param name="Message"></param>
-        /// <returns></returns>
+        /// <param name="Message">Message to display</param>
+        /// <returns>Result of dialog</returns>
         public static DialogResult DispError(string Message)
         {
             return MessageBox.Show(
@@ -29,8 +29,8 @@ namespace Bacchus.View
         /// <summary>
         /// Create an Info messagebox
         /// </summary>
-        /// <param name="Message"></param>
-        /// <returns></returns>
+        /// <param name="Message">Message to display</param>
+        /// <returns>Result of dialog</returns>
         public static DialogResult DispInfo(string Message)
         {
             return MessageBox.Show(
@@ -43,8 +43,8 @@ namespace Bacchus.View
         /// <summary>
         /// Create a Confirmation warning messagebox
         /// </summary>
-        /// <param name="Message"></param>
-        /// <returns></returns>
+        /// <param name="Message">Message to display</param>
+        /// <returns>Result of dialog</returns>
         public static DialogResult DispConfirmation(string Message)
         {
             return MessageBox.Show(

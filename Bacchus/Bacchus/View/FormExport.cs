@@ -18,6 +18,9 @@ namespace Bacchus.View
     /// </summary>
     public partial class FormExport : Form
     {
+        /// <summary>
+        /// Last path used
+        /// </summary>
         private string LastPath;
 
         /// <summary>
@@ -43,8 +46,8 @@ namespace Bacchus.View
         /// <summary>
         /// When the backbtn is pressed, close the window
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -53,8 +56,8 @@ namespace Bacchus.View
         /// <summary>
         /// When the select csv is pressed
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void SelectCsvBtn_Click(object sender, EventArgs e)
         {
             
@@ -64,31 +67,24 @@ namespace Bacchus.View
             if (SaveDialog.ShowDialog() == DialogResult.OK)
             {
                 CsvName.Text = SaveDialog.FileName;
-                if (CsvName.Text == "" || CsvName.Text.Contains(" "))
+                
+                InitProgressBar();
+                ExportLab.Text = "Exportation de la base de données en cours...";
+                ExportLab.Visible = true;
+                if (FileControl.ExportFile(CsvName.Text, ExportProgress))
                 {
-                    MessageBoxes.DispError("ERREUR : Le nom du fichier n'est pas valide ou contient des espaces");
-                    CsvName.Text = "";
+                    MessageBoxes.DispInfo("L'export est terminé");
+                    this.Close();
                 }
                 else
                 {
-                    InitProgressBar();
-                    ExportLab.Text = "Exportation de la base de données en cours...";
-                    ExportLab.Visible = true;
-                    if (FileControl.ExportFile(CsvName.Text, ExportProgress))
-                    {
-                        MessageBoxes.DispInfo("L'export est terminé");
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBoxes.DispError("Une erreur est survenue lors de l'exportation");
-                        ExportLab.Text = "L'opération a été intérompu, veuillez réessayer";
-                    }
-
-                    // save the path
-                    LastPath = SaveDialog.FileName;
-                    SaveLastPath();
+                    MessageBoxes.DispError("Une erreur est survenue lors de l'exportation");
+                    ExportLab.Text = "L'opération a été intérompu, veuillez réessayer";
                 }
+
+                // save the path
+                LastPath = SaveDialog.FileName;
+                SaveLastPath();
             }
         }
 
@@ -105,6 +101,11 @@ namespace Bacchus.View
             Config.Save(ConfigurationSaveMode.Full);
         }
 
+        /// <summary>
+        /// Load configuration
+        /// </summary>
+        /// <param name="sender">Event sender</param>
+        /// <param name="e">Event arg</param>
         private void FormExport_Load(object sender, EventArgs e)
         {
             var Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
