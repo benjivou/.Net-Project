@@ -49,8 +49,7 @@ namespace Bacchus.Control.File
 						/*
 						 * Test 1 : Length Of the item
 						 */
-						if (Values.Length != CONSTRAINT_LENGTH 
-							|| Values[PRIXHT] == "," ) // the element is empty but there is just ,
+						if (Values.Length != CONSTRAINT_LENGTH ) // the element is empty but there is just ,
 						{
 							throw (new Exception(CreateErrorMsg(ERROR_LENGTH, CurrentItem)));
 							
