@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Bacchus.Control;
+using Bacchus.Control.File;
 
 namespace Bacchus.View
 {
@@ -88,10 +89,13 @@ namespace Bacchus.View
             {
                 if (File.Exists(CsvPathText.Text))
                 {
-                    InitProgressBar();
-                    ImportLab.Text = "Importation de la nouvelle base de données en cours...";
-                    ImportLab.Visible = true;
-                    LaunchImport();
+                    if (CheckFile(CsvPathText.Text))
+                    {
+                        InitProgressBar();
+                        ImportLab.Text = "Importation de la nouvelle base de données en cours...";
+                        ImportLab.Visible = true;
+                        LaunchImport();
+                    }
                 }
                 else
                 {
@@ -142,14 +146,17 @@ namespace Bacchus.View
             {
                 if (File.Exists(CsvPathText.Text))
                 {
-                    InitProgressBar();
-                    ImportLab.Text = "Suppression de tout les éléments actuels en cours...";
-                    ImportLab.Visible = true;
-                    MCont.FlushTable();
-                    FCont.FlushTable();
-                    ImportLab.Text = "Importation de la nouvelle base de données en cours...";
-                    ImportLab.Refresh();
-                    LaunchImport();
+                    if (CheckFile(CsvPathText.Text))
+                    {
+                        InitProgressBar();
+                        ImportLab.Text = "Suppression de tout les éléments actuels en cours...";
+                        ImportLab.Visible = true;
+                        MCont.FlushTable();
+                        FCont.FlushTable();
+                        ImportLab.Text = "Importation de la nouvelle base de données en cours...";
+                        ImportLab.Refresh();
+                        LaunchImport();
+                    }
                 }
                 else
                 {
@@ -195,6 +202,30 @@ namespace Bacchus.View
             {
                 LastPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             }
+        }
+
+        /// <summary>
+        /// Check if the format of the csv file is correct
+        /// </summary>
+        /// <param name="Path">Path of the csv file</param>
+        /// <returns>True if format is correct</returns>
+        private bool CheckFile(string Path)
+        {
+            try
+            {
+                FileCheck.CheckFile(Path);
+                return true;
+            }
+            catch(ExceptionFile Excep)
+            {
+                MessageBoxes.DispError(Excep.FileErrorMsg);
+            }
+            catch(Exception Excep)
+            {
+                MessageBoxes.DispError("Le fichier est inaccessible. Le fichier est peut être utilisé par une autre application");
+            }
+            
+            return false;
         }
     }
 }
