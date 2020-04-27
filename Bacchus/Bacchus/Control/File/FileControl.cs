@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bacchus.Control.File;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -9,16 +10,9 @@ using System.Windows.Forms;
 
 namespace Bacchus.Control
 {
-	class FileControl
+	class FileControl : ConstClass
 	{
-
-		private static int DESCRIPTION = 0;
-		private static int REF = 1;
-		private static int MARQUE = 2;
-		private static int FAMILLE = 3;
-		private static int SOUSFAMILLE = 4;
-		private static int PRIXHT = 5;
-
+	
 
 		/// <summary>
 		/// Import the file in the database
@@ -51,9 +45,9 @@ namespace Bacchus.Control
 						 *Parser 
 						 * 
 						 */
-                        var line = reader.ReadLine();
+                        var Line = reader.ReadLine();
                         //Console.WriteLine(line);
-                        string[] values = line.Split(';');
+                        string[] values = Line.Split(';');
 
                         /*
 						 * Create a "Marque" in the Database and get the Id
@@ -187,5 +181,9 @@ namespace Bacchus.Control
 			
 			return IsItDone;		// Job Done
 		}
+
+		
+
+		
 	}
 }
