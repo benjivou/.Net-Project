@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.0\lib\net46\System.Data.SQLite.dll</HintPath>
@@ -69,12 +70,32 @@
     <Compile Include="Control\Database\AutoIncrementBaseControl.cs" />
     <Compile Include="Control\Database\BaseControl.cs" />
     <Compile Include="Control\Database\FamilleControl.cs" />
-    <Compile Include="Control\FileControl.cs" />
+    <Compile Include="Control\File\ConstClass.cs" />
+    <Compile Include="Control\File\FileCheck.cs" />
+    <Compile Include="Control\File\FileControl.cs" />
     <Compile Include="Control\Database\MarqueControl.cs" />
     <Compile Include="Control\Database\SousFamilleControl.cs" />
     <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Famille.cs" />
     <Compile Include="Model\SousFamille.cs" />
+    <Compile Include="View\FormArticle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormArticle.Designer.cs">
+      <DependentUpon>FormArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormChildFamily.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormChildFamily.Designer.cs">
+      <DependentUpon>FormChildFamily.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormExport.Designer.cs">
+      <DependentUpon>FormExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormImport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +111,23 @@
     <Compile Include="Model\Marque.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\FormName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormName.Designer.cs">
+      <DependentUpon>FormName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListViewGrouper.cs" />
+    <Compile Include="View\MessageBoxes.cs" />
+    <EmbeddedResource Include="View\FormArticle.resx">
+      <DependentUpon>FormArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormChildFamily.resx">
+      <DependentUpon>FormChildFamily.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormExport.resx">
+      <DependentUpon>FormExport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormImport.resx">
       <DependentUpon>FormImport.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,6 +146,9 @@
     <Content Include="Bacchus.SQLite">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="View\FormName.resx">
+      <DependentUpon>FormName.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -8,11 +8,13 @@ using Bacchus.Model;
 namespace Bacchus.Control
 {
     /// <summary>
-    /// Link Marque between Model and SQLite
+    /// Control the Marque management
     /// </summary>
     class MarqueControl : AutoIncrementBaseControl<Marque>
     {
-		       // Name 
+		/// <summary>
+        /// Default constructor
+        /// </summary>
 		public MarqueControl()
         {
             TableName = "Marques";
@@ -26,14 +28,14 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Insert(Marque Objet)
         {
-            if (Objet == null || Exist(Objet.Nom))
+            if (Objet == null || Exist(Objet))
                 return false;
             if(Objet.RefMarque > 0)
-                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom) VALUES (" + Objet.RefMarque + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + ",Nom) VALUES (null,'" + Objet.Nom + "')");
             else
             {
                 // Auto-inc
-                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom) VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + " ,Nom) VALUES (null,'" + Objet.Nom + "')");
             }
         }
 
@@ -55,7 +57,7 @@ namespace Bacchus.Control
 			HashSet<Article> Liste = ACont.FindByMarque(Objet);
 			foreach(Article Element in Liste)
 			{
-				Console.WriteLine(Element.ToString());
+				//Console.WriteLine(Element.ToString());
 				ACont.Delete(Element);
 			}
 			/*
@@ -72,7 +74,7 @@ namespace Bacchus.Control
         {
             OpenConnection();
             HashSet<Marque> Liste = new HashSet<Marque>();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName );
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " ORDER BY Nom");
             while (Result.Read())
             {
                 Marque Brand = new Marque(Result.GetString(1), Result.GetInt16(0));
@@ -114,10 +116,16 @@ namespace Bacchus.Control
             CloseConnection();
             return Brand;
         }
+
+        /// <summary>
+        /// Get details of a Marque with his name
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
 		public override Marque GetByName(Marque obj)
 		{
 			OpenConnection();
-			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + ValueName + " LIKE '" + ValueName + "'");
+			var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE " + ValueName + " LIKE '" + obj.Nom + "'");
 			Marque Brand;
 			if (Result.Read())
 			{
@@ -128,5 +136,6 @@ namespace Bacchus.Control
 			CloseConnection();
 			return Brand;
 		}
+
 	}
 }

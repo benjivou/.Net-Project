@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Model
 {
-    class SousFamille
+    /// <summary>
+    /// Represent a sousfamille object in the database
+    /// </summary>
+    public class SousFamille
     {
         public int RefSousFamille{ get; set; }
         public Famille Famille {get;set; }
@@ -17,6 +20,15 @@ namespace Bacchus.Model
             RefSousFamille = Ref;
             Famille = Family;
             Nom = Name;
+        }
+
+		public SousFamille()
+		{
+		}
+
+        public override string ToString()
+        {
+            return Nom;
         }
     }
 }

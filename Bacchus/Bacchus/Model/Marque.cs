@@ -9,14 +9,14 @@ namespace Bacchus.Model
     /// <summary>
     /// Marque model from Marques Tables
     /// </summary>
-    class Marque
+    public class Marque
     {
         public int RefMarque { get; set; }
-        public String Nom { get; set; }
+        public string Nom { get; set; }
 
         public Marque()
         {
-
+			
         }
 
         /// <summary>
@@ -28,6 +28,11 @@ namespace Bacchus.Model
         {
             RefMarque = Ref;
             Nom = Name;
+        }
+
+        public override string ToString()
+        {
+            return Nom;
         }
     }
 }

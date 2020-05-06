@@ -7,11 +7,15 @@ using Bacchus.Model;
 
 namespace Bacchus.Control
 {
+    /// <summary>
+    /// Control the Famille management
+    /// </summary>
     class FamilleControl : AutoIncrementBaseControl<Famille>
     {
         
-        
-
+        /// <summary>
+        /// Default Construtor
+        /// </summary>
         public FamilleControl()
         {
             TableName = "Familles";  // Tablename
@@ -57,7 +61,7 @@ namespace Bacchus.Control
         {
             OpenConnection();
             HashSet<Famille> Liste = new HashSet<Famille>();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName);
+            var Result = ExecuteSelect("SELECT * FROM " + TableName + " ORDER BY Nom");
             while (Result.Read())
             {
                 Famille Family = new Famille(Result.GetString(1), Result.GetInt16(0));
@@ -74,13 +78,13 @@ namespace Bacchus.Control
         /// <returns></returns>
         public override bool Insert(Famille Objet)
         {
-            if (Objet == null || Exist(Objet.Nom))
+            if (Objet == null || Exist(Objet))
                 return false;
             if (Objet.RefFamille > 0 )
-                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + "," + ValueName + ") VALUES (" + Objet.RefFamille + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + " (" + RefName + "," + ValueName + ") VALUES (null,'" + Objet.Nom + "')");
             else
             {
-                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + ", " + ValueName + ") VALUES (" + (GetMaxRef() + 1) + ",'" + Objet.Nom + "')");
+                return ExecuteUpdate("INSERT INTO " + TableName + "(" + RefName + ", " + ValueName + ") VALUES (null,'" + Objet.Nom + "')");
             }
         }
 
@@ -119,6 +123,11 @@ namespace Bacchus.Control
             return Family;
         }
 
+        /// <summary>
+        /// Get famille details with his name
+        /// </summary>
+        /// <param name="Obj"></param>
+        /// <returns></returns>
 		public override Famille GetByName(Famille Obj)
 		{
 			OpenConnection();

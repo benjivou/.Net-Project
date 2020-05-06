@@ -6,41 +6,22 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Control
 {
+    /// <summary>
+    /// Control for identifiable table in database
+    /// </summary>
+    /// <typeparam name="Obj"></typeparam>
     abstract class AutoIncrementBaseControl<Obj> : BaseControl<Obj>
     {
+        /// <summary>
+        /// Default name label
+        /// </summary>
 		protected string ValueName = "Nom";
-
-		public int GetMaxRef()
-        {
-            if (TableIsEmpty() == true)
-                return 0;
-            OpenConnection();
-            var Result = ExecuteSelect("SELECT MAX(" + RefName + "), Nom FROM " + TableName);
-            int Ref;
-            if (Result.Read())
-            {
-                Ref = Result.GetInt16(0);
-            }
-            else
-                Ref = 0;
-
-            CloseConnection();
-            return Ref;
-        }
-
-        public bool Exist(string Name)
-        {
-            OpenConnection();
-            var Result = ExecuteSelect("SELECT * FROM " + TableName + " WHERE Nom = '" + Name + "'");
-            bool state;
-            if (Result != null && Result.Read())
-                state = true;
-            else
-                state = false;
-            CloseConnection();
-            return state;
-        }
-
-        abstract public Obj FindByRef(int Ref);
+        
+        /// <summary>
+        /// Find an object by his reference
+        /// </summary>
+        /// <param name="Ref"></param>
+        /// <returns></returns>
+		abstract public Obj FindByRef(int Ref);
     }
 }
