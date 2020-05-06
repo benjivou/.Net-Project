@@ -22,7 +22,7 @@ namespace Bacchus
         [STAThread]
         static void Main()
         {
-			test();
+            appli();
 		}
 
         /// <summary>

@@ -17,9 +17,9 @@ namespace Bacchus.Control.File
 		/*
 		 * Error Message
 		 */
-		private static String ERROR_LENGTH = "Il manque un element";
-		private static String ERROR_INVALID = "Element invalide";
-		private static String ERROR_PRIXHT = "LE prix Ht est invalide";
+		private static String ERROR_LENGTH = "Le format est invalide";
+		private static String ERROR_INVALID = "Cellule invalide";
+		private static String ERROR_PRIXHT = "Le prix HT est invalide";
 
 		public static bool CheckFile(String Path)
 		{
@@ -51,7 +51,7 @@ namespace Bacchus.Control.File
 						 */
 						if (Values.Length != CONSTRAINT_LENGTH ) // the element is empty but there is just ,
 						{
-							throw (new Exception(CreateErrorMsg(ERROR_LENGTH, CurrentItem)));
+							throw (new ExceptionFile(CreateErrorMsg(ERROR_LENGTH, CurrentItem)));
 							
 						}
 						Console.WriteLine(Values.Length);
@@ -65,7 +65,7 @@ namespace Bacchus.Control.File
 							// Empty element "" or just , at the end
 							if (Val == ""  )
 							{
-								throw new Exception(CreateErrorMsg(ERROR_INVALID, CurrentItem));
+								throw new ExceptionFile(CreateErrorMsg(ERROR_INVALID, CurrentItem));
 							}
 
 						}
@@ -86,16 +86,15 @@ namespace Bacchus.Control.File
 				}
 				return true;
 			}
-			catch (ExceptionFile Exception)
+			catch (Exception Excep)
 			{
-				throw (Exception);
-
-			}
+                throw Excep;
+            }
 		}
 
 		private static String CreateErrorMsg(String Msg, int Line)
 		{
-			return "Erreur : " + Msg + " à l'élément " + Line;
+			return "Erreur : " + Msg + " à la ligne " + Line;
 		}
 	}
 
